@@ -4,7 +4,7 @@ library(viridis)
 
 file_list <- list.files("G:/CSIF/CMG4day/2020", pattern = "*.nc$", full.names = TRUE, recursive = TRUE)
 
-### Do instant and clear variables seperately (uses lots of memory)
+### Do instant and clear variables separately (uses lots of memory)
 
 doy_list  <- seq(1, 365, 8)
 doy_count <- 1
@@ -32,13 +32,5 @@ for (f in seq(1, 92, 2)) {
 
 
 
-# Aggregate spatially in bash using these commands:
+### Aggregate spatially in bash using agg_csif.py
 
-inst_list  <- list.files("G:/CSIF/8-day/inst", pattern = "*.nc$", full.names = TRUE, recursive = TRUE)
-clear_list <- list.files("G:/CSIF/8-day/clear", pattern = "*.nc$", full.names = TRUE, recursive = TRUE)
-
-for (f in 1:length(inst_list)) {
-  
-}
-
-system(sprintf("cdo -b f32 remapcon,gridfile_1.0.txt /mnt/g/ChloFluo/input/Temp/daytime/25km/8day/Temp.mean.daytime.8day.era.25km.2019.nc /mnt/g/ChloFluo/input/Temp/daytime/1deg/8day/Temp.mean.daytime.8day.era.1deg.2019.nc"))
