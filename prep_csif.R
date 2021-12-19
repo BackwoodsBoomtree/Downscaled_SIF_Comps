@@ -21,11 +21,11 @@ for (f in seq(1, 92, 2)) {
   
   # Place inst and clear rasters into different files
 
-  writeCDF(m[[1]], paste0("G:/CSIF/8-day/inst/CSIF.inst.2020.", doy, ".v2.nc"),
+  writeCDF(m[[1]], paste0("G:/CSIF/8-day/inst/orig/CSIF.inst.2020.", doy, ".v2.nc"),
            varname = "csif_inst", longname = "CSIF Instant 8-day Mean", unit = "mW/m-2/sr/nm",
            missval = -9999, overwrite = TRUE, compression = 4)
   
-  writeCDF(m[[2]], paste0("G:/CSIF/8-day/clear/CSIF.clear.2020.", doy, ".v2.nc"),
+  writeCDF(m[[2]], paste0("G:/CSIF/8-day/clear/orig/CSIF.clear.2020.", doy, ".v2.nc"),
            varname = "csif_clear", longname = "CSIF Daily 8-day Mean", unit = "mW/m-2/sr/nm",
            missval = -9999, overwrite = TRUE, compression = 4)
 }
