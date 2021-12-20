@@ -5,7 +5,7 @@ sif_file <- "G:/TROPOMI/esa/gridded/20km/8day/TROPOMI.ESA.SIF.201805-202109.glob
 sif_rang <- 78:123
 y_name   <- "csif_clear"
 x_name   <- "SIF_Corr_743"
-out_dir  <- "G:/SIF_comps/csif/daily/2020/20km/raster_regressions/test"
+out_dir  <- "G:/SIF_comps/csif/daily/2020/20km/raster_regressions"
 out_name <- "CSIF_vs_TROPO_SIF.20km.CF80.2020"
 f_name   <- NA # Filter by value. Example, error, std, or n. If none use NA.
 f_thresh <- 30  # Values => will be kept
@@ -80,4 +80,4 @@ rast_reg <- function(y_stack, x_stack, out_dir, out_name) {
   
 }
 
-rast_reg(y, y, out_dir, out_name)
+rast_reg(y, x, out_dir, out_name)

@@ -1,19 +1,17 @@
 library(raster)
 
-csif_dir <- "G:/CSIF/8-day/daily/1deg/2020"
-sif_file <- "G:/TROPOMI/esa/gridded/1deg/8day/TROPOMI.ESA.SIF.201805-202109.global.8day.1deg.clearsky.nc"
-sif_rang <- 78:123
-y_name   <- "csif_clear"
-x_name   <- "SIF_Corr_743"
-out_dir  <- "G:/SIF_comps/csif/daily/2020/1deg/raster_regressions"
-out_name <- "CSIF_vs_TROPO_SIF.1deg.clearsky.2020"
-f_name   <- NA # Filter by value. Example, error, std, or n. If none use NA.
-f_thresh <- 30  # Values => will be kept
+siflue_file <- "G:/SIF-LUE/1deg/GOME_PK_dcSIF_005deg_8day_2018_1deg.nc"
+sif_file    <- "G:/TROPOMI/esa/gridded/1deg/8day/TROPOMI.ESA.SIF.201805-202109.global.8day.1deg.clearsky.nc"
+sif_rang    <- 1:31
+y_name      <- "sif_lue"
+x_name      <- "SIF_Corr_743"
+out_dir     <- "G:/SIF_comps/sif-lue/2018/1deg/raster_regressions"
+out_name    <- "SIF-LUE_vs_TROPO_SIF.1deg.clearsky.2018"
+f_name      <- NA # Filter by value. Example, error, std, or n. If none use NA.
+f_thresh    <- 30  # Values => will be kept
 
 
-y_list <- list.files(csif_dir, pattern = "*.nc$", full.names = TRUE, recursive = TRUE)
-
-y <- stack(y_list, varname = y_name)
+y <- stack(siflue_file, varname = y_name)[[16:46]]
 x <- stack(sif_file, varname = x_name)[[sif_rang]]
 
 
@@ -76,7 +74,7 @@ rast_reg <- function(y_stack, x_stack, out_dir, out_name) {
   writeRaster(lm.result[[5]], paste0(out_dir, "/", out_name, "_RMSE.tif"), overwrite = TRUE)
   writeRaster(lm.result[[6]], paste0(out_dir, "/", out_name, "_Nobs.tif"), overwrite = TRUE)
   
-  remove(x_stack, y_stack, yx) # get it out of memory
+  remove(x_brick, y_brick, yx) # get it out of memory
   
 }
 

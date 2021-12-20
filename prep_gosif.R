@@ -26,4 +26,4 @@ writeCDF(gosif, paste0(out_dir, "/GOSIF.2020.5km.nc"),
          varname = "gosif", longname = "GOSIF 8-day Mean", unit = "mW/m-2/sr/nm",
          missval = -9999, overwrite = TRUE, compression = 4)
 
-### Aggregate spatially in bash using agg_gosif.py
+### Aggregate spatially in bash using agg_gosif.R
