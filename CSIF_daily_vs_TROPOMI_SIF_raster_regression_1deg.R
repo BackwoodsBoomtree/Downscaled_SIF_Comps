@@ -57,13 +57,13 @@ rast_reg <- function(y_stack, x_stack, out_dir, out_name) {
     f <- brick(in_file, varname = f_name)
     f[f < f_thresh] <- NA
     
-    y <- mask(y, f)
-    x <- mask(x, f)
+    y_stack <- mask(y_stack, f)
+    x_stack <- mask(x_stack, f)
     
   }
   
   # Combine stack into single stack. lm convention is y~x
-  yx <- stack(y, x)
+  yx <- stack(y_stack, x_stack)
   
   beginCluster(12)
   lm.result <- clusterR(yx, calc, args = list(fun = rastlm))
