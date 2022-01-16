@@ -72,11 +72,17 @@ cs_diff   <- raster("G:/SIF_comps/min_max/20km/clearsky/NIRv_Rad-SIF.max.8day.20
 cf20_diff <- raster("G:/SIF_comps/min_max/20km/cf20/NIRv_Rad-SIF.max.8day.20km.CF20.2020.tif")
 cf80_diff <- raster("G:/SIF_comps/min_max/20km/cf20/NIRv_Rad-SIF.max.8day.20km.CF80.2020.tif")
 
-mask      <- rast("G:/TROPOMI/esa/gridded/20km/8day/TROPOMI.ESA.SIF.201805-202111.global.8day.20km.clearsky.VIs.nc", subds = "NDVI")[[78:123]]
+sif_mask  <- rast("G:/TROPOMI/esa/gridded/20km/monthly/TROPOMI.ESA.SIF.201805-202111.global.monthly.20km.CF20.VIs.nc", subds = "SIF_743")[[21:32]]
+ndvi_mask <- rast("G:/TROPOMI/esa/gridded/20km/monthly/TROPOMI.ESA.SIF.201805-202111.global.monthly.20km.CF20.VIs.nc", subds = "NDVI")[[21:32]]
 
-# Get max annual SIF values for masking
-mask <- max(mask, na.rm = TRUE)
-mask[mask < 0.5] <- NA
+# Get max annual values for masking
+sif_mask  <- max(sif_mask, na.rm = TRUE)
+ndvi_mask <- max(ndvi_mask, na.rm = TRUE)
+sif_mask[sif_mask < 0.2] <- NA
+ndvi_mask[ndvi_mask < 0.1] <- NA
+
+plot(sif_mask, col = viridis(100))
+plot(ndvi_mask, col = viridis(100))
 
 
 # Get median of difference rasters before plotting (where we set thresholds)
