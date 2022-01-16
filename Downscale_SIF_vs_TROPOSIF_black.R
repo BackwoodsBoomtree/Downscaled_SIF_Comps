@@ -66,7 +66,6 @@ gosif_pval  <- raster("G:/SIF_comps/gosif/2020/1deg/raster_regressions/GOSIF_vs_
 csif_pval   <- raster("G:/SIF_comps/csif/daily/2020/1deg/raster_regressions/CSIF_vs_TROPO_SIF.1deg.clearsky.2020_Pval.tif")
 siflue_pval <- raster("G:/SIF_comps/sif-lue/2018/1deg/raster_regressions/SIF-LUE_vs_TROPO_SIF.1deg.clearsky.2018_Pval.tif")
 
-
 # Row means for latitude mean difference
 gosif_r2_lat  <- rev(rowMeans(as.matrix(gosif_r2), na.rm = TRUE))
 csif_r2_lat   <- rev(rowMeans(as.matrix(csif_r2), na.rm = TRUE))
