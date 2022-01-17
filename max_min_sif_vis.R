@@ -1,17 +1,17 @@
 library(terra)
 library(pals)
 
-tropomi_file <- "G:/TROPOMI/esa/gridded/20km/8day/2020/TROPOMI.ESA.SIF.2020.global.8day.20km.CF80.nc"
+tropomi_file <- "G:/TROPOMI/esa/gridded/20km/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.20km.CF80.nc"
 out_dir      <- "G:/SIF_comps/min_max/20km/cf80"
-out_name     <- "8day.20km.CF80.2020"
+out_name     <- "monthly.20km.CF80.2020"
 
 # Build stacks for each variable
 tropomi_sif     <- rast(tropomi_file, subds = "SIF_743")
-tropomi_n       <- rast(tropomi_file, subds = "n")
-tropomi_sif_std <- rast(tropomi_file, subds = "SIF_743_std")
-# tropomi_nirv    <- rast(tropomi_file, subds = "NIRv")[[lrange]]
-# tropomi_nirvr   <- rast(tropomi_file, subds = "NIRv_RAD")[[lrange]]
-# tropomi_ndvi    <- rast(tropomi_file, subds = "NDVI")[[lrange]]
+# tropomi_n       <- rast(tropomi_file, subds = "n")
+# tropomi_sif_std <- rast(tropomi_file, subds = "SIF_743_std")
+# tropomi_nirv    <- rast(tropomi_file, subds = "NIRv")
+# tropomi_nirvr   <- rast(tropomi_file, subds = "NIRv_RAD")
+# tropomi_ndvi    <- rast(tropomi_file, subds = "NDVI")
 
 
 # Calculate SEM

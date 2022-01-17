@@ -3,16 +3,16 @@ library(terra)
 library(pals)
 
 out_dir      <- "G:/SIF_comps/min_max_diff/20km/cf2080"
-out_name     <- "8day.20km.CF2080.2020"
+out_name     <- "monthly.20km.CF2080.2020"
 
-tropomi_sif_max   <- rast("G:/SIF_comps/min_max/20km/cf80/SIF.max.8day.20km.CF80.2020.tif")
-tropomi_sif_min   <- rast("G:/SIF_comps/min_max/20km/cf80/SIF.min.8day.20km.CF80.2020.tif")
-tropomi_nirv_max  <- rast("G:/SIF_comps/min_max/20km/cf20/NIRv.max.8day.20km.CF20.2020.tif")
-tropomi_nirv_min  <- rast("G:/SIF_comps/min_max/20km/cf20/NIRv.min.8day.20km.CF20.2020.tif")
-tropomi_nirvr_max <- rast("G:/SIF_comps/min_max/20km/cf20/NIRv_Rad.max.8day.20km.CF20.2020.tif")
-tropomi_nirvr_min <- rast("G:/SIF_comps/min_max/20km/cf20/NIRv_Rad.min.8day.20km.CF20.2020.tif")
-tropomi_ndvi_max  <- rast("G:/SIF_comps/min_max/20km/cf20/NDVI.max.8day.20km.CF20.2020.tif")
-tropomi_ndvi_min  <- rast("G:/SIF_comps/min_max/20km/cf20/NDVI.min.8day.20km.CF20.2020.tif")
+tropomi_sif_max   <- rast("G:/SIF_comps/min_max/20km/cf80/SIF.max.monthly.20km.CF80.2020.tif")
+tropomi_sif_min   <- rast("G:/SIF_comps/min_max/20km/cf80/SIF.min.monthly.20km.CF80.2020.tif")
+tropomi_nirv_max  <- rast("G:/SIF_comps/min_max/20km/cf20/NIRv.max.monthly.20km.CF20.2020.tif")
+tropomi_nirv_min  <- rast("G:/SIF_comps/min_max/20km/cf20/NIRv.min.monthly.20km.CF20.2020.tif")
+tropomi_nirvr_max <- rast("G:/SIF_comps/min_max/20km/cf20/NIRv_Rad.max.monthly.20km.CF20.2020.tif")
+tropomi_nirvr_min <- rast("G:/SIF_comps/min_max/20km/cf20/NIRv_Rad.min.monthly.20km.CF20.2020.tif")
+tropomi_ndvi_max  <- rast("G:/SIF_comps/min_max/20km/cf20/NDVI.max.monthly.20km.CF20.2020.tif")
+tropomi_ndvi_min  <- rast("G:/SIF_comps/min_max/20km/cf20/NDVI.min.monthly.20km.CF20.2020.tif")
 
 # Difference from SIF (negative means NIRv earlier than SIF)
 diff_max_nirv  <-  tropomi_nirv_max  - tropomi_sif_max
