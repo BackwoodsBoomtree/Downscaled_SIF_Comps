@@ -1,8 +1,7 @@
 library(raster)
 
-vi_file    <- "G:/TROPOMI/esa/gridded/20km/8day/TROPOMI.ESA.SIF.201805-202111.global.8day.20km.CF20.VIs.nc"
-sif_file   <- "G:/TROPOMI/esa/gridded/20km/8day/TROPOMI.ESA.SIF.201805-202111.global.8day.20km.CF80.nc"
-sif_rang   <- 78:123
+vi_file    <- "G:/TROPOMI/esa/gridded/20km/8day/2020/TROPOMI.ESA.SIF.2020.global.8day.20km.CF20.nc"
+sif_file   <- "G:/TROPOMI/esa/gridded/20km/8day/2020/TROPOMI.ESA.SIF.2020.global.8day.20km.CF80.nc"
 y_name     <- "SIF_743"
 x_name     <- "NIRv_RAD"
 out_dir    <- "G:/SIF_comps/nirv_rad/2020/8day/20km/cf2080/raster_regressions"
@@ -11,8 +10,8 @@ f_name     <- NA # Filter by value. Example, error, std, or n. If none use NA.
 f_thresh   <- 30  # Values => will be kept
 
 
-y <- stack(sif_file, varname = y_name)[[sif_rang]]
-x <- stack(vi_file, varname = x_name)[[sif_rang]]
+y <- stack(sif_file, varname = y_name)
+x <- stack(vi_file, varname = x_name)
 
 
 rastlm <- function(x) {

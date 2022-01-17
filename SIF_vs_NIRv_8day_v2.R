@@ -87,16 +87,30 @@ cs_diff   <- mask(cs_diff, m)
 cf20_diff <- mask(cf20_diff, m)
 cf80_diff <- mask(cf80_diff, m)
 
-# Get mean of difference rasters before plotting (where we set thresholds)
-cs_mean   <- cellStats(cs_diff, stat = 'mean', na.rm = TRUE)
-cf20_mean <- cellStats(cf20_diff, stat = 'mean', na.rm = TRUE)
-cf80_mean <- cellStats(cf80_diff, stat = 'mean', na.rm = TRUE)
+# Get mean of rasters before plotting (where we set thresholds)
+cs_r2_mean   <- cellStats(cs_r2, stat = 'mean', na.rm = TRUE)
+cf20_r2_mean <- cellStats(cf20_r2, stat = 'mean', na.rm = TRUE)
+cf80_r2_mean <- cellStats(cf80_r2, stat = 'mean', na.rm = TRUE)
+
+cs_diff_mean   <- cellStats(cs_diff, stat = 'mean', na.rm = TRUE)
+cf20_diff_mean <- cellStats(cf20_diff, stat = 'mean', na.rm = TRUE)
+cf80_diff_mean <- cellStats(cf80_diff, stat = 'mean', na.rm = TRUE)
 
 # Median (seems to be 0 always)
-# cs_median <- as.vector(cs_diff)
-# cs_median <- cs_median[!is.na(cs_median)]
-# cs_median <- sort(cs_median)
-# cs_median <- median(cs_median)
+cs_r2_median <- as.vector(cs_r2)
+cs_r2_median <- cs_r2_median[!is.na(cs_r2_median)]
+cs_r2_median <- sort(cs_r2_median)
+cs_r2_median <- median(cs_r2_median)
+
+cf20_r2_median <- as.vector(cf20_r2)
+cf20_r2_median <- cf20_r2_median[!is.na(cf20_r2_median)]
+cf20_r2_median <- sort(cf20_r2_median)
+cf20_r2_median <- median(cf20_r2_median)
+
+cf80_r2_median <- as.vector(cf80_r2)
+cf80_r2_median <- cf80_r2_median[!is.na(cf80_r2_median)]
+cf80_r2_median <- sort(cf80_r2_median)
+cf80_r2_median <- median(cf80_r2_median)
 
 # Row means for latitude mean difference
 cs_r2_lat   <- rev(rowMeans(as.matrix(cs_r2), na.rm = TRUE))
@@ -114,11 +128,11 @@ cf80_col <- col_list(cf80_r2_lat)
 
 # Labels
 labs <- c(paste0("8-day SIF vs NIRv: Clear Sky"),
-          paste0("Peak SIF - Peak NIRv: Clear Sky"),
+          paste0("Peak NIRv - Peak SIF: Clear Sky"),
           paste0("8-day SIF vs NIRv: Cloud Fraction ", intToUtf8(8804)," 0.20"),
-          paste0("Peak SIF - Peak NIRv: Cloud Fraction ", intToUtf8(8804)," 0.20"),
+          paste0("Peak NIRv - Peak SIF: Cloud Fraction ", intToUtf8(8804)," 0.20"),
           paste0("8-day SIF vs NIRv: Cloud Fraction ", intToUtf8(8804), " 0.80 & ", intToUtf8(8804)," 0.20"),
-          paste0("Peak SIF - Peak NIRv: Cloud Fraction ", intToUtf8(8804), " 0.80 & ", intToUtf8(8804)," 0.20"))
+          paste0("Peak NIRv - Peak SIF: Cloud Fraction ", intToUtf8(8804), " 0.80 & ", intToUtf8(8804)," 0.20"))
 
 ##### PLOTS ####
 
@@ -141,21 +155,17 @@ plot(cs_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend.s
      smallplot=c(0.40,0.90,0.2,0.25)); par(mar = par("mar"))
 
 par(new=TRUE)
-op <- op <- par(mar = c(3.1,2,8,21)) # Set margins
-barplot(cs_r2_lat, col = NA, axes=F, tck=F, xpd=F, mgp=c(3,0.3,0), ann=FALSE, xaxs = "i", yaxs = "i", horiz = TRUE, border = NA, space = 0, xlim = c(0, 1.0), ylim = c(151,850))
+op <- par(mar = c(3.1,0.75,8,21)) # Set margins
+hist(cs_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
-rect(-100,275,100,625, col = rgb(0.20,0.20,0.20), border = NA)
-rect(-100,335,100,565, col = rgb(0.30,0.30,0.30), border = NA)
-par(new=T)
-barplot(cs_r2_lat, col = cs_col,
-        axes=F, tck=F, xpd=F, mgp=c(3,0.3,0), ann=FALSE, xaxs = "i", yaxs = "i", horiz = TRUE, border = NA, space = 0, xlim = c(0, 1.0), ylim = c(151,850))
+abline(v=cs_r2_median, col="red")
+abline(v = 0.5, col = "white")
+axis(3, tck=F, labels= round2(cs_r2_median, 2), at=cs_r2_median, mgp=c(3, 0.1, 0), col.axis = "white")
+hist(cs_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
-# axis
-axis(side=2, tck=F, las=1, cex.axis=1, labels = c("-60°", "0°", "80°"), mgp=c(3,0.3,0), at=c(151,450,850), col.axis = "white")
-axis(side=1, tck=F, las=1, cex.axis=1, labels = c("0", "0.5", "1.0"),
-     mgp=c(3,0.3,0), at=c(0, 0.5, 1.0), col.axis = "white")
-title <- as.list(expression(paste("Mean R"^"2"), "by Latitude"))
-mtext(do.call(expression, title), side = 3, line = c(1,-0.25), cex = 0.75, col = "white")
+#axis
+axis(side=1, tck=F, las=1, cex.axis=1, labels=c("0","0.5","1"),
+     mgp=c(3,0.3,0), at=c(0, 0.5, 1), col.axis = "white")
 box(col = "white")
 
 
@@ -179,9 +189,9 @@ par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
 hist(cs_diff, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(-5,5), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
-abline(v=cs_mean, col="red")
+abline(v=cs_diff_mean, col="red")
 abline(v = 0, col = "white")
-axis(3, tck=F, labels= round2(cs_mean, 2), at=cs_mean, mgp=c(3, 0.1, 0), col.axis = "white")
+axis(3, tck=F, labels= round2(cs_diff_mean, 2), at=cs_diff_mean, mgp=c(3, 0.1, 0), col.axis = "white")
 hist(cs_diff, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(-5,5), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
 #axis
@@ -205,21 +215,17 @@ plot(cf20_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend
      smallplot=c(0.40,0.90,0.2,0.25)); par(mar = par("mar"))
 
 par(new=TRUE)
-op <- op <- par(mar = c(3.1,2,8,21)) # Set margins
-barplot(cf20_r2_lat, col = NA, axes=F, tck=F, xpd=F, mgp=c(3,0.3,0), ann=FALSE, xaxs = "i", yaxs = "i", horiz = TRUE, border = NA, space = 0, xlim = c(0, 1.0), ylim = c(151,850))
+op <- par(mar = c(3.1,0.75,8,21)) # Set margins
+hist(cf20_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
-rect(-100,275,100,625, col = rgb(0.20,0.20,0.20), border = NA)
-rect(-100,335,100,565, col = rgb(0.30,0.30,0.30), border = NA)
-par(new=T)
-barplot(cf20_r2_lat, col = cf20_col,
-        axes=F, tck=F, xpd=F, mgp=c(3,0.3,0), ann=FALSE, xaxs = "i", yaxs = "i", horiz = TRUE, border = NA, space = 0, xlim = c(0, 1.0), ylim = c(151,850))
+abline(v=cf20_r2_median, col="red")
+abline(v = 0.5, col = "white")
+axis(3, tck=F, labels= round2(cf20_r2_median, 2), at=cf20_r2_median, mgp=c(3, 0.1, 0), col.axis = "white")
+hist(cf20_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
-# axis
-axis(side=2, tck=F, las=1, cex.axis=1, labels = c("-60°", "0°", "80°"), mgp=c(3,0.3,0), at=c(151,450,850), col.axis = "white")
-axis(side=1, tck=F, las=1, cex.axis=1, labels = c("0", "0.5", "1.0"),
-     mgp=c(3,0.3,0), at=c(0, 0.5, 1.0), col.axis = "white")
-title <- as.list(expression(paste("Mean R"^"2"), "by Latitude"))
-mtext(do.call(expression, title), side = 3, line = c(1,-0.25), cex = 0.75, col = "white")
+#axis
+axis(side=1, tck=F, las=1, cex.axis=1, labels=c("0","0.5","1"),
+     mgp=c(3,0.3,0), at=c(0, 0.5, 1), col.axis = "white")
 box(col = "white")
 
 
@@ -243,9 +249,9 @@ par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
 hist(cf20_diff, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(-5,5), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
-abline(v=cf20_mean, col="red")
+abline(v=cf20_diff_mean, col="red")
 abline(v = 0, col = "white")
-axis(3, tck=F, labels= round2(cf20_mean, 2), at=cf20_mean, mgp=c(3, 0.1, 0), col.axis = "white")
+axis(3, tck=F, labels= round2(cf20_diff_mean, 2), at=cf20_diff_mean, mgp=c(3, 0.1, 0), col.axis = "white")
 hist(cf20_diff, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(-5,5), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
 #axis
@@ -269,21 +275,17 @@ plot(cf80_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend
      smallplot=c(0.40,0.90,0.2,0.25)); par(mar = par("mar"))
 
 par(new=TRUE)
-op <- par(mar = c(3.1,2,8,21)) # Set margins
-barplot(cf80_r2_lat, col = NA, axes=F, tck=F, xpd=F, mgp=c(3,0.3,0), ann=FALSE, xaxs = "i", yaxs = "i", horiz = TRUE, border = NA, space = 0, xlim = c(0, 1.0), ylim = c(151,850))
+op <- par(mar = c(3.1,0.75,8,21)) # Set margins
+hist(cf80_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
-rect(-100,275,100,625, col = rgb(0.20,0.20,0.20), border = NA)
-rect(-100,335,100,565, col = rgb(0.30,0.30,0.30), border = NA)
-par(new=T)
-barplot(cf80_r2_lat, col = cf80_col,
-        axes=F, tck=F, xpd=F, mgp=c(3,0.3,0), ann=FALSE, xaxs = "i", yaxs = "i", horiz = TRUE, border = NA, space = 0, xlim = c(0, 1.0), ylim = c(151,850))
+abline(v=cf80_r2_median, col="red")
+abline(v = 0.5, col = "white")
+axis(3, tck=F, labels= round2(cf80_r2_median, 2), at=cf80_r2_median, mgp=c(3, 0.1, 0), col.axis = "white")
+hist(cf80_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
-# axis
-axis(side=2, tck=F, las=1, cex.axis=1, labels = c("-60°", "0°", "80°"), mgp=c(3,0.3,0), at=c(151,450,850), col.axis = "white")
-axis(side=1, tck=F, las=1, cex.axis=1, labels = c("0", "0.5", "1.0"),
-     mgp=c(3,0.3,0), at=c(0, 0.5, 1.0), col.axis = "white")
-title <- as.list(expression(paste("Mean R"^"2"), "by Latitude"))
-mtext(do.call(expression, title), side = 3, line = c(1,-0.25), cex = 0.75, col = "white")
+#axis
+axis(side=1, tck=F, las=1, cex.axis=1, labels=c("0","0.5","1"),
+     mgp=c(3,0.3,0), at=c(0, 0.5, 1), col.axis = "white")
 box(col = "white")
 
 
@@ -307,9 +309,9 @@ par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
 hist(cf80_diff, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(-5,5), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
-abline(v=cf80_mean, col="red")
+abline(v=cf80_diff_mean, col="red")
 abline(v = 0, col = "white")
-axis(3, tck=F, labels= round2(cf80_mean, 2), at=cf80_mean, mgp=c(3, 0.1, 0), col.axis = "white")
+axis(3, tck=F, labels= round2(cf80_diff_mean, 2), at=cf80_diff_mean, mgp=c(3, 0.1, 0), col.axis = "white")
 hist(cf80_diff, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,125000), xlim=c(-5,5), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
 #axis
