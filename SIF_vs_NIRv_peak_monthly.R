@@ -142,12 +142,12 @@ plot(cs_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend.s
 
 par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
-hist(cs_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
+hist(cs_r2, col=r2.col, breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
 abline(v=cs_r2_median, col="red")
 abline(v = 0.5, col = "white")
 axis(3, tck=F, labels= round2(cs_r2_median, 2), at=cs_r2_median, mgp=c(3, 0.1, 0), col.axis = "white")
-hist(cs_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
+hist(cs_r2, col=r2.col, breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
 #axis
 axis(side=1, tck=F, las=1, cex.axis=1, labels=c("0","0.5","1"),
@@ -173,12 +173,12 @@ plot(cs_diff, legend.only=TRUE, col=diff.col, horizontal=T, legend.width=2, lege
 
 par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
-barplot(cs_diff, col=rgb(0.30,0.30,0.30), space = 0, border = NA, ylim = c(0,250000),
+barplot(cs_diff, col=diff.col, space = 0, border = NA, ylim = c(0,250000),
         xaxs="i", yaxs="i", xaxt="n", yaxt="n", ann=FALSE, axes=FALSE)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
 abline(v = (cs_diff_mean + 3.5), col = "red")
 axis(3, tck = F, labels = round2(cs_diff_mean, 3), at = (cs_diff_mean + 3.5), mgp=c(3, 0.1, 0), col.axis = "white")
-barplot(cs_diff, col=rgb(0.30,0.30,0.30), space = 0, border = NA, ylim = c(0,250000),
+barplot(cs_diff, col=diff.col, space = 0, border = NA, ylim = c(0,250000),
         xaxs="i", yaxs="i", xaxt="n", yaxt="n", ann=FALSE, axes=FALSE, add = TRUE)
 
 #axis
@@ -204,12 +204,12 @@ plot(cf20_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend
 
 par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
-hist(cf20_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
+hist(cf20_r2, col=r2.col, breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
 abline(v=cf20_r2_median, col="red")
 abline(v = 0.5, col = "white")
 axis(3, tck=F, labels= round2(cf20_r2_median, 2), at=cf20_r2_median, mgp=c(3, 0.1, 0), col.axis = "white")
-hist(cf20_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
+hist(cf20_r2, col=r2.col, breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
 #axis
 axis(side=1, tck=F, las=1, cex.axis=1, labels=c("0","0.5","1"),
@@ -235,12 +235,12 @@ plot(cf20_diff, legend.only=TRUE, col=diff.col, horizontal=T, legend.width=2, le
 
 par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
-barplot(cf20_diff, col=rgb(0.30,0.30,0.30), space = 0, border = NA, ylim = c(0,250000),
+barplot(cf20_diff, col=diff.col, space = 0, border = NA, ylim = c(0,250000),
         xaxs="i", yaxs="i", xaxt="n", yaxt="n", ann=FALSE, axes=FALSE)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
 abline(v = (cf20_diff_mean + 3.5), col = "red")
 axis(3, tck = F, labels = round2(cf20_diff_mean, 3), at = (cf20_diff_mean + 3.5), mgp=c(3, 0.1, 0), col.axis = "white")
-barplot(cf20_diff, col=rgb(0.30,0.30,0.30), space = 0, border = NA, ylim = c(0,250000),
+barplot(cf20_diff, col=diff.col, space = 0, border = NA, ylim = c(0,250000),
         xaxs="i", yaxs="i", xaxt="n", yaxt="n", ann=FALSE, axes=FALSE, add = TRUE)
 
 #axis
@@ -265,12 +265,12 @@ plot(cf80_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend
 
 par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
-hist(cf80_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
+hist(cf80_r2, col=r2.col, breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
 abline(v=cf80_r2_median, col="red")
 abline(v = 0.5, col = "white")
 axis(3, tck=F, labels= round2(cf80_r2_median, 2), at=cf80_r2_median, mgp=c(3, 0.1, 0), col.axis = "white")
-hist(cf80_r2, col=rgb(0.30,0.30,0.30), breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
+hist(cf80_r2, col=r2.col, breaks=10, ylim=c(0,250000), xlim=c(0,1), xaxs="i", yaxs="i", ann=FALSE, axes=FALSE, border = NA, add=T)
 
 #axis
 axis(side=1, tck=F, las=1, cex.axis=1, labels=c("0","0.5","1"),
@@ -296,12 +296,12 @@ plot(cf80_diff, legend.only=TRUE, col=diff.col, horizontal=T, legend.width=2, le
 
 par(new=TRUE)
 op <- par(mar = c(3.1,0.75,8,21)) # Set margins
-barplot(cf80_diff, col=rgb(0.30,0.30,0.30), space = 0, border = NA, ylim = c(0,250000),
+barplot(cf80_diff, col=diff.col, space = 0, border = NA, ylim = c(0,250000),
         xaxs="i", yaxs="i", xaxt="n", yaxt="n", ann=FALSE, axes=FALSE)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4], col = "black", border = "white")
 abline(v = (cf80_diff_mean + 3.5), col = "red")
 axis(3, tck = F, labels = round2(cf80_diff_mean, 3), at = (cf80_diff_mean + 3.5), mgp=c(3, 0.1, 0), col.axis = "white")
-barplot(cf80_diff, col=rgb(0.30,0.30,0.30), space = 0, border = NA, ylim = c(0,250000),
+barplot(cf80_diff, col=diff.col, space = 0, border = NA, ylim = c(0,250000),
         xaxs="i", yaxs="i", xaxt="n", yaxt="n", ann=FALSE, axes=FALSE, add = TRUE)
 
 #axis
