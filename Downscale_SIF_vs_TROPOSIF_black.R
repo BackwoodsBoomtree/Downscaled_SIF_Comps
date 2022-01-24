@@ -66,6 +66,13 @@ gosif_pval  <- raster("G:/SIF_comps/gosif/2020/1deg/raster_regressions/GOSIF_vs_
 csif_pval   <- raster("G:/SIF_comps/csif/daily/2020/1deg/raster_regressions/CSIF_vs_TROPO_SIF.1deg.clearsky.2020_Pval.tif")
 siflue_pval <- raster("G:/SIF_comps/sif-lue/2018/1deg/raster_regressions/SIF-LUE_vs_TROPO_SIF.1deg.clearsky.2018_Pval.tif")
 
+# # Mask rasters by veg
+# m  <- raster("G:/SIF_comps/veg_mask/max.monthly.ndvi.0.2.tif") # Veg mask
+# 
+# gosif_r2   <- mask(gosif_r2, m)
+# csif_r2    <- mask(csif_r2, m)
+# siflue_r2  <- mask(siflue_r2, m)
+
 # Row means for latitude mean difference
 gosif_r2_lat  <- rev(rowMeans(as.matrix(gosif_r2), na.rm = TRUE))
 csif_r2_lat   <- rev(rowMeans(as.matrix(csif_r2), na.rm = TRUE))
@@ -93,7 +100,7 @@ par(mfrow=c(3,1),oma=c(0,0.25,1.25,0), bg = "black")
 ### GOSIF ###
 op <- par(mar = c(0,0,0.25,0.25), bg = "black")
 plot(gosif_r2, ext=c(-180,180,-60,80), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, col = NA)
-plot(coastlines, add = TRUE, border = NA, col = rgb(0.20,0.20,0.20))
+plot(coastlines, add = TRUE, border = NA, col = rgb(0.30,0.30,0.30))
 plot(gosif_r2, col=r2.col, ext=c(-180,180,-60,80), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, add = TRUE)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col = NA, border = "white")
 mtext(3, text=labs[1], cex=0.85, col = "white")
@@ -125,7 +132,7 @@ box(col = "white")
 ### CSIF ###
 op <- par(mar = c(0,0,0.25,0.25), bg = "black")
 plot(csif_r2, ext=c(-180,180,-60,80), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, col = NA)
-plot(coastlines, add = TRUE, border = NA, col = rgb(0.20,0.20,0.20))
+plot(coastlines, add = TRUE, border = NA, col = rgb(0.30,0.30,0.30))
 plot(csif_r2, col=r2.col, ext=c(-180,180,-60,80), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, add=T)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col = NA, border = "white")
 mtext(3, text=labs[2], cex=0.85, col = "white")
@@ -158,7 +165,7 @@ box(col = "white")
 ### SIF-LUE ###
 op <- par(mar = c(0,0,0.25,0.25), bg = "black")
 plot(siflue_r2, ext=c(-180,180,-60,80), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, col = NA)
-plot(coastlines, add = TRUE, border = NA, col = rgb(0.20,0.20,0.20))
+plot(coastlines, add = TRUE, border = NA, col = rgb(0.30,0.30,0.30))
 plot(siflue_r2, col=r2.col, ext=c(-180,180,-60,80), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, add=T)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col = NA, border = "white")
 mtext(3, text=labs[3], cex=0.85, col = "white")

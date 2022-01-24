@@ -3,10 +3,10 @@ library(terra)
 library(pals)
 
 out_dir      <- "G:/SIF_comps/min_max_diff/20km/clearsky_vis"
-out_name     <- "CF80.monthly.20km.2020"
+out_name     <- "CF60.monthly.20km.2020"
 
-tropomi_sif_max   <- rast("G:/SIF_comps/min_max/20km/cf80/SIF.max.monthly.20km.CF80.2020.tif")
-tropomi_sif_min   <- rast("G:/SIF_comps/min_max/20km/cf80/SIF.min.monthly.20km.CF80.2020.tif")
+tropomi_sif_max   <- rast("G:/SIF_comps/min_max/20km/cf60/SIF.max.monthly.20km.CF60.2020.tif")
+tropomi_sif_min   <- rast("G:/SIF_comps/min_max/20km/cf60/SIF.min.monthly.20km.CF60.2020.tif")
 tropomi_nirv_max  <- rast("G:/SIF_comps/min_max/20km/clearsky/NIRv.max.monthly.20km.clearsky.2020.tif")
 tropomi_nirv_min  <- rast("G:/SIF_comps/min_max/20km/clearsky/NIRv.min.monthly.20km.clearsky.2020.tif")
 tropomi_nirvr_max <- rast("G:/SIF_comps/min_max/20km/clearsky/NIRv_Rad.max.monthly.20km.clearsky.2020.tif")

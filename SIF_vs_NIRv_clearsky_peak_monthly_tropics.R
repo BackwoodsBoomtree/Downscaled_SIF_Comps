@@ -14,6 +14,10 @@ class(coastlines)
 extent(coastlines)
 crs(coastlines)
 
+# Shape files
+amazon <- readOGR("G:/SIF_comps/shps/amazon/Amazon_Poly.shp")
+
+
 # Round up
 round2 <- function(x, n) {
   posneg = sign(x)
@@ -23,6 +27,8 @@ round2 <- function(x, n) {
   z = z/10^n
   z*posneg
 }
+
+amazlm_1608.shp
 
 # Get list of colors for barplot
 col_list <- function(x) {
@@ -100,6 +106,10 @@ cs_diff_mean   <- cellStats(cs_diff, stat = 'mean', na.rm = TRUE)
 cf40_diff_mean <- cellStats(cf40_diff, stat = 'mean', na.rm = TRUE)
 cf80_diff_mean <- cellStats(cf80_diff, stat = 'mean', na.rm = TRUE)
 
+# Clip rasters to tropics
+amazon_cs_r2 <- mask(cs_r2, amazon)
+
+
 # Colors
 r2.col   <- rev(plasma(10))
 diff.col <- coolwarm(7)
@@ -120,9 +130,9 @@ par(mfrow=c(3,2),oma=c(0,0.25,1.25,0), bg = "black")
 
 ### Clearsky R2 ###
 op <- par(mar = c(0,0,0.25,0.25), bg = "black")
-plot(cs_r2, ext=c(-180,180,-80,80), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, col = NA)
+plot(cs_r2, ext=c(-82,154,-15,13), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, col = NA)
 plot(coastlines, add = TRUE, border = NA, col = rgb(0.30,0.30,0.30))
-plot(cs_r2, col=r2.col, ext=c(-180,180,-80,80), axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, add = TRUE)
+plot(amazon_cs_r2, col=r2.col, axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, add = TRUE)
 rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col = NA, border = "white")
 mtext(3, text=labs[1], cex=0.85, col = "white")
 mtext(3, text="a", cex= 0.85, adj=0, font=2, col = "white")
