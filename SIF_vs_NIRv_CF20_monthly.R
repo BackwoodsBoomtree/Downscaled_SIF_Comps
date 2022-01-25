@@ -60,11 +60,11 @@ col_list <- function(x) {
 }
 
 ### Data
-cs_r2   <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/clearsky_nirvr/raster_regressions/TROPOSIF.clearsky_vs_TROPONIRv_RAD.clearsky.monthly.20km.2020_Rsquare.tif")
-cf20_r2 <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/clearsky_nirvr/raster_regressions/TROPOSIF.CF20_vs_TROPONIRv_RAD.clearsky.monthly.20km.2020_Rsquare.tif")
-cf40_r2 <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/clearsky_nirvr/raster_regressions/TROPOSIF.CF40_vs_TROPONIRv_RAD.clearsky.monthly.20km.2020_Rsquare.tif")
-cf60_r2 <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/clearsky_nirvr/raster_regressions/TROPOSIF.CF60_vs_TROPONIRv_RAD.clearsky.monthly.20km.2020_Rsquare.tif")
-cf80_r2 <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/clearsky_nirvr/raster_regressions/TROPOSIF.CF80_vs_TROPONIRv_RAD.clearsky.monthly.20km.2020_Rsquare.tif")
+cs_r2   <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/CF20_nirvr/raster_regressions/TROPOSIF.clearsky_vs_TROPONIRv_RAD.CF20.monthly.20km.2020_Rsquare.tif")
+cf20_r2 <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/CF20_nirvr/raster_regressions/TROPOSIF.CF20_vs_TROPONIRv_RAD.CF20.monthly.20km.2020_Rsquare.tif")
+cf40_r2 <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/CF20_nirvr/raster_regressions/TROPOSIF.CF40_vs_TROPONIRv_RAD.CF20.monthly.20km.2020_Rsquare.tif")
+cf60_r2 <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/CF20_nirvr/raster_regressions/TROPOSIF.CF60_vs_TROPONIRv_RAD.CF20.monthly.20km.2020_Rsquare.tif")
+cf80_r2 <- raster("G:/SIF_comps/nirv_rad/2020/monthly/20km/CF20_nirvr/raster_regressions/TROPOSIF.CF80_vs_TROPONIRv_RAD.CF20.monthly.20km.2020_Rsquare.tif")
 
 
 # Mask rasters by veg
@@ -111,17 +111,17 @@ r2.col   <- rev(plasma(10))
 diff.col <- coolwarm(6)
 
 # Labels
-labs <- c(paste0("Monthly Clear Sky SIF vs Clear Sky NIRv"),
-          paste0("Monthly SIF CF ", intToUtf8(8804),"0.20 vs Clear Sky NIRv"),
-          paste0("Monthly SIF CF ", intToUtf8(8804),"0.40 vs Clear Sky NIRv"),
-          paste0("Monthly SIF CF ", intToUtf8(8804),"0.60 vs Clear Sky NIRv"),
-          paste0("Monthly SIF CF ", intToUtf8(8804),"0.80 vs Clear Sky NIRv"))
+labs <- c(paste0("Monthly Clear Sky SIF vs CF ", intToUtf8(8804),"0.20 NIRv"),
+          paste0("Monthly SIF CF ", intToUtf8(8804),"0.20 vs CF ", intToUtf8(8804),"0.20 NIRv"),
+          paste0("Monthly SIF CF ", intToUtf8(8804),"0.40 vs CF ", intToUtf8(8804),"0.20 NIRv"),
+          paste0("Monthly SIF CF ", intToUtf8(8804),"0.60 vs CF ", intToUtf8(8804),"0.20 NIRv"),
+          paste0("Monthly SIF CF ", intToUtf8(8804),"0.80 vs CF ", intToUtf8(8804),"0.20 NIRv"))
 
 diff_lab <- expression(paste("Difference in R"^"2", " between CF 0.8 and Clear Sky (e - a)"))
 
 ##### PLOTS ####
 
-cairo_pdf("G:/SIF_comps/figs/SIF_vs_NIRv_clearsky_monthly_black.pdf", width=7.5, height=6)
+cairo_pdf("G:/SIF_comps/figs/SIF_vs_NIRv_CF20_monthly_black.pdf", width=7.5, height=6)
 
 par(mfrow=c(3,2),oma=c(0,0.25,1.25,0), bg = "black")
 
