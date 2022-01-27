@@ -1,7 +1,6 @@
 library(raster)
-library(terra)
-library(viridis)
 library(rgdal)
+library(viridis)
 library(pals)
 
 options(scipen=999)
@@ -9,9 +8,6 @@ options(scipen=999)
 #### Load Map ####
 
 coastlines <- readOGR("C:/Russell/R_Scripts/TROPOMI_2/mapping/GSHHS_shp/c/GSHHS_c_L1.shp")
-class(coastlines)
-extent(coastlines)
-crs(coastlines)
 
 # Round up
 round2 <- function(x, n) {
@@ -42,18 +38,15 @@ cf20_diff[cf20_diff < -3] <- -3
 cf20_diff[cf20_diff > 3]  <- 3
 
 # Colors
-diff.col <- coolwarm(7)
+# diff.col <- coolwarm(7)
+diff.col <- rev(viridis(7))
 
 # Labels
-labs <- c(paste0("Peak CF ", intToUtf8(8804), "0.20 NIRv - Peak Clear Sky SIF"),
-          paste0("Peak CF ", intToUtf8(8804), "0.20 NIRv -  Peak SIF CF ", intToUtf8(8804), "0.20"),
-          paste0("Peak CF ", intToUtf8(8804), "0.20 NIRv -  Peak SIF CF ", intToUtf8(8804), "0.40"),
-          paste0("Peak CF ", intToUtf8(8804), "0.20 NIRv -  Peak SIF CF ", intToUtf8(8804), "0.60"),
-          paste0("Peak CF ", intToUtf8(8804), "0.20 NIRv -  Peak SIF CF ", intToUtf8(8804), "0.80"))
+labs <- c(paste0("Difference in Peak NIRv and Peak SIF at Cloud Fraction Threshold ", intToUtf8(8804), "0.20"))
 
 ##### PLOTS ####
 
-cairo_pdf("G:/SIF_comps/figs/inset_top_black.pdf", width = 7.5, height = 3.25)
+cairo_pdf("G:/SIF_comps/figs/inset_top_peak_CF20_black.pdf", width = 7.5, height = 3.25)
 
 par(oma=c(0.1,0.1,1.25,0.1), bg = "black")
 
