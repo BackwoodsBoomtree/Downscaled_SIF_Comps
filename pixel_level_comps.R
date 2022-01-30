@@ -1,7 +1,8 @@
 library(terra)
+library(viridis)
 
-cf_file    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.CF20.nc"
-cs_file    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.nc"
+cf_file    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.nc"
+cs_file    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.nc"
 
 # Get the data
 nirv_cf     <- rast(cf_file, subds = "NIRv")
@@ -44,9 +45,9 @@ ref_781_sem_cs  <- ref_781_std_cs / (sqrt(n_cs))
 
 # Coordinate
 # Amazon zero diff
-# coord <- vect(cbind(-67.5, -2.5), type = "points", crs = "+proj=longlat +datum=WGS84")
+coord <- vect(cbind(-67.5, -2.5), type = "points", crs = "+proj=longlat +datum=WGS84")
 # Amazon 3 months early
-coord <- vect(cbind(-72.5, -1.5), type = "points", crs = "+proj=longlat +datum=WGS84")
+# coord <- vect(cbind(-72.5, -1.5), type = "points", crs = "+proj=longlat +datum=WGS84")
 
 # Check coord is in the correct location
 # plot.new()
@@ -106,32 +107,81 @@ ts_sif_sem_cs      <- as.vector(t(ts_sif_sem_cs[-c(1)]))
 ts_ref_665_sem_cs  <- as.vector(t(ts_ref_665_sem_cs[-c(1)]))
 ts_ref_781_sem_cs  <- as.vector(t(ts_ref_781_sem_cs[-c(1)]))
 
-# Plot
-par(mfrow = c(3, 2), oma=c(0.1,0.1,1.25,0.1))
-
+# Plot Settings
 x = 1:12
+xlabs = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+y_lab_sif   <- list(bquote("SIF"),bquote("(mW/m"^"2"*"/sr/nm)"))
+y_lab_n     <- list(bquote("Number of "),bquote("Soundings"))
+y_lab_nirv  <- "NIRv"
+y_lab_nirvr <- list(bquote("NIRv Radiance"),bquote("(mW/m"^"2"*"/sr/nm)"))
+y_lab_665   <- list(bquote("Reflectance"),bquote("665 nm"))
+y_lab_781   <- list(bquote("Reflectance"),bquote("781 nm"))
 
-op <- par(mar = c(0,5,0,0))
-plot(x, ts_nirv_cf, col = "black", type = "l", ylim = c(min(ts_nirv_cf), max(ts_nirv_cs)))
-lines(x, ts_nirv_cs, col = "black", lty = 2)
-arrows(x0 = x, y0 = ts_nirv_cf - ts_nirv_sem_cf, x1 = x, y1 = ts_nirv_cf + ts_nirv_sem_cf, code=3, angle=90, length=0.1)
+line.cols = viridis(8)
 
-op <- par(mar = c(0,5,0,0))
-plot(x, ts_nirv_rad_cf, col = "orange", type = "l")
-arrows(x0 = x, y0 = ts_nirv_rad_cf - ts_nirv_rad_sem_cf, x1 = x, y1 = ts_nirv_rad_cf + ts_nirv_rad_sem_cf, code=3, angle=90, length=0.1)
+# Plot
+cairo_pdf("G:/SIF_comps/figs/test_black.pdf", width = 7.5, height = 4.25)
 
-op <- par(mar = c(0,5,0,0))
-plot(x, ts_ref_781_cf, col = "pink", type = "l")
-arrows(x0 = x, y0 = ts_ref_781_cf - ts_ref_781_sem_cf, x1 = x, y1 = ts_ref_781_cf + ts_ref_781_sem_cf, code=3, angle=90, length=0.1)
+par(mfrow = c(3, 2), oma=c(2.0,0.1,1.25,0.1), bg = "black")
 
-op <- par(mar = c(0,5,0,0))
-plot(x, ts_ref_665_cf, col = "red", type = "l")
-arrows(x0 = x, y0 = ts_ref_665_cf - ts_ref_665_sem_cf, x1 = x, y1 = ts_ref_665_cf + ts_ref_665_sem_cf, code=3, angle=90, length=0.1)
+op <- par(mar = c(0,6,0,0.5), bg = "black")
+plot(x, ts_sif_cf, col = line.cols[2], type = "l", ylim = c(min(ts_sif_cf), max(ts_sif_cs)), axes = FALSE, lwd = 1.5)
+lines(x, ts_sif_cs, col = line.cols[2], lty = 2, lwd = 1.5)
+arrows(x0 = x, y0 = ts_sif_cf - ts_sif_sem_cf, x1 = x, y1 = ts_sif_cf + ts_sif_sem_cf, code=3, angle=90, length=0.05, col = "White")
+arrows(x0 = x, y0 = ts_sif_cs - ts_sif_sem_cs, x1 = x, y1 = ts_sif_cs + ts_sif_sem_cs, code=3, angle=90, length=0.05, col = "white")
+axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
+legend("topleft", legend=c("Clear Sky", "Cloud Fraction <0.20"), col=c("white", "white"),
+       lty=c(2, 1), box.col = "white", text.col = "white")
+box(col = "white")
 
-op <- par(mar = c(0,5,0,0))
-plot(x, ts_sif_cf, col = "purple", type = "l")
-arrows(x0 = x, y0 = ts_sif_cf - ts_sif_sem_cf, x1 = x, y1 = ts_sif_cf + ts_sif_sem_cf, code=3, angle=90, length=0.1)
+op <- par(mar = c(0,6,0,0.5), bg = "black")
+plot(x, ts_n_cf, col = line.cols[3], type = "l", ylim = c(min(ts_n_cs), max(ts_n_cf)), axes = FALSE, lwd = 1.5)
+lines(x, ts_n_cs, col = line.cols[3], lty = 2, lwd = 1.5)
+axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+mtext(2, text = do.call(expression, y_lab_n), col = "white", line = c(4.25, 2.25))
+box(col = "white")
 
-op <- par(mar = c(0,5,0,0))
-plot(x, ts_n_cf, col = "black", type = "l")
+op <- par(mar = c(0,6,0,0.5), bg = "black")
+plot(x, ts_nirv_rad_cf, col = line.cols[4], type = "l", ylim = c(min(ts_nirv_rad_cf), max(ts_nirv_rad_cs)), axes = FALSE, lwd = 1.5)
+lines(x, ts_nirv_rad_cs, col = line.cols[4], lty = 2, lwd = 1.5)
+arrows(x0 = x, y0 = ts_nirv_rad_cf - ts_nirv_rad_sem_cf, x1 = x, y1 = ts_nirv_rad_cf + ts_nirv_rad_sem_cf, code=3, angle=90, length=0.05, col = "White")
+arrows(x0 = x, y0 = ts_nirv_rad_cs - ts_nirv_rad_sem_cs, x1 = x, y1 = ts_nirv_rad_cs + ts_nirv_rad_sem_cs, code=3, angle=90, length=0.05, col = "White")
+axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+mtext(2, text = y_lab_nirv, col = "white", line = 2.25)
+box(col = "white")
 
+op <- par(mar = c(0,6,0,0.5), bg = "black")
+plot(x, ts_nirv_cf, col = line.cols[5], type = "l", ylim = c(min(ts_nirv_cf), max(ts_nirv_cs)), axes = FALSE, lwd = 1.5)
+lines(x, ts_nirv_cs, col = line.cols[5], lty = 2, lwd = 1.5)
+arrows(x0 = x, y0 = ts_nirv_cf - ts_nirv_sem_cf, x1 = x, y1 = ts_nirv_cf + ts_nirv_sem_cf, code=3, angle=90, length=0.05, col = "White")
+arrows(x0 = x, y0 = ts_nirv_cs - ts_nirv_sem_cs, x1 = x, y1 = ts_nirv_cs + ts_nirv_sem_cs, code=3, angle=90, length=0.05, col = "White")
+axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+mtext(2, text = do.call(expression, y_lab_nirvr), col = "white", line = c(4.25, 2.25))
+box(col = "white")
+
+op <- par(mar = c(0,6,0,0.5), bg = "black")
+plot(x, ts_ref_665_cf, col = line.cols[6], type = "l", ylim = c(min(ts_ref_665_cs), max(ts_ref_665_cf)), axes = FALSE, lwd = 1.5)
+lines(x, ts_ref_665_cs, col = line.cols[6], lty = 2, lwd = 1.5)
+arrows(x0 = x, y0 = ts_ref_665_cf - ts_ref_665_sem_cf, x1 = x, y1 = ts_ref_665_cf + ts_ref_665_sem_cf, code=3, angle=90, length=0.05, col = "White")
+arrows(x0 = x, y0 = ts_ref_665_cs - ts_ref_665_sem_cs, x1 = x, y1 = ts_ref_665_cs + ts_ref_665_sem_cs, code=3, angle=90, length=0.05, col = "White")
+axis(1, tck = 0.03, labels = xlabs, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+mtext(2, text = do.call(expression, y_lab_665), col = "white", line = c(4.25, 2.25))
+box(col = "white")
+
+op <- par(mar = c(0,6,0,0.5), bg = "black")
+plot(x, ts_ref_781_cf, col = line.cols[7], type = "l", ylim = c(min(ts_ref_781_cs), max(ts_ref_781_cf)), axes = FALSE, lwd = 1.5)
+lines(x, ts_ref_781_cs, col = line.cols[7], lty = 2, lwd = 1.5)
+arrows(x0 = x, y0 = ts_ref_781_cf - ts_ref_781_sem_cf, x1 = x, y1 = ts_ref_781_cf + ts_ref_781_sem_cf, code=3, angle=90, length=0.05, col = "White")
+arrows(x0 = x, y0 = ts_ref_781_cs - ts_ref_781_sem_cs, x1 = x, y1 = ts_ref_781_cs + ts_ref_781_sem_cs, code=3, angle=90, length=0.05, col = "White")
+axis(1, tck = 0.03, labels = xlabs, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+mtext(2, text = do.call(expression, y_lab_781), col = "white", line = c(4.25, 2.25))
+box(col = "white")
+
+dev.off()
