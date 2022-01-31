@@ -6,10 +6,10 @@ library(rgeos)
 library(RColorBrewer)
 
 #### Load Files ####
-cf_file  <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.nc"
-cs_file  <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.nc"
-mask_ebf <- rast("G:/MCD12C1/MCD12C1.A2020001.006.EBF.1deg.tif")
-mask_veg <- rast("G:/SIF_comps/veg_mask/max.monthly.ndvi.1deg.tif")
+cf_file    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.nc"
+cs_file    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.nc"
+mask_ebf   <- rast("G:/MCD12C1/MCD12C1.A2020001.006.EBF.1deg.tif")
+mask_veg   <- rast("G:/SIF_comps/veg_mask/max.monthly.ndvi.1deg.tif")
 coastlines <- readOGR("C:/Russell/R_Scripts/TROPOMI_2/mapping/GSHHS_shp/c/GSHHS_c_L1.shp")
 
 # Create single mask with cover threshold
@@ -19,8 +19,7 @@ m[m < 80]  <- NA
 
 # Extent
 samerica_ext <- ext(-82,-34,-20,13)
-
-cover <- crop(m, samerica_ext)
+cover        <- crop(m, samerica_ext)
 
 #### Get the data ####
 nirv_cf     <- crop(mask(rast(cf_file, subds = "NIRv"), m), samerica_ext)
