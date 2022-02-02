@@ -66,12 +66,12 @@ gosif_pval  <- raster("G:/SIF_comps/gosif/2020/1deg/raster_regressions/GOSIF_vs_
 csif_pval   <- raster("G:/SIF_comps/csif/daily/2020/1deg/raster_regressions/CSIF_vs_TROPO_SIF.1deg.clearsky.2020_Pval.tif")
 siflue_pval <- raster("G:/SIF_comps/sif-lue/2018/1deg/raster_regressions/SIF-LUE_vs_TROPO_SIF.1deg.clearsky.2018_Pval.tif")
 
-# # Mask rasters by veg
-# m  <- raster("G:/SIF_comps/veg_mask/max.monthly.ndvi.0.2.tif") # Veg mask
-# 
-# gosif_r2   <- mask(gosif_r2, m)
-# csif_r2    <- mask(csif_r2, m)
-# siflue_r2  <- mask(siflue_r2, m)
+# Mask rasters by veg
+m  <- raster("G:/SIF_comps/veg_mask/max.monthly.ndvi.1deg.tif") # Veg mask
+
+gosif_r2   <- mask(gosif_r2, m)
+csif_r2    <- mask(csif_r2, m)
+siflue_r2  <- mask(siflue_r2, m)
 
 # Row means for latitude mean difference
 gosif_r2_lat  <- rev(rowMeans(as.matrix(gosif_r2), na.rm = TRUE))
