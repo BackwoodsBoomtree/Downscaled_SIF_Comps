@@ -3,7 +3,7 @@ library(terra)
 library(pals)
 
 out_dir      <- "G:/SIF_comps/min_max_diff/1deg/cf20"
-out_name     <- "cf20.monthly.1deg.2021"
+out_name     <- "cf20.monthly.1deg.2020"
 
 tropomi_sif_max   <- rast("G:/SIF_comps/min_max/1deg/cf20/SIF.max.monthly.1deg.cf20.2020.tif")
 tropomi_sif_min   <- rast("G:/SIF_comps/min_max/1deg/cf20/SIF.min.monthly.1deg.cf20.2020.tif")

@@ -1,9 +1,9 @@
 library(terra)
 library(pals)
 
-tropomi_file <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.CF80.nc"
-out_dir      <- "G:/SIF_comps/min_max/1deg/cf80"
-out_name     <- "monthly.1deg.CF80.2020"
+tropomi_file <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.nc"
+out_dir      <- "G:/SIF_comps/min_max/1deg/cf20"
+out_name     <- "monthly.1deg.CF20.2020"
 
 # Build stacks for each variable
 tropomi_sif     <- rast(tropomi_file, subds = "SIF_743")

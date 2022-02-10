@@ -20,8 +20,8 @@ round2 <- function(x, n) {
 }
 
 # Data #
-cf20_diff_max <- raster("G:/SIF_comps/min_max_diff/1deg/cf20/NIRv_Rad.cf20-SIF.max.cf20.monthly.1deg.2021.tif")
-cf20_diff_min <- raster("G:/SIF_comps/min_max_diff/1deg/cf20/NIRv_Rad.cf20-SIF.min.cf20.monthly.1deg.2021.tif")
+cf20_diff_max <- raster("G:/SIF_comps/min_max_diff/1deg/cf20/NIRv_Rad.cf20-SIF.max.cf20.monthly.1deg.2020.tif")
+cf20_diff_min <- raster("G:/SIF_comps/min_max_diff/1deg/cf20/NIRv_Rad.cf20-SIF.min.cf20.monthly.1deg.2020.tif")
 
 
 # Mask rasters by veg
