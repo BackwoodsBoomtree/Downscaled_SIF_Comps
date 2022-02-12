@@ -158,8 +158,6 @@ ts_siflue_asia    <- to_month(as.vector(t(ts_siflue_asia)), 2018)
 x           <- 1:12
 xlabs       <- c("Jan", "Apr", "Jul", "Oct")
 y_lab_sif   <- list(bquote("SIF"), bquote("(mW/m"^"2"*"/sr/nm)"))
-y_lab_nirv  <- "NIRv"
-y_lab_nirvr <- list(bquote("NIRv Radiance"), bquote("(mW/m"^"2"*"/sr/nm)"))
 
 mag.cols <- magma(7)
 vir.cols <- viridis(7)
@@ -167,68 +165,64 @@ vir.cols <- viridis(7)
 #### Plot ####
 cairo_pdf("G:/SIF_comps/figs/downscale_timeseries_black.pdf", width = 7.5, height = 5.25)
 
-par(mfrow = c(3, 2), oma=c(2.0,0.1,5.25,0.1), bg = "black")
+par(mfrow = c(3, 2), oma=c(2.0,4,5.25,0.1), bg = "black")
 
 # South America
-op <- par(mar = c(0,6,0,0.5), bg = "black")
+op <- par(mar = c(0,2,0,0.5), bg = "black")
 plot(x, ts_sif_cf_sa, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs_sa, ts_sif_cf_sa, ts_csif_sa, ts_gosif_sa) - 0.10 * min(ts_sif_cs_sa, ts_sif_cf_sa, ts_csif_sa, ts_gosif_sa),
               max(ts_sif_cs_sa, ts_sif_cf_sa, ts_csif_sa, ts_gosif_sa) + 0.10 * max(ts_sif_cs_sa, ts_sif_cf_sa, ts_csif_sa, ts_gosif_sa)))
 lines(x, ts_sif_cs_sa, col = mag.cols[4], lwd = 1.5, lty = 2)
 lines(x, ts_csif_sa, col = vir.cols[3], lwd = 1.5, lty = 1)
 lines(x, ts_gosif_sa, col = vir.cols[5], lwd = 1.5, lty = 1)
-axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = FALSE, at = seq(1, 12, by = 3), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
-mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
+axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 3), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(3, text = "South America Tropical Forest", line = -1.35, col = "white")
 box(col = "white")
 
 # South America SIF-LUE
-op <- par(mar = c(0,6,0,0.5), bg = "black")
+op <- par(mar = c(0,2,0,0.5), bg = "black")
 plot(x, ts_sif_cf_sa_18, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs_sa_18, ts_sif_cf_sa_18, ts_siflue_sa, na.rm = TRUE) - 0.10 * min(ts_sif_cs_sa_18, ts_sif_cf_sa_18, ts_siflue_sa, na.rm = TRUE),
               max(ts_sif_cs_sa_18, ts_sif_cf_sa_18, ts_siflue_sa, na.rm = TRUE) + 0.10 * max(ts_sif_cs_sa_18, ts_sif_cf_sa_18, ts_siflue_sa, na.rm = TRUE)))
 lines(x, ts_sif_cs_sa_18, col = mag.cols[4], lwd = 1.5, lty = 2)
 lines(x, ts_siflue_sa, col = vir.cols[6], lwd = 1.5, lty = 1)
-axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = FALSE, at = seq(1, 12, by = 3), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
-mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
+axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 3), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(3, text = "South America Tropical Forest", line = -1.35, col = "white")
 box(col = "white")
 
 # Africa
-op <- par(mar = c(0,6,0,0.5), bg = "black")
+op <- par(mar = c(0,2,0,0.5), bg = "black")
 plot(x, ts_sif_cf_africa, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs_africa, ts_sif_cf_africa, ts_csif_africa, ts_gosif_africa) - 0.10 * min(ts_sif_cs_africa, ts_sif_cf_africa, ts_csif_africa, ts_gosif_africa),
               max(ts_sif_cs_africa, ts_sif_cf_africa, ts_csif_africa, ts_gosif_africa) + 0.10 * max(ts_sif_cs_africa, ts_sif_cf_africa, ts_csif_africa, ts_gosif_africa)))
 lines(x, ts_sif_cs_africa, col = mag.cols[4], lwd = 1.5, lty = 2)
 lines(x, ts_csif_africa, col = vir.cols[3], lwd = 1.5, lty = 1)
 lines(x, ts_gosif_africa, col = vir.cols[5], lwd = 1.5, lty = 1)
-axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = FALSE, at = seq(1, 12, by = 3), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
-mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
+axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 3), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(3, text = "Africa Tropical Forest", line = -1.35, col = "white")
 box(col = "white")
 
 # Africa SIF-LUE
-op <- par(mar = c(0,6,0,0.5), bg = "black")
+op <- par(mar = c(0,2,0,0.5), bg = "black")
 plot(x, ts_sif_cf_africa_18, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs_africa_18, ts_sif_cf_africa_18, ts_siflue_africa, na.rm = TRUE) - 0.10 * min(ts_sif_cs_africa_18, ts_sif_cf_africa_18, ts_siflue_africa, na.rm = TRUE),
               max(ts_sif_cs_africa_18, ts_sif_cf_africa_18, ts_siflue_africa, na.rm = TRUE) + 0.10 * max(ts_sif_cs_africa_18, ts_sif_cf_africa_18, ts_siflue_africa, na.rm = TRUE)))
 lines(x, ts_sif_cs_africa_18, col = mag.cols[4], lwd = 1.5, lty = 2)
 lines(x, ts_siflue_africa, col = vir.cols[6], lwd = 1.5, lty = 1)
-axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = FALSE, at = seq(1, 12, by = 3), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
-mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
+axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 3), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(3, text = "Africa Tropical Forest", line = -1.35, col = "white")
 box(col = "white")
 
 # Asia
-op <- par(mar = c(0,6,0,0.5), bg = "black")
+op <- par(mar = c(0,2,0,0.5), bg = "black")
 plot(x, ts_sif_cf_asia, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs_asia, ts_sif_cf_asia, ts_csif_asia, ts_gosif_asia) - 0.10 * min(ts_sif_cs_asia, ts_sif_cf_asia, ts_csif_asia, ts_gosif_asia),
               max(ts_sif_cs_asia, ts_sif_cf_asia, ts_csif_asia, ts_gosif_asia) + 0.10 * max(ts_sif_cs_asia, ts_sif_cf_asia, ts_csif_asia, ts_gosif_asia)))
@@ -236,26 +230,24 @@ lines(x, ts_sif_cs_asia, col = mag.cols[4], lwd = 1.5, lty = 2)
 lines(x, ts_csif_asia, col = vir.cols[3], lwd = 1.5, lty = 1)
 lines(x, ts_gosif_asia, col = vir.cols[5], lwd = 1.5, lty = 1)
 axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = xlabs, at = seq(1, 12, by = 3), mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = xlabs, at = seq(1, 12, by = 3), mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
 axis(1, labels = "2020", tck = FALSE, at = 6.5, mgp=c(3, 1.1, 0), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
-mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(3, text = "Asia Tropical Forest", line = -1.35, col = "white")
 box(col = "white")
 
 
 # Asia SIF-LUE
-op <- par(mar = c(0,6,0,0.5), bg = "black")
+op <- par(mar = c(0,2,0,0.5), bg = "black")
 plot(x, ts_sif_cf_asia_18, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs_asia_18, ts_sif_cf_asia_18, ts_siflue_asia, na.rm = TRUE) - 0.10 * min(ts_sif_cs_asia_18, ts_sif_cf_asia_18, ts_siflue_asia, na.rm = TRUE),
               max(ts_sif_cs_asia_18, ts_sif_cf_asia_18, ts_siflue_asia, na.rm = TRUE) + 0.10 * max(ts_sif_cs_asia_18, ts_sif_cf_asia_18, ts_siflue_asia, na.rm = TRUE)))
 lines(x, ts_sif_cs_asia_18, col = mag.cols[4], lwd = 1.5, lty = 2)
 lines(x, ts_siflue_asia, col = vir.cols[6], lwd = 1.5, lty = 1)
 axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = xlabs, at = seq(1, 12, by = 3), mgp=c(3, 0.1, 0), cex.axis = 0.85, col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = xlabs, at = seq(1, 12, by = 3), mgp=c(3, 0.1, 0), cex.axis = 0.85, col.axis = "white", col = "white")
 axis(1, labels = "2018", tck = FALSE, at = 6.5, mgp=c(3, 1.1, 0), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
-mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(3, text = "Asia Tropical Forest", line = -1.35, col = "white")
 box(col = "white")
 
@@ -268,5 +260,7 @@ ltext       <- c("TROPOMI Clear Sky", "TROPOMI Cloud Fraction <0.20", "CSIF", "G
 legend(0.225, 1.05, legend=ltext, ncol = 2,
        col = c(mag.cols[4], mag.cols[4], vir.cols[3], vir.cols[5], vir.cols[6]), lwd = c(1.5, 1.5, 1.5, 1.5, 1.5),
        lty=c(2, 1, 1, 1, 1), box.col = NA, text.col = "white", bg = "NA")
+
+mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(-1.25, -2.50), outer = TRUE)
 
 dev.off()

@@ -184,24 +184,24 @@ box(col = "white")
 # Legend
 plot(raster(cover), legend.only=TRUE, col=map.cols, horizontal=F,
      legend.args = list(text = do.call(expression, y_lab_map), side = 2, line = c(3.0, 1.0), col = "white"),
-     axis.args = list(line = -3.25, cex.axis=1, tick=F, at=c(80.2, 100), labels=c("80","100"), col.axis = "white"),
-     smallplot=c(0.175,0.200,0.05,0.95)); par(mar = par("mar"))
+     axis.args = list(line = -1.75, cex.axis=1, tick=F, at=c(80.2, 100), labels=c("80","100"), col.axis = "white", hadj = 1),
+     smallplot=c(0.175,0.200,0.10,0.90)); par(mar = par("mar"))
 
 # Line Plots
 # SIF
 op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_sif_cf, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
-     ylim = c(min(ts_sif_cs, ts_sif_cf) - 0.025 * min(ts_sif_cs, ts_sif_cf),
-              max(ts_sif_cs, ts_sif_cf) + 0.025 * max(ts_sif_cs, ts_sif_cf)))
+     ylim = c(min(ts_sif_cs, ts_sif_cf) - 0.10 * min(ts_sif_cs, ts_sif_cf),
+              max(ts_sif_cs, ts_sif_cf) + 0.10 * max(ts_sif_cs, ts_sif_cf)))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_sif_cf, col = mag.cols[4], lwd = 1.5)
 lines(x, ts_sif_cs, col = mag.cols[4], lwd = 1.5, lty = 2)
-axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
-legend("topleft", legend=c("Clear Sky", "Cloud Fraction <0.20"), col=c("white", "white"),
-       lty=c(2, 1), box.col = "white", text.col = "white")
+legend("topleft", legend=c("Clear Sky", "Cloud <0.20"), col=c("white", "white"),
+       lty=c(2, 1), box.col = "white", text.col = "white", horiz = TRUE, y.intersp=0.5)
 box(col = "white")
 
 # op <- par(mar = c(0,6,0,0.5), bg = "black")
@@ -215,59 +215,60 @@ box(col = "white")
 # REF 781
 op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_ref_781_cf, col = vir.cols[5], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
-     ylim = c(min(ts_ref_781_cs, ts_ref_781_cf) - 0.025 * min(ts_ref_781_cs, ts_ref_781_cf),
-              max(ts_ref_781_cs, ts_ref_781_cf) + 0.025 * max(ts_ref_781_cs, ts_ref_781_cf)))
+     ylim = c(min(ts_ref_781_cs, ts_ref_781_cf) - 0.10 * min(ts_ref_781_cs, ts_ref_781_cf),
+              max(ts_ref_781_cs, ts_ref_781_cf) + 0.10 * max(ts_ref_781_cs, ts_ref_781_cf)))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_ref_781_cf, col = vir.cols[5], lty = 1, lwd = 1.5)
 lines(x, ts_ref_781_cs, col = vir.cols[5], lty = 2, lwd = 1.5)
-axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(2, text = do.call(expression, y_lab_781), col = "white", line = c(4.25, 2.25))
 box(col = "white")
 
 # NIRv
 op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_nirv_cf, col = mag.cols[5], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
-     ylim = c(min(ts_nirv_cs, ts_nirv_cf) - 0.025 * min(ts_nirv_cs, ts_nirv_cf),
-              max(ts_nirv_cs, ts_nirv_cf) + 0.025 * max(ts_nirv_cs, ts_nirv_cf)))
+     ylim = c(min(ts_nirv_cs, ts_nirv_cf) - 0.10 * min(ts_nirv_cs, ts_nirv_cf),
+              max(ts_nirv_cs, ts_nirv_cf) + 0.10 * max(ts_nirv_cs, ts_nirv_cf)))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_nirv_cf, col = mag.cols[5], lty = 1, lwd = 1.5)
 lines(x, ts_nirv_cs, col = mag.cols[5], lty = 2, lwd = 1.5)
-axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, tck = 0.05, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(2, text = y_lab_nirv, col = "white", line = 2.25)
 box(col = "white")
 
 # REF 665
 op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_ref_665_cf, col = vir.cols[6], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
-     ylim = c(min(ts_ref_665_cs, ts_ref_665_cf) - 0.025 * min(ts_ref_665_cs, ts_ref_665_cf),
-              max(ts_ref_665_cs, ts_ref_665_cf) + 0.025 * max(ts_ref_665_cs, ts_ref_665_cf)))
+     ylim = c(min(ts_ref_665_cs, ts_ref_665_cf) - 0.10 * min(ts_ref_665_cs, ts_ref_665_cf),
+              max(ts_ref_665_cs, ts_ref_665_cf) + 0.10 * max(ts_ref_665_cs, ts_ref_665_cf)))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_ref_665_cf, col = vir.cols[6], lty = 1, lwd = 1.5)
 lines(x, ts_ref_665_cs, col = vir.cols[6], lty = 2, lwd = 1.5)
 axis(1, labels = FALSE, tck = 0.03, at = x,  mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, labels = xlabs, tck = 0.04, at = seq(1, 36, by = 3), mgp=c(3, 0.1, 0), col.axis = "white", col = "white", cex.axis = 0.85)
+axis(1, labels = xlabs, tck = 0.06, at = seq(1, 36, by = 3), mgp=c(3, 0.1, 0), col.axis = "white", col = "white", cex.axis = 0.85)
 axis(1, labels = c("2019", "2020", "2021"), tck = FALSE, at = c(6.5, 18.5, 30.5), mgp=c(3, 1.1, 0), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(2, text = do.call(expression, y_lab_665), col = "white", line = c(4.25, 2.25))
 box(col = "white")
 
 #NIRV Rad
 op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_nirv_rad_cf, col = mag.cols[6], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
-     ylim = c(min(ts_nirv_rad_cs, ts_nirv_rad_cf) - 0.025 * min(ts_nirv_rad_cs, ts_nirv_rad_cf),
-              max(ts_nirv_rad_cs, ts_nirv_rad_cf) + 0.025 * max(ts_nirv_rad_cs, ts_nirv_rad_cf)))
+     ylim = c(min(ts_nirv_rad_cs, ts_nirv_rad_cf) - 0.10 * min(ts_nirv_rad_cs, ts_nirv_rad_cf),
+              max(ts_nirv_rad_cs, ts_nirv_rad_cf) + 0.10 * max(ts_nirv_rad_cs, ts_nirv_rad_cf)))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_nirv_rad_cf, col = mag.cols[6], lty = 1, lwd = 1.5)
 lines(x, ts_nirv_rad_cs, col = mag.cols[6], lty = 2, lwd = 1.5)
 axis(1, labels = FALSE, tck = 0.03, at = x,  mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-axis(1, labels = xlabs, tck = 0.04, at = seq(1, 36, by = 3), mgp=c(3, 0.1, 0), col.axis = "white", col = "white", cex.axis = 0.85)
+axis(1, labels = xlabs, tck = 0.06, at = seq(1, 36, by = 3), mgp=c(3, 0.1, 0), col.axis = "white", col = "white", cex.axis = 0.85)
 axis(1, labels = c("2019", "2020", "2021"), tck = FALSE, at = c(6.5, 18.5, 30.5), mgp=c(3, 1.1, 0), col.axis = "white", col = "white")
-axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
+axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(2, text = do.call(expression, y_lab_nirvr), col = "white", line = c(4.25, 2.25))
 box(col = "white")
 
 dev.off()
+

@@ -170,7 +170,7 @@ map_max <- minmax(cf20_diff_max)[2]
 map_min <- minmax(cf20_diff_max)[1]
 plot(raster(cf20_diff_max), legend.only=TRUE, col=diff_max.col, horizontal=F,
      legend.args = list(text = do.call(expression, y_lab_map), side = 2, line = c(3.0, 1.0), col = "white"),
-     axis.args = list(line = -2.50, cex.axis=1, tick=F, at=c(map_min, 0, map_max), labels=c(map_min, "0", map_max), col.axis = "white"),
+     axis.args = list(line = -1.75, cex.axis=1, tick=F, at=c(map_min, 0, map_max), labels=c(map_min, "0", map_max), col.axis = "white", hadj = 1),
      smallplot=c(0.175,0.200,0.10,0.90)); par(mar = par("mar"))
 
 # Line Plots
@@ -186,7 +186,7 @@ axis(1, tck = 0.06, labels = FALSE, at = c(1, 4, 7, 12), col.axis = "white", col
 axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
 legend("topleft", legend=c("Clear Sky", "Cloud <0.20"), col=c("white", "white"),
-       lty=c(2, 1), box.col = "white", text.col = "white", horiz = TRUE)
+       lty=c(2, 1), box.col = "white", text.col = "white", horiz = TRUE, y.intersp=0.5)
 box(col = "white")
 
 # op <- par(mar = c(0,6,0,0.5), bg = "black")
