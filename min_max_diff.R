@@ -2,17 +2,17 @@
 library(terra)
 library(pals)
 
-out_dir      <- "G:/SIF_comps/min_max_diff/1deg/cf20"
-out_name     <- "cf20.monthly.1deg.2020"
+out_dir      <- "G:/SIF_comps/min_max_diff/1deg/clearsky"
+out_name     <- "clearsky.cold.monthly.1deg.2021"
 
-tropomi_sif_max   <- rast("G:/SIF_comps/min_max/1deg/cf20/SIF.max.monthly.1deg.cf20.2020.tif")
-tropomi_sif_min   <- rast("G:/SIF_comps/min_max/1deg/cf20/SIF.min.monthly.1deg.cf20.2020.tif")
-tropomi_nirv_max  <- rast("G:/SIF_comps/min_max/1deg/cf20/NIRv.max.monthly.1deg.cf20.2020.tif")
-tropomi_nirv_min  <- rast("G:/SIF_comps/min_max/1deg/cf20/NIRv.min.monthly.1deg.cf20.2020.tif")
-tropomi_nirvr_max <- rast("G:/SIF_comps/min_max/1deg/cf20/NIRv_Rad.max.monthly.1deg.cf20.2020.tif")
-tropomi_nirvr_min <- rast("G:/SIF_comps/min_max/1deg/cf20/NIRv_Rad.min.monthly.1deg.cf20.2020.tif")
-tropomi_ndvi_max  <- rast("G:/SIF_comps/min_max/1deg/cf20/NDVI.max.monthly.1deg.cf20.2020.tif")
-tropomi_ndvi_min  <- rast("G:/SIF_comps/min_max/1deg/cf20/NDVI.min.monthly.1deg.cf20.2020.tif")
+tropomi_sif_max   <- rast("G:/SIF_comps/min_max/1deg/clearsky/SIF.max.monthly.1deg.clearsky.cold.2021.tif")
+tropomi_sif_min   <- rast("G:/SIF_comps/min_max/1deg/clearsky/SIF.min.monthly.1deg.clearsky.cold.2021.tif")
+tropomi_nirv_max  <- rast("G:/SIF_comps/min_max/1deg/clearsky/NIRv.max.monthly.1deg.clearsky.cold.2021.tif")
+tropomi_nirv_min  <- rast("G:/SIF_comps/min_max/1deg/clearsky/NIRv.min.monthly.1deg.clearsky.cold.2021.tif")
+tropomi_nirvr_max <- rast("G:/SIF_comps/min_max/1deg/clearsky/NIRv_Rad.max.monthly.1deg.clearsky.cold.2021.tif")
+tropomi_nirvr_min <- rast("G:/SIF_comps/min_max/1deg/clearsky/NIRv_Rad.min.monthly.1deg.clearsky.cold.2021.tif")
+tropomi_ndvi_max  <- rast("G:/SIF_comps/min_max/1deg/clearsky/NDVI.max.monthly.1deg.clearsky.cold.2021.tif")
+tropomi_ndvi_min  <- rast("G:/SIF_comps/min_max/1deg/clearsky/NDVI.min.monthly.1deg.clearsky.cold.2021.tif")
 
 # Difference from SIF (negative means NIRv earlier than SIF)
 diff_max_nirv  <-  tropomi_nirv_max  - tropomi_sif_max
@@ -40,14 +40,14 @@ nirvr_sif_min_reclass_sign <- classify(diff_min_nirvr, reclass_sign)
 ndvi_sif_min_reclass_sign  <- classify(diff_min_ndvi, reclass_sign)
 
 # Save min_max raster differences with sign
-writeRaster(nirv_sif_max_reclass_sign, paste0(out_dir, "/", "NIRv.cf20-SIF.max.", out_name, ".tif"), overwrite = TRUE)
-writeRaster(nirv_sif_min_reclass_sign, paste0(out_dir, "/", "NIRv.cf20-SIF.min.", out_name, ".tif"), overwrite = TRUE)
+writeRaster(nirv_sif_max_reclass_sign, paste0(out_dir, "/", "NIRv.clearsky-SIF.max.", out_name, ".tif"), overwrite = TRUE)
+writeRaster(nirv_sif_min_reclass_sign, paste0(out_dir, "/", "NIRv.clearsky-SIF.min.", out_name, ".tif"), overwrite = TRUE)
 
-writeRaster(nirvr_sif_max_reclass_sign, paste0(out_dir, "/", "NIRv_Rad.cf20-SIF.max.", out_name, ".tif"), overwrite = TRUE)
-writeRaster(nirvr_sif_min_reclass_sign, paste0(out_dir, "/", "NIRv_Rad.cf20-SIF.min.", out_name, ".tif"), overwrite = TRUE)
+writeRaster(nirvr_sif_max_reclass_sign, paste0(out_dir, "/", "NIRv_Rad.clearsky-SIF.max.", out_name, ".tif"), overwrite = TRUE)
+writeRaster(nirvr_sif_min_reclass_sign, paste0(out_dir, "/", "NIRv_Rad.clearsky-SIF.min.", out_name, ".tif"), overwrite = TRUE)
 
-writeRaster(ndvi_sif_max_reclass_sign, paste0(out_dir, "/", "NDVI.cf20-SIF.max.", out_name, ".tif"), overwrite = TRUE)
-writeRaster(ndvi_sif_min_reclass_sign, paste0(out_dir, "/", "NDVI.cf20-SIF.min.", out_name, ".tif"), overwrite = TRUE)
+writeRaster(ndvi_sif_max_reclass_sign, paste0(out_dir, "/", "NDVI.clearsky-SIF.max.", out_name, ".tif"), overwrite = TRUE)
+writeRaster(ndvi_sif_min_reclass_sign, paste0(out_dir, "/", "NDVI.clearsky-SIF.min.", out_name, ".tif"), overwrite = TRUE)
 
 # # Reclassify into absolute differences in 8-day periods (difference is positive (no sign) 0 to 23)
 # reclass_abs <- matrix(c((45:24), (1:22)), ncol = 2)
