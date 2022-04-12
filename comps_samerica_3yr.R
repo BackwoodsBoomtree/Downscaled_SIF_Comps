@@ -10,7 +10,8 @@ library(RColorBrewer)
 # out_name   <- "G:/SIF_comps/figs/comps_samerica_map_3yr_cold_black.pdf"
 # out_name   <- "G:/SIF_comps/figs/comps_samerica_map_3yr_hot_black.pdf"
 # out_name   <- "G:/SIF_comps/figs/comps_samerica_map_3yr_strict_black.pdf"
-out_name   <- "G:/SIF_comps/figs/comps_samerica_map_3yr_cold_strict_black.pdf"
+# out_name   <- "G:/SIF_comps/figs/comps_samerica_map_3yr_cold_strict_black.pdf"
+out_name   <- "G:/SIF_comps/figs/comps_samerica_map_3yr_cold_all_black.pdf"
 
 #### Load Files ####
 
@@ -50,15 +51,27 @@ out_name   <- "G:/SIF_comps/figs/comps_samerica_map_3yr_cold_strict_black.pdf"
 # cs_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.strict.nc"
 # cs_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.strict.nc"
 
-### Strict and cold
+# ### Strict and cold
+# cf_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.CF20.cold.nc"
+# cf_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.cold.nc"
+# cf_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.CF20.cold.nc"
+# 
+# cs_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.clearsky.cold.strict.nc"
+# cs_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.cold.strict.nc"
+# cs_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.cold.strict.nc"
+
+### All PAs, cold, cold CF
+cs_all_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.clearsky.nc"
+cs_all_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.nc"
+cs_all_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.nc"
+
+cs_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.clearsky.cold.nc"
+cs_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.cold.nc"
+cs_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.cold.nc"
+
 cf_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.CF20.cold.nc"
 cf_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.cold.nc"
 cf_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.CF20.cold.nc"
-
-cs_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.clearsky.cold.strict.nc"
-cs_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.cold.strict.nc"
-cs_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.cold.strict.nc"
-
 
 # Masks
 
@@ -102,6 +115,19 @@ sif_std_cs      <- crop(mask(c(rast(cs_2019, subds = "SIF_743_std"), rast(cs_202
 ref_665_std_cs  <- crop(mask(c(rast(cs_2019, subds = "REF_665_std"), rast(cs_2020, subds = "REF_665_std"), rast(cs_2021, subds = "REF_665_std")), m), samerica_ext)
 ref_781_std_cs  <- crop(mask(c(rast(cs_2019, subds = "REF_781_std"), rast(cs_2020, subds = "REF_781_std"), rast(cs_2021, subds = "REF_781_std")), m), samerica_ext)
 
+n_cs_all        <- crop(mask(c(rast(cs_all_2019, subds = "n"), rast(cs_all_2020, subds = "n"), rast(cs_all_2021, subds = "n")), m), samerica_ext)
+nirv_cs_all     <- crop(mask(c(rast(cs_all_2019, subds = "NIRv"), rast(cs_all_2020, subds = "NIRv"), rast(cs_all_2021, subds = "NIRv")), m), samerica_ext)
+nirv_rad_cs_all <- crop(mask(c(rast(cs_all_2019, subds = "NIRv_Rad"), rast(cs_all_2020, subds = "NIRv_Rad"), rast(cs_all_2021, subds = "NIRv_Rad")), m), samerica_ext)
+sif_cs_all      <- crop(mask(c(rast(cs_all_2019, subds = "SIF_743"), rast(cs_all_2020, subds = "SIF_743"), rast(cs_all_2021, subds = "SIF_743")), m), samerica_ext)
+ref_665_cs_all  <- crop(mask(c(rast(cs_all_2019, subds = "REF_665"), rast(cs_all_2020, subds = "REF_665"), rast(cs_all_2021, subds = "REF_665")), m), samerica_ext)
+ref_781_cs_all  <- crop(mask(c(rast(cs_all_2019, subds = "REF_781"), rast(cs_all_2020, subds = "REF_781"), rast(cs_all_2021, subds = "REF_781")), m), samerica_ext)
+
+nirv_std_cs_all     <- crop(mask(c(rast(cs_all_2019, subds = "NIRv_std"), rast(cs_all_2020, subds = "NIRv_std"), rast(cs_all_2021, subds = "NIRv_std")), m), samerica_ext)
+nirv_rad_std_cs_all <- crop(mask(c(rast(cs_all_2019, subds = "NIRv_Rad_std"), rast(cs_all_2020, subds = "NIRv_Rad_std"), rast(cs_all_2021, subds = "NIRv_Rad_std")), m), samerica_ext)
+sif_std_cs_all      <- crop(mask(c(rast(cs_all_2019, subds = "SIF_743_std"), rast(cs_all_2020, subds = "SIF_743_std"), rast(cs_all_2021, subds = "SIF_743_std")), m), samerica_ext)
+ref_665_std_cs_all  <- crop(mask(c(rast(cs_all_2019, subds = "REF_665_std"), rast(cs_all_2020, subds = "REF_665_std"), rast(cs_all_2021, subds = "REF_665_std")), m), samerica_ext)
+ref_781_std_cs_all  <- crop(mask(c(rast(cs_all_2019, subds = "REF_781_std"), rast(cs_all_2020, subds = "REF_781_std"), rast(cs_all_2021, subds = "REF_781_std")), m), samerica_ext)
+
 
 #### Extract the data ####
 ts_nirv_cf     <- global(nirv_cf, fun = "mean", na.rm = TRUE)
@@ -131,6 +157,20 @@ ts_sif_cs      <- as.vector(t(ts_sif_cs))
 ts_ref_665_cs  <- as.vector(t(ts_ref_665_cs))
 ts_ref_781_cs  <- as.vector(t(ts_ref_781_cs))
 ts_n_cs        <- as.vector(t(ts_n_cs))
+
+ts_nirv_cs_all     <- global(nirv_cs_all, fun = "mean", na.rm = TRUE)
+ts_nirv_rad_cs_all <- global(nirv_rad_cs_all, fun = "mean", na.rm = TRUE)
+ts_sif_cs_all      <- global(sif_cs_all, fun = "mean", na.rm = TRUE)
+ts_ref_665_cs_all  <- global(ref_665_cs_all, fun = "mean", na.rm = TRUE)
+ts_ref_781_cs_all  <- global(ref_781_cs_all, fun = "mean", na.rm = TRUE)
+ts_n_cs_all        <- global(n_cs_all, fun = "mean", na.rm = TRUE)
+
+ts_nirv_cs_all     <- as.vector(t(ts_nirv_cs_all))
+ts_nirv_rad_cs_all <- as.vector(t(ts_nirv_rad_cs_all))
+ts_sif_cs_all      <- as.vector(t(ts_sif_cs_all))
+ts_ref_665_cs_all  <- as.vector(t(ts_ref_665_cs_all))
+ts_ref_781_cs_all  <- as.vector(t(ts_ref_781_cs_all))
+ts_n_cs_all        <- as.vector(t(ts_n_cs_all))
 
 
 #### Calc SEM at regional scale ####
@@ -206,7 +246,7 @@ xlabs       <- c("Jan", "Apr", "Jul", "Oct", "Jan", "Apr", "Jul", "Oct", "Jan", 
 y_lab_map   <- list(bquote("Forest Cover"), bquote("Percent  (%)"))
 y_lab_sif   <- list(bquote("SIF"), bquote("(mW/m"^"2"*"/sr/nm)"))
 y_lab_n     <- list(bquote("Number of "), bquote("Soundings"))
-y_lab_nirv  <- "NIRv"
+y_lab_nirv  <- list(bquote("NIRv"), bquote("(Reflectance)"))
 y_lab_nirvr <- list(bquote("NIRv Radiance"), bquote("(mW/m"^"2"*"/sr/nm)"))
 y_lab_665   <- list(bquote("Reflectance"), bquote("665 nm"))
 y_lab_781   <- list(bquote("Reflectance"), bquote("781 nm"))
@@ -232,42 +272,36 @@ box(col = "white")
 # Legend
 plot(raster(cover), legend.only=TRUE, col=map.cols, horizontal=F,
      legend.args = list(text = do.call(expression, y_lab_map), side = 2, line = c(3.0, 1.0), col = "white"),
-     axis.args = list(line = -1.75, cex.axis=1, tick=F, at=c(80.2, 100), labels=c("80","100"), col.axis = "white", hadj = 1),
+     axis.args = list(line = -1.75, cex.axis=1, tick=F, at=c(81, 100), labels=c("80","100"), col.axis = "white", hadj = 1),
      smallplot=c(0.175,0.200,0.10,0.90)); par(mar = par("mar"))
 
 # Line Plots
 # SIF
 op <- par(mar = c(0,6,0,0.5), bg = "black")
-plot(x, ts_sif_cf, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
+plot(x, ts_sif_cs, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs, ts_sif_cf) - 0.10 * min(ts_sif_cs, ts_sif_cf),
               max(ts_sif_cs, ts_sif_cf) + 0.10 * max(ts_sif_cs, ts_sif_cf)))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
-lines(x, ts_sif_cf, col = mag.cols[4], lwd = 1.5)
-lines(x, ts_sif_cs, col = mag.cols[4], lwd = 1.5, lty = 2)
+lines(x, ts_sif_cs, col = mag.cols[4], lwd = 1.5)
+lines(x, ts_sif_cf, col = mag.cols[4], lwd = 1.5, lty = 2)
+lines(x, ts_sif_cs_all, col = mag.cols[4], lwd = 1.5, lty = 3)
 axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
 axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
-legend("topleft", legend=c("Clear Sky", "Cloud <0.20"), col=c("white", "white"),
-       lty=c(2, 1), box.col = "white", text.col = "white", horiz = TRUE, y.intersp=0.5)
+legend("topleft", legend=c("Clear Sky (w/ Hotspot)", "Clear Sky (No Hotspot)", "Cloud <0.20 (No Hotspot)"), col=c("white", "white", "white"),
+       lty=c(3, 1, 2), box.col = "white", text.col = "white", horiz = FALSE, y.intersp = 1, cex = 0.75)
 box(col = "white")
-
-# op <- par(mar = c(0,6,0,0.5), bg = "black")
-# plot(x, ts_n_cf, col = mag.cols[3], type = "l", ylim = c(min(ts_n_cs), max(ts_n_cf)), axes = FALSE, lwd = 1.5)
-# lines(x, ts_n_cs, col = mag.cols[3], lty = 2, lwd = 1.5)
-# axis(1, tck = 0.03, labels = FALSE, at = x, mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
-# axis(2, tck = 0.03, mgp=c(3, 0.1, 0), col.axis = "white", col = "white", las = 2)
-# mtext(2, text = do.call(expression, y_lab_n), col = "white", line = c(4.25, 2.25))
-# box(col = "white")
 
 # REF 781
 op <- par(mar = c(0,6,0,0.5), bg = "black")
-plot(x, ts_ref_781_cf, col = vir.cols[5], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
-     ylim = c(min(ts_ref_781_cs, ts_ref_781_cf) - 0.10 * min(ts_ref_781_cs, ts_ref_781_cf),
-              max(ts_ref_781_cs, ts_ref_781_cf) + 0.10 * max(ts_ref_781_cs, ts_ref_781_cf)))
+plot(x, ts_ref_781_cs, col = vir.cols[5], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
+     ylim = c(min(ts_ref_781_cs, ts_ref_781_cf, ts_ref_781_cs_all) - 0.01,
+              max(ts_ref_781_cs, ts_ref_781_cf, ts_ref_781_cs_all) + 0.01))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
-lines(x, ts_ref_781_cf, col = vir.cols[5], lty = 1, lwd = 1.5)
-lines(x, ts_ref_781_cs, col = vir.cols[5], lty = 2, lwd = 1.5)
+lines(x, ts_ref_781_cs, col = vir.cols[5], lty = 1, lwd = 1.5)
+lines(x, ts_ref_781_cf, col = vir.cols[5], lty = 2, lwd = 1.5)
+lines(x, ts_ref_781_cs_all, col = vir.cols[5], lty = 3, lwd = 1.5)
 axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
 axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
@@ -276,26 +310,28 @@ box(col = "white")
 
 # NIRv
 op <- par(mar = c(0,6,0,0.5), bg = "black")
-plot(x, ts_nirv_cf, col = mag.cols[5], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
+plot(x, ts_nirv_cs, col = mag.cols[5], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_nirv_cs, ts_nirv_cf) - 0.10 * min(ts_nirv_cs, ts_nirv_cf),
               max(ts_nirv_cs, ts_nirv_cf) + 0.10 * max(ts_nirv_cs, ts_nirv_cf)))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
-lines(x, ts_nirv_cf, col = mag.cols[5], lty = 1, lwd = 1.5)
-lines(x, ts_nirv_cs, col = mag.cols[5], lty = 2, lwd = 1.5)
+lines(x, ts_nirv_cs, col = mag.cols[5], lty = 1, lwd = 1.5)
+lines(x, ts_nirv_cf, col = mag.cols[5], lty = 2, lwd = 1.5)
+lines(x, ts_nirv_cs_all, col = mag.cols[5], lty = 3, lwd = 1.5)
 axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
 axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
-mtext(2, text = y_lab_nirv, col = "white", line = 2.25)
+mtext(2, text = do.call(expression, y_lab_nirv), col = "white", line = c(4.25, 2.25))
 box(col = "white")
 
 # REF 665
 op <- par(mar = c(0,6,0,0.5), bg = "black")
-plot(x, ts_ref_665_cf, col = vir.cols[6], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
-     ylim = c(min(ts_ref_665_cs, ts_ref_665_cf) - 0.10 * min(ts_ref_665_cs, ts_ref_665_cf),
-              max(ts_ref_665_cs, ts_ref_665_cf) + 0.10 * max(ts_ref_665_cs, ts_ref_665_cf)))
+plot(x, ts_ref_665_cs, col = vir.cols[6], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
+     ylim = c(min(ts_ref_665_cs, ts_ref_665_cf, ts_ref_665_cs_all) - 0.01,
+              max(ts_ref_665_cs, ts_ref_665_cf, ts_ref_665_cs_all) + 0.01))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
-lines(x, ts_ref_665_cf, col = vir.cols[6], lty = 1, lwd = 1.5)
-lines(x, ts_ref_665_cs, col = vir.cols[6], lty = 2, lwd = 1.5)
+lines(x, ts_ref_665_cs, col = vir.cols[6], lty = 1, lwd = 1.5)
+lines(x, ts_ref_665_cf, col = vir.cols[6], lty = 2, lwd = 1.5)
+lines(x, ts_ref_665_cs_all, col = vir.cols[6], lty = 3, lwd = 1.5)
 axis(1, labels = FALSE, tck = 0.03, at = x,  mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
 axis(1, labels = xlabs, tck = 0.06, at = seq(1, 36, by = 3), mgp=c(3, 0.1, 0), col.axis = "white", col = "white", cex.axis = 0.85)
 axis(1, labels = c("2019", "2020", "2021"), tck = FALSE, at = c(6.5, 18.5, 30.5), mgp=c(3, 1.1, 0), col.axis = "white", col = "white")
@@ -305,12 +341,13 @@ box(col = "white")
 
 #NIRV Rad
 op <- par(mar = c(0,6,0,0.5), bg = "black")
-plot(x, ts_nirv_rad_cf, col = mag.cols[6], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
-     ylim = c(min(ts_nirv_rad_cs, ts_nirv_rad_cf) - 0.10 * min(ts_nirv_rad_cs, ts_nirv_rad_cf),
-              max(ts_nirv_rad_cs, ts_nirv_rad_cf) + 0.10 * max(ts_nirv_rad_cs, ts_nirv_rad_cf)))
+plot(x, ts_nirv_rad_cs, col = mag.cols[6], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
+     ylim = c(min(ts_nirv_rad_cs, ts_nirv_rad_cf, ts_nirv_rad_cs_all) - 2,
+              max(ts_nirv_rad_cs, ts_nirv_rad_cf, ts_nirv_rad_cs_all) + 2))
 rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
-lines(x, ts_nirv_rad_cf, col = mag.cols[6], lty = 1, lwd = 1.5)
-lines(x, ts_nirv_rad_cs, col = mag.cols[6], lty = 2, lwd = 1.5)
+lines(x, ts_nirv_rad_cs, col = mag.cols[6], lty = 1, lwd = 1.5)
+lines(x, ts_nirv_rad_cf, col = mag.cols[6], lty = 2, lwd = 1.5)
+lines(x, ts_nirv_rad_cs_all, col = mag.cols[6], lty = 3, lwd = 1.5)
 axis(1, labels = FALSE, tck = 0.03, at = x,  mgp=c(3, 0.1, 0), col.axis = "white", col = "white")
 axis(1, labels = xlabs, tck = 0.06, at = seq(1, 36, by = 3), mgp=c(3, 0.1, 0), col.axis = "white", col = "white", cex.axis = 0.85)
 axis(1, labels = c("2019", "2020", "2021"), tck = FALSE, at = c(6.5, 18.5, 30.5), mgp=c(3, 1.1, 0), col.axis = "white", col = "white")
