@@ -63,8 +63,6 @@ cf_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.glo
 cf_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.cold.nc"
 cf_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.CF20.cold.nc"
 
-
-
 # Masks
 mask_ebf   <- rast("G:/MCD12C1/MCD12C1.A2020001.006.EBF.1deg.tif")
 mask_veg   <- rast("G:/SIF_comps/veg_mask/max.monthly.ndvi.1deg.tif")
@@ -239,8 +237,8 @@ y_lab_sif   <- list(bquote("SIF"), bquote("(mW/m"^"2"*"/sr/nm)"))
 y_lab_n     <- list(bquote("Number of "), bquote("Soundings"))
 y_lab_nirv  <- list(bquote("NIRv"), bquote("(Reflectance)"))
 y_lab_nirvr <- list(bquote("NIRv Radiance"), bquote("(mW/m"^"2"*"/sr/nm)"))
-y_lab_665   <- list(bquote("Reflectance"), bquote("665 nm"))
-y_lab_781   <- list(bquote("Reflectance"), bquote("781 nm"))
+y_lab_665   <- list(bquote("Red"), bquote("Reflectance"))
+y_lab_781   <- list(bquote("NIR"), bquote("Reflectance"))
 
 mag.cols <- magma(7)
 vir.cols <- viridis(7)

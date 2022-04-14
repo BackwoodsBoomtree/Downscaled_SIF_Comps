@@ -282,51 +282,51 @@ africa_s_equ_pred   <- data.frame(pa = africa_s_equ_pa_seq)
 seasia_s_equ_pred   <- data.frame(pa = seasia_s_equ_pa_seq)
 
 for (i in 1:nrow(samerica_m_equ_pred)) {
-  samerica_m_equ_pred$sif[i]    <- samerica_m_equ_sif_coeff[1] + (samerica_m_equ_sif_coeff[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_sif_coeff[3] * (samerica_m_equ_pred$pa[i]^2))
-  samerica_m_equ_pred$nirv[i]   <- samerica_m_equ_nirv_coeff[1] + (samerica_m_equ_nirv_coeff[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_nirv_coeff[3] * (samerica_m_equ_pred$pa[i]^2))
-  samerica_m_equ_pred$nirvr[i]  <- samerica_m_equ_nirvr_coeff[1] + (samerica_m_equ_nirvr_coeff[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_nirvr_coeff[3] * (samerica_m_equ_pred$pa[i]^2))
-  samerica_m_equ_pred$ref665[i] <- samerica_m_equ_ref665_coeff[1] + (samerica_m_equ_ref665_coeff[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_ref665_coeff[3] * (samerica_m_equ_pred$pa[i]^2))
-  samerica_m_equ_pred$ref781[i] <- samerica_m_equ_ref781_coeff[1] + (samerica_m_equ_ref781_coeff[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_ref781_coeff[3] * (samerica_m_equ_pred$pa[i]^2))
+  samerica_m_equ_pred$sif[i]    <- samerica_m_equ_sif_fit$coefficients[1] + (samerica_m_equ_sif_fit$coefficients[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_sif_fit$coefficients[3] * (samerica_m_equ_pred$pa[i]^2))
+  samerica_m_equ_pred$nirv[i]   <- samerica_m_equ_nirv_fit$coefficients[1] + (samerica_m_equ_nirv_fit$coefficients[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_nirv_fit$coefficients[3] * (samerica_m_equ_pred$pa[i]^2))
+  samerica_m_equ_pred$nirvr[i]  <- samerica_m_equ_nirvr_fit$coefficients[1] + (samerica_m_equ_nirvr_fit$coefficients[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_nirvr_fit$coefficients[3] * (samerica_m_equ_pred$pa[i]^2))
+  samerica_m_equ_pred$ref665[i] <- samerica_m_equ_ref665_fit$coefficients[1] + (samerica_m_equ_ref665_fit$coefficients[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_ref665_fit$coefficients[3] * (samerica_m_equ_pred$pa[i]^2))
+  samerica_m_equ_pred$ref781[i] <- samerica_m_equ_ref781_fit$coefficients[1] + (samerica_m_equ_ref781_fit$coefficients[2] * samerica_m_equ_pred$pa[i]) + (samerica_m_equ_ref781_fit$coefficients[3] * (samerica_m_equ_pred$pa[i]^2))
 }
 
 for (i in 1:nrow(africa_m_equ_pred)) {
-  africa_m_equ_pred$sif[i]    <- africa_m_equ_sif_coeff[1] + (africa_m_equ_sif_coeff[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_sif_coeff[3] * (africa_m_equ_pred$pa[i]^2))
-  africa_m_equ_pred$nirv[i]   <- africa_m_equ_nirv_coeff[1] + (africa_m_equ_nirv_coeff[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_nirv_coeff[3] * (africa_m_equ_pred$pa[i]^2))
-  africa_m_equ_pred$nirvr[i]  <- africa_m_equ_nirvr_coeff[1] + (africa_m_equ_nirvr_coeff[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_nirvr_coeff[3] * (africa_m_equ_pred$pa[i]^2))
-  africa_m_equ_pred$ref665[i] <- africa_m_equ_ref665_coeff[1] + (africa_m_equ_ref665_coeff[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_ref665_coeff[3] * (africa_m_equ_pred$pa[i]^2))
-  africa_m_equ_pred$ref781[i] <- africa_m_equ_ref781_coeff[1] + (africa_m_equ_ref781_coeff[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_ref781_coeff[3] * (africa_m_equ_pred$pa[i]^2))
+  africa_m_equ_pred$sif[i]    <- africa_m_equ_sif_fit$coefficients[1] + (africa_m_equ_sif_fit$coefficients[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_sif_fit$coefficients[3] * (africa_m_equ_pred$pa[i]^2))
+  africa_m_equ_pred$nirv[i]   <- africa_m_equ_nirv_fit$coefficients[1] + (africa_m_equ_nirv_fit$coefficients[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_nirv_fit$coefficients[3] * (africa_m_equ_pred$pa[i]^2))
+  africa_m_equ_pred$nirvr[i]  <- africa_m_equ_nirvr_fit$coefficients[1] + (africa_m_equ_nirvr_fit$coefficients[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_nirvr_fit$coefficients[3] * (africa_m_equ_pred$pa[i]^2))
+  africa_m_equ_pred$ref665[i] <- africa_m_equ_ref665_fit$coefficients[1] + (africa_m_equ_ref665_fit$coefficients[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_ref665_fit$coefficients[3] * (africa_m_equ_pred$pa[i]^2))
+  africa_m_equ_pred$ref781[i] <- africa_m_equ_ref781_fit$coefficients[1] + (africa_m_equ_ref781_fit$coefficients[2] * africa_m_equ_pred$pa[i]) + (africa_m_equ_ref781_fit$coefficients[3] * (africa_m_equ_pred$pa[i]^2))
 }
 
 for (i in 1:nrow(seasia_m_equ_pred)) {
-  seasia_m_equ_pred$sif[i]    <- seasia_m_equ_sif_coeff[1] + (seasia_m_equ_sif_coeff[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_sif_coeff[3] * (seasia_m_equ_pred$pa[i]^2))
-  seasia_m_equ_pred$nirv[i]   <- seasia_m_equ_nirv_coeff[1] + (seasia_m_equ_nirv_coeff[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_nirv_coeff[3] * (seasia_m_equ_pred$pa[i]^2))
-  seasia_m_equ_pred$nirvr[i]  <- seasia_m_equ_nirvr_coeff[1] + (seasia_m_equ_nirvr_coeff[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_nirvr_coeff[3] * (seasia_m_equ_pred$pa[i]^2))
-  seasia_m_equ_pred$ref665[i] <- seasia_m_equ_ref665_coeff[1] + (seasia_m_equ_ref665_coeff[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_ref665_coeff[3] * (seasia_m_equ_pred$pa[i]^2))
-  seasia_m_equ_pred$ref781[i] <- seasia_m_equ_ref781_coeff[1] + (seasia_m_equ_ref781_coeff[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_ref781_coeff[3] * (seasia_m_equ_pred$pa[i]^2))
+  seasia_m_equ_pred$sif[i]    <- seasia_m_equ_sif_fit$coefficients[1] + (seasia_m_equ_sif_fit$coefficients[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_sif_fit$coefficients[3] * (seasia_m_equ_pred$pa[i]^2))
+  seasia_m_equ_pred$nirv[i]   <- seasia_m_equ_nirv_fit$coefficients[1] + (seasia_m_equ_nirv_fit$coefficients[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_nirv_fit$coefficients[3] * (seasia_m_equ_pred$pa[i]^2))
+  seasia_m_equ_pred$nirvr[i]  <- seasia_m_equ_nirvr_fit$coefficients[1] + (seasia_m_equ_nirvr_fit$coefficients[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_nirvr_fit$coefficients[3] * (seasia_m_equ_pred$pa[i]^2))
+  seasia_m_equ_pred$ref665[i] <- seasia_m_equ_ref665_fit$coefficients[1] + (seasia_m_equ_ref665_fit$coefficients[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_ref665_fit$coefficients[3] * (seasia_m_equ_pred$pa[i]^2))
+  seasia_m_equ_pred$ref781[i] <- seasia_m_equ_ref781_fit$coefficients[1] + (seasia_m_equ_ref781_fit$coefficients[2] * seasia_m_equ_pred$pa[i]) + (seasia_m_equ_ref781_fit$coefficients[3] * (seasia_m_equ_pred$pa[i]^2))
 }
 
 for (i in 1:nrow(samerica_s_equ_pred)) {
-  samerica_s_equ_pred$sif[i]    <- samerica_s_equ_sif_coeff[1] + (samerica_s_equ_sif_coeff[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_sif_coeff[3] * (samerica_s_equ_pred$pa[i]^2))
-  samerica_s_equ_pred$nirv[i]   <- samerica_s_equ_nirv_coeff[1] + (samerica_s_equ_nirv_coeff[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_nirv_coeff[3] * (samerica_s_equ_pred$pa[i]^2))
-  samerica_s_equ_pred$nirvr[i]  <- samerica_s_equ_nirvr_coeff[1] + (samerica_s_equ_nirvr_coeff[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_nirvr_coeff[3] * (samerica_s_equ_pred$pa[i]^2))
-  samerica_s_equ_pred$ref665[i] <- samerica_s_equ_ref665_coeff[1] + (samerica_s_equ_ref665_coeff[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_ref665_coeff[3] * (samerica_s_equ_pred$pa[i]^2))
-  samerica_s_equ_pred$ref781[i] <- samerica_s_equ_ref781_coeff[1] + (samerica_s_equ_ref781_coeff[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_ref781_coeff[3] * (samerica_s_equ_pred$pa[i]^2))
+  samerica_s_equ_pred$sif[i]    <- samerica_s_equ_sif_fit$coefficients[1] + (samerica_s_equ_sif_fit$coefficients[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_sif_fit$coefficients[3] * (samerica_s_equ_pred$pa[i]^2))
+  samerica_s_equ_pred$nirv[i]   <- samerica_s_equ_nirv_fit$coefficients[1] + (samerica_s_equ_nirv_fit$coefficients[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_nirv_fit$coefficients[3] * (samerica_s_equ_pred$pa[i]^2))
+  samerica_s_equ_pred$nirvr[i]  <- samerica_s_equ_nirvr_fit$coefficients[1] + (samerica_s_equ_nirvr_fit$coefficients[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_nirvr_fit$coefficients[3] * (samerica_s_equ_pred$pa[i]^2))
+  samerica_s_equ_pred$ref665[i] <- samerica_s_equ_ref665_fit$coefficients[1] + (samerica_s_equ_ref665_fit$coefficients[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_ref665_fit$coefficients[3] * (samerica_s_equ_pred$pa[i]^2))
+  samerica_s_equ_pred$ref781[i] <- samerica_s_equ_ref781_fit$coefficients[1] + (samerica_s_equ_ref781_fit$coefficients[2] * samerica_s_equ_pred$pa[i]) + (samerica_s_equ_ref781_fit$coefficients[3] * (samerica_s_equ_pred$pa[i]^2))
 }
 
 for (i in 1:nrow(africa_s_equ_pred)) {
-  africa_s_equ_pred$sif[i]    <- africa_s_equ_sif_coeff[1] + (africa_s_equ_sif_coeff[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_sif_coeff[3] * (africa_s_equ_pred$pa[i]^2))
-  africa_s_equ_pred$nirv[i]   <- africa_s_equ_nirv_coeff[1] + (africa_s_equ_nirv_coeff[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_nirv_coeff[3] * (africa_s_equ_pred$pa[i]^2))
-  africa_s_equ_pred$nirvr[i]  <- africa_s_equ_nirvr_coeff[1] + (africa_s_equ_nirvr_coeff[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_nirvr_coeff[3] * (africa_s_equ_pred$pa[i]^2))
-  africa_s_equ_pred$ref665[i] <- africa_s_equ_ref665_coeff[1] + (africa_s_equ_ref665_coeff[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_ref665_coeff[3] * (africa_s_equ_pred$pa[i]^2))
-  africa_s_equ_pred$ref781[i] <- africa_s_equ_ref781_coeff[1] + (africa_s_equ_ref781_coeff[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_ref781_coeff[3] * (africa_s_equ_pred$pa[i]^2))
+  africa_s_equ_pred$sif[i]    <- africa_s_equ_sif_fit$coefficients[1] + (africa_s_equ_sif_fit$coefficients[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_sif_fit$coefficients[3] * (africa_s_equ_pred$pa[i]^2))
+  africa_s_equ_pred$nirv[i]   <- africa_s_equ_nirv_fit$coefficients[1] + (africa_s_equ_nirv_fit$coefficients[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_nirv_fit$coefficients[3] * (africa_s_equ_pred$pa[i]^2))
+  africa_s_equ_pred$nirvr[i]  <- africa_s_equ_nirvr_fit$coefficients[1] + (africa_s_equ_nirvr_fit$coefficients[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_nirvr_fit$coefficients[3] * (africa_s_equ_pred$pa[i]^2))
+  africa_s_equ_pred$ref665[i] <- africa_s_equ_ref665_fit$coefficients[1] + (africa_s_equ_ref665_fit$coefficients[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_ref665_fit$coefficients[3] * (africa_s_equ_pred$pa[i]^2))
+  africa_s_equ_pred$ref781[i] <- africa_s_equ_ref781_fit$coefficients[1] + (africa_s_equ_ref781_fit$coefficients[2] * africa_s_equ_pred$pa[i]) + (africa_s_equ_ref781_fit$coefficients[3] * (africa_s_equ_pred$pa[i]^2))
 }
 
 for (i in 1:nrow(seasia_s_equ_pred)) {
-  seasia_s_equ_pred$sif[i]    <- seasia_s_equ_sif_coeff[1] + (seasia_s_equ_sif_coeff[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_sif_coeff[3] * (seasia_s_equ_pred$pa[i]^2))
-  seasia_s_equ_pred$nirv[i]   <- seasia_s_equ_nirv_coeff[1] + (seasia_s_equ_nirv_coeff[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_nirv_coeff[3] * (seasia_s_equ_pred$pa[i]^2))
-  seasia_s_equ_pred$nirvr[i]  <- seasia_s_equ_nirvr_coeff[1] + (seasia_s_equ_nirvr_coeff[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_nirvr_coeff[3] * (seasia_s_equ_pred$pa[i]^2))
-  seasia_s_equ_pred$ref665[i] <- seasia_s_equ_ref665_coeff[1] + (seasia_s_equ_ref665_coeff[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_ref665_coeff[3] * (seasia_s_equ_pred$pa[i]^2))
-  seasia_s_equ_pred$ref781[i] <- seasia_s_equ_ref781_coeff[1] + (seasia_s_equ_ref781_coeff[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_ref781_coeff[3] * (seasia_s_equ_pred$pa[i]^2))
+  seasia_s_equ_pred$sif[i]    <- seasia_s_equ_sif_fit$coefficients[1] + (seasia_s_equ_sif_fit$coefficients[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_sif_fit$coefficients[3] * (seasia_s_equ_pred$pa[i]^2))
+  seasia_s_equ_pred$nirv[i]   <- seasia_s_equ_nirv_fit$coefficients[1] + (seasia_s_equ_nirv_fit$coefficients[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_nirv_fit$coefficients[3] * (seasia_s_equ_pred$pa[i]^2))
+  seasia_s_equ_pred$nirvr[i]  <- seasia_s_equ_nirvr_fit$coefficients[1] + (seasia_s_equ_nirvr_fit$coefficients[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_nirvr_fit$coefficients[3] * (seasia_s_equ_pred$pa[i]^2))
+  seasia_s_equ_pred$ref665[i] <- seasia_s_equ_ref665_fit$coefficients[1] + (seasia_s_equ_ref665_fit$coefficients[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_ref665_fit$coefficients[3] * (seasia_s_equ_pred$pa[i]^2))
+  seasia_s_equ_pred$ref781[i] <- seasia_s_equ_ref781_fit$coefficients[1] + (seasia_s_equ_ref781_fit$coefficients[2] * seasia_s_equ_pred$pa[i]) + (seasia_s_equ_ref781_fit$coefficients[3] * (seasia_s_equ_pred$pa[i]^2))
 }
 
 # get model coefficients
@@ -368,40 +368,40 @@ seasia_s_equ_ref781_coeff <- round(seasia_s_equ_ref781_fit$coefficients, 3)
 
 # Eqs for US legend
 samerica_m_equ_sif_eq    <- paste0("SIF = ", samerica_m_equ_sif_coeff[1], samerica_m_equ_sif_coeff[2], "x", "+", samerica_m_equ_sif_coeff[3], "x^2")
-samerica_m_equ_nirv_eq   <- paste0("NIRv = ", samerica_m_equ_nirv_coeff[1], samerica_m_equ_nirv_coeff[2], "x", "+", samerica_m_equ_nirv_coeff[3], "x^2")
-samerica_m_equ_nirvr_eq  <- paste0("NIRvR = ", samerica_m_equ_nirvr_coeff[1], samerica_m_equ_nirvr_coeff[2], "x", "+", samerica_m_equ_nirvr_coeff[3], "x^2")
-samerica_m_equ_ref665_eq <- paste0("REF665 = ", samerica_m_equ_ref665_coeff[1], samerica_m_equ_ref665_coeff[2], "x", "+", samerica_m_equ_ref665_coeff[3], "x^2")
-samerica_m_equ_ref781_eq <- paste0("REF781 = ", samerica_m_equ_ref781_coeff[1], samerica_m_equ_ref781_coeff[2], "x", "+", samerica_m_equ_ref781_coeff[3], "x^2")
+samerica_m_equ_nirv_eq   <- paste0("NIRv Ref = ", samerica_m_equ_nirv_coeff[1], samerica_m_equ_nirv_coeff[2], "x", "+", samerica_m_equ_nirv_coeff[3], "x^2")
+samerica_m_equ_nirvr_eq  <- paste0("NIRv Rad = ", samerica_m_equ_nirvr_coeff[1], samerica_m_equ_nirvr_coeff[2], "x", "+", samerica_m_equ_nirvr_coeff[3], "x^2")
+samerica_m_equ_ref665_eq <- paste0("Red = ", samerica_m_equ_ref665_coeff[1], samerica_m_equ_ref665_coeff[2], "x", "+", samerica_m_equ_ref665_coeff[3], "x^2")
+samerica_m_equ_ref781_eq <- paste0("NIR = ", samerica_m_equ_ref781_coeff[1], samerica_m_equ_ref781_coeff[2], "x", "+", samerica_m_equ_ref781_coeff[3], "x^2")
 
 africa_m_equ_sif_eq    <- paste0("SIF = ", africa_m_equ_sif_coeff[1], africa_m_equ_sif_coeff[2], "x", "+", africa_m_equ_sif_coeff[3], "x^2")
-africa_m_equ_nirv_eq   <- paste0("NIRv = ", africa_m_equ_nirv_coeff[1], africa_m_equ_nirv_coeff[2], "x", "+", africa_m_equ_nirv_coeff[3], "x^2")
-africa_m_equ_nirvr_eq  <- paste0("NIRvR = ", africa_m_equ_nirvr_coeff[1], africa_m_equ_nirvr_coeff[2], "x", "+", africa_m_equ_nirvr_coeff[3], "x^2")
-africa_m_equ_ref665_eq <- paste0("REF665 = ", africa_m_equ_ref665_coeff[1], africa_m_equ_ref665_coeff[2], "x", "+", africa_m_equ_ref665_coeff[3], "x^2")
-africa_m_equ_ref781_eq <- paste0("REF781 = ", africa_m_equ_ref781_coeff[1], africa_m_equ_ref781_coeff[2], "x", "+", africa_m_equ_ref781_coeff[3], "x^2")
+africa_m_equ_nirv_eq   <- paste0("NIRv Ref = ", africa_m_equ_nirv_coeff[1], africa_m_equ_nirv_coeff[2], "x", "+", africa_m_equ_nirv_coeff[3], "x^2")
+africa_m_equ_nirvr_eq  <- paste0("NIRv Rad = ", africa_m_equ_nirvr_coeff[1], africa_m_equ_nirvr_coeff[2], "x", "+", africa_m_equ_nirvr_coeff[3], "x^2")
+africa_m_equ_ref665_eq <- paste0("Red = ", africa_m_equ_ref665_coeff[1], africa_m_equ_ref665_coeff[2], "x", "+", africa_m_equ_ref665_coeff[3], "x^2")
+africa_m_equ_ref781_eq <- paste0("NIR = ", africa_m_equ_ref781_coeff[1], africa_m_equ_ref781_coeff[2], "x", "+", africa_m_equ_ref781_coeff[3], "x^2")
 
 seasia_m_equ_sif_eq    <- paste0("SIF = ", seasia_m_equ_sif_coeff[1], seasia_m_equ_sif_coeff[2], "x", "+", seasia_m_equ_sif_coeff[3], "x^2")
-seasia_m_equ_nirv_eq   <- paste0("NIRv = ", seasia_m_equ_nirv_coeff[1], seasia_m_equ_nirv_coeff[2], "x", "+", seasia_m_equ_nirv_coeff[3], "x^2")
-seasia_m_equ_nirvr_eq  <- paste0("NIRvR = ", seasia_m_equ_nirvr_coeff[1], seasia_m_equ_nirvr_coeff[2], "x", "+", seasia_m_equ_nirvr_coeff[3], "x^2")
-seasia_m_equ_ref665_eq <- paste0("REF665 = ", seasia_m_equ_ref665_coeff[1], seasia_m_equ_ref665_coeff[2], "x", "+", seasia_m_equ_ref665_coeff[3], "x^2")
-seasia_m_equ_ref781_eq <- paste0("REF781 = ", seasia_m_equ_ref781_coeff[1], seasia_m_equ_ref781_coeff[2], "x", "+", seasia_m_equ_ref781_coeff[3], "x^2")
+seasia_m_equ_nirv_eq   <- paste0("NIRv Ref = ", seasia_m_equ_nirv_coeff[1], seasia_m_equ_nirv_coeff[2], "x", "+", seasia_m_equ_nirv_coeff[3], "x^2")
+seasia_m_equ_nirvr_eq  <- paste0("NIRv Rad = ", seasia_m_equ_nirvr_coeff[1], seasia_m_equ_nirvr_coeff[2], "x", "+", seasia_m_equ_nirvr_coeff[3], "x^2")
+seasia_m_equ_ref665_eq <- paste0("Red = ", seasia_m_equ_ref665_coeff[1], seasia_m_equ_ref665_coeff[2], "x", "+", seasia_m_equ_ref665_coeff[3], "x^2")
+seasia_m_equ_ref781_eq <- paste0("NIR = ", seasia_m_equ_ref781_coeff[1], seasia_m_equ_ref781_coeff[2], "x", "+", seasia_m_equ_ref781_coeff[3], "x^2")
 
 samerica_s_equ_sif_eq    <- paste0("SIF = ", samerica_s_equ_sif_coeff[1], samerica_s_equ_sif_coeff[2], "x", "+", samerica_s_equ_sif_coeff[3], "x^2")
-samerica_s_equ_nirv_eq   <- paste0("NIRv = ", samerica_s_equ_nirv_coeff[1], samerica_s_equ_nirv_coeff[2], "x", "+", samerica_s_equ_nirv_coeff[3], "x^2")
-samerica_s_equ_nirvr_eq  <- paste0("NIRvR = ", samerica_s_equ_nirvr_coeff[1], samerica_s_equ_nirvr_coeff[2], "x", "+", samerica_s_equ_nirvr_coeff[3], "x^2")
-samerica_s_equ_ref665_eq <- paste0("REF665 = ", samerica_s_equ_ref665_coeff[1], samerica_s_equ_ref665_coeff[2], "x", "+", samerica_s_equ_ref665_coeff[3], "x^2")
-samerica_s_equ_ref781_eq <- paste0("REF781 = ", samerica_s_equ_ref781_coeff[1], samerica_s_equ_ref781_coeff[2], "x", "+", samerica_s_equ_ref781_coeff[3], "x^2")
+samerica_s_equ_nirv_eq   <- paste0("NIRv Ref = ", samerica_s_equ_nirv_coeff[1], samerica_s_equ_nirv_coeff[2], "x", "+", samerica_s_equ_nirv_coeff[3], "x^2")
+samerica_s_equ_nirvr_eq  <- paste0("NIRv Rad = ", samerica_s_equ_nirvr_coeff[1], samerica_s_equ_nirvr_coeff[2], "x", "+", samerica_s_equ_nirvr_coeff[3], "x^2")
+samerica_s_equ_ref665_eq <- paste0("Red = ", samerica_s_equ_ref665_coeff[1], samerica_s_equ_ref665_coeff[2], "x", "+", samerica_s_equ_ref665_coeff[3], "x^2")
+samerica_s_equ_ref781_eq <- paste0("NIR = ", samerica_s_equ_ref781_coeff[1], samerica_s_equ_ref781_coeff[2], "x", "+", samerica_s_equ_ref781_coeff[3], "x^2")
 
 africa_s_equ_sif_eq    <- paste0("SIF = ", africa_s_equ_sif_coeff[1], africa_s_equ_sif_coeff[2], "x", "+", africa_s_equ_sif_coeff[3], "x^2")
-africa_s_equ_nirv_eq   <- paste0("NIRv = ", africa_s_equ_nirv_coeff[1], africa_s_equ_nirv_coeff[2], "x", "+", africa_s_equ_nirv_coeff[3], "x^2")
-africa_s_equ_nirvr_eq  <- paste0("NIRvR = ", africa_s_equ_nirvr_coeff[1], africa_s_equ_nirvr_coeff[2], "x", "+", africa_s_equ_nirvr_coeff[3], "x^2")
-africa_s_equ_ref665_eq <- paste0("REF665 = ", africa_s_equ_ref665_coeff[1], africa_s_equ_ref665_coeff[2], "x", "+", africa_s_equ_ref665_coeff[3], "x^2")
-africa_s_equ_ref781_eq <- paste0("REF781 = ", africa_s_equ_ref781_coeff[1], africa_s_equ_ref781_coeff[2], "x", "+", africa_s_equ_ref781_coeff[3], "x^2")
+africa_s_equ_nirv_eq   <- paste0("NIRv Ref = ", africa_s_equ_nirv_coeff[1], africa_s_equ_nirv_coeff[2], "x", "+", africa_s_equ_nirv_coeff[3], "x^2")
+africa_s_equ_nirvr_eq  <- paste0("NIRv Rad = ", africa_s_equ_nirvr_coeff[1], africa_s_equ_nirvr_coeff[2], "x", "+", africa_s_equ_nirvr_coeff[3], "x^2")
+africa_s_equ_ref665_eq <- paste0("Red = ", africa_s_equ_ref665_coeff[1], africa_s_equ_ref665_coeff[2], "x", "+", africa_s_equ_ref665_coeff[3], "x^2")
+africa_s_equ_ref781_eq <- paste0("NIR = ", africa_s_equ_ref781_coeff[1], africa_s_equ_ref781_coeff[2], "x", "+", africa_s_equ_ref781_coeff[3], "x^2")
 
 seasia_s_equ_sif_eq    <- paste0("SIF = ", seasia_s_equ_sif_coeff[1], seasia_s_equ_sif_coeff[2], "x", "+", seasia_s_equ_sif_coeff[3], "x^2")
-seasia_s_equ_nirv_eq   <- paste0("NIRv = ", seasia_s_equ_nirv_coeff[1], seasia_s_equ_nirv_coeff[2], "x", "+", seasia_s_equ_nirv_coeff[3], "x^2")
-seasia_s_equ_nirvr_eq  <- paste0("NIRvR = ", seasia_s_equ_nirvr_coeff[1], seasia_s_equ_nirvr_coeff[2], "x", "+", seasia_s_equ_nirvr_coeff[3], "x^2")
-seasia_s_equ_ref665_eq <- paste0("REF665 = ", seasia_s_equ_ref665_coeff[1], seasia_s_equ_ref665_coeff[2], "x", "+", seasia_s_equ_ref665_coeff[3], "x^2")
-seasia_s_equ_ref781_eq <- paste0("REF781 = ", seasia_s_equ_ref781_coeff[1], seasia_s_equ_ref781_coeff[2], "x", "+", seasia_s_equ_ref781_coeff[3], "x^2")
+seasia_s_equ_nirv_eq   <- paste0("NIRv Ref = ", seasia_s_equ_nirv_coeff[1], seasia_s_equ_nirv_coeff[2], "x", "+", seasia_s_equ_nirv_coeff[3], "x^2")
+seasia_s_equ_nirvr_eq  <- paste0("NIRv Rad = ", seasia_s_equ_nirvr_coeff[1], seasia_s_equ_nirvr_coeff[2], "x", "+", seasia_s_equ_nirvr_coeff[3], "x^2")
+seasia_s_equ_ref665_eq <- paste0("Red = ", seasia_s_equ_ref665_coeff[1], seasia_s_equ_ref665_coeff[2], "x", "+", seasia_s_equ_ref665_coeff[3], "x^2")
+seasia_s_equ_ref781_eq <- paste0("NIR = ", seasia_s_equ_ref781_coeff[1], seasia_s_equ_ref781_coeff[2], "x", "+", seasia_s_equ_ref781_coeff[3], "x^2")
 
 
 #### Plot ####
@@ -416,7 +416,7 @@ par(mfrow = c(3, 2), oma=c(3.0,2.75,0,0.1), bg = "black")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "Amazon Tropical Forest March Equniox", col = "white")
+mtext(3, text = "S America Tropical Forest March Equniox", col = "white")
 
 # Add polynomial curves
 lines(samerica_m_equ_pred$pa, samerica_m_equ_pred$sif, col=mag.cols[4], lwd = 2)
@@ -440,7 +440,7 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "Amazon Tropical Forest September Equniox", col = "white")
+mtext(3, text = "S America Tropical Forest September Equniox", col = "white")
 
 # Add polynomial curves
 lines(samerica_s_equ_pred$pa, samerica_s_equ_pred$sif, col=mag.cols[4], lwd = 2)
