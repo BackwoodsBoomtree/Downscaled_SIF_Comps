@@ -222,9 +222,14 @@ samerica_ts_nirvr_cs_all    <- as.vector(t(samerica_ts_nirvr_cs_all))
 samerica_ts_sif_cs_all      <- as.vector(t(samerica_ts_sif_cs_all))
 samerica_ts_TOA_cs_all      <- as.vector(t(samerica_ts_TOA_cs_all))
 
+# relative
 samerica_ts_sif_rel_cf     <- samerica_ts_sif_cf     / samerica_ts_TOA_cf
 samerica_ts_sif_rel_cs     <- samerica_ts_sif_cs     / samerica_ts_TOA_cs
 samerica_ts_sif_rel_cs_all <- samerica_ts_sif_cs_all / samerica_ts_TOA_cs_all
+
+samerica_ts_nirv_rel_cf     <- samerica_ts_nirv_cf     / samerica_ts_TOA_cf
+samerica_ts_nirv_rel_cs     <- samerica_ts_nirv_cs     / samerica_ts_TOA_cs
+samerica_ts_nirv_rel_cs_all <- samerica_ts_nirv_cs_all / samerica_ts_TOA_cs_all
 
 samerica_ts_yelu_cf     <- samerica_ts_sif_cf     / samerica_ts_nirvr_cf
 samerica_ts_yelu_cs     <- samerica_ts_sif_cs     / samerica_ts_nirvr_cs
@@ -261,9 +266,14 @@ africa_ts_nirvr_cs_all    <- as.vector(t(africa_ts_nirvr_cs_all))
 africa_ts_sif_cs_all      <- as.vector(t(africa_ts_sif_cs_all))
 africa_ts_TOA_cs_all      <- as.vector(t(africa_ts_TOA_cs_all))
 
+# relative
 africa_ts_sif_rel_cf     <- africa_ts_sif_cf     / africa_ts_TOA_cf
 africa_ts_sif_rel_cs     <- africa_ts_sif_cs     / africa_ts_TOA_cs
 africa_ts_sif_rel_cs_all <- africa_ts_sif_cs_all / africa_ts_TOA_cs_all
+
+africa_ts_nirv_rel_cf     <- africa_ts_nirv_cf     / africa_ts_TOA_cf
+africa_ts_nirv_rel_cs     <- africa_ts_nirv_cs     / africa_ts_TOA_cs
+africa_ts_nirv_rel_cs_all <- africa_ts_nirv_cs_all / africa_ts_TOA_cs_all
 
 africa_ts_yelu_cf     <- africa_ts_sif_cf     / africa_ts_nirvr_cf
 africa_ts_yelu_cs     <- africa_ts_sif_cs     / africa_ts_nirvr_cs
@@ -300,9 +310,14 @@ seasia_ts_nirvr_cs_all    <- as.vector(t(seasia_ts_nirvr_cs_all))
 seasia_ts_sif_cs_all      <- as.vector(t(seasia_ts_sif_cs_all))
 seasia_ts_TOA_cs_all      <- as.vector(t(seasia_ts_TOA_cs_all))
 
+# relative
 seasia_ts_sif_rel_cf     <- seasia_ts_sif_cf     / seasia_ts_TOA_cf
 seasia_ts_sif_rel_cs     <- seasia_ts_sif_cs     / seasia_ts_TOA_cs
 seasia_ts_sif_rel_cs_all <- seasia_ts_sif_cs_all / seasia_ts_TOA_cs_all
+
+seasia_ts_nirv_rel_cf     <- seasia_ts_nirv_cf     / seasia_ts_TOA_cf
+seasia_ts_nirv_rel_cs     <- seasia_ts_nirv_cs     / seasia_ts_TOA_cs
+seasia_ts_nirv_rel_cs_all <- seasia_ts_nirv_cs_all / seasia_ts_TOA_cs_all
 
 seasia_ts_yelu_cf     <- seasia_ts_sif_cf     / seasia_ts_nirvr_cf
 seasia_ts_yelu_cs     <- seasia_ts_sif_cs     / seasia_ts_nirvr_cs
@@ -310,16 +325,16 @@ seasia_ts_yelu_cs_all <- seasia_ts_sif_cs_all / seasia_ts_nirvr_cs_all
 
 # Normalize values
 samerica_ts_sif_rel_cs_norm <- min_max_norm(samerica_ts_sif_rel_cs)
-africa_ts_sif_rel_cs_norm <- min_max_norm(africa_ts_sif_rel_cs)
-seasia_ts_sif_rel_cs_norm <- min_max_norm(seasia_ts_sif_rel_cs)
+africa_ts_sif_rel_cs_norm   <- min_max_norm(africa_ts_sif_rel_cs)
+seasia_ts_sif_rel_cs_norm   <- min_max_norm(seasia_ts_sif_rel_cs)
 
 samerica_ts_nirv_rel_cs_norm <- min_max_norm(samerica_ts_nirv_rel_cs)
-africa_ts_nirv_rel_cs_norm <- min_max_norm(africa_ts_nirv_rel_cs)
-seasia_ts_nirv_rel_cs_norm <- min_max_norm(seasia_ts_nirv_rel_cs)
+africa_ts_nirv_rel_cs_norm   <- min_max_norm(africa_ts_nirv_rel_cs)
+seasia_ts_nirv_rel_cs_norm   <- min_max_norm(seasia_ts_nirv_rel_cs)
 
 samerica_ts_yelu_cs_norm <- min_max_norm(samerica_ts_yelu_cs)
-africa_ts_yelu_cs_norm <- min_max_norm(africa_ts_yelu_cs)
-seasia_ts_yelu_cs_norm <- min_max_norm(seasia_ts_yelu_cs)
+africa_ts_yelu_cs_norm   <- min_max_norm(africa_ts_yelu_cs)
+seasia_ts_yelu_cs_norm   <- min_max_norm(seasia_ts_yelu_cs)
 
 #### Plot Settings ####
 x           <- 1:36
@@ -342,7 +357,7 @@ par(mfrow = c(3, 1), oma=c(3.0,2.75,0,0.1), bg = "black")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 plot(x, samerica_ts_sif_rel_cs_norm, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(0,1))
-rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
+rect(13, -100, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, samerica_ts_sif_rel_cs_norm, col = mag.cols[4], lwd = 1.5)
 lines(x, samerica_ts_nirv_rel_cs_norm, col = mag.cols[5], lwd = 1.5, lty = 2)
 lines(x, samerica_ts_yelu_cs_norm, col = mag.cols[6], lwd = 1.5, lty = 3)
@@ -358,7 +373,7 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 plot(x, africa_ts_sif_rel_cs_norm, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(0,1))
-rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
+rect(13, -100, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, africa_ts_sif_rel_cs_norm, col = mag.cols[4], lwd = 1.5)
 lines(x, africa_ts_nirv_rel_cs_norm, col = mag.cols[5], lwd = 1.5, lty = 2)
 lines(x, africa_ts_yelu_cs_norm, col = mag.cols[6], lwd = 1.5, lty = 3)
@@ -372,7 +387,7 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 plot(x, seasia_ts_sif_rel_cs_norm, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(0,1))
-rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
+rect(13, -100, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, seasia_ts_sif_rel_cs_norm, col = mag.cols[4], lwd = 1.5)
 lines(x, seasia_ts_nirv_rel_cs_norm, col = mag.cols[5], lwd = 1.5, lty = 2)
 lines(x, seasia_ts_yelu_cs_norm, col = mag.cols[6], lwd = 1.5, lty = 3)
