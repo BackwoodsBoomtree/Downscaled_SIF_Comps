@@ -73,13 +73,27 @@ gosif_r2   <- mask(gosif_r2, m)
 csif_r2    <- mask(csif_r2, m)
 siflue_r2  <- mask(siflue_r2, m)
 
+# Mask by pval
+gosif_pval[gosif_pval >= 0.05]   <- NA
+csif_pval[csif_pval >= 0.05]     <- NA
+siflue_pval[siflue_pval >= 0.05] <- NA
+
+gosif_r2   <- mask(gosif_r2, gosif_pval)
+csif_r2    <- mask(csif_r2, csif_pval)
+siflue_r2  <- mask(siflue_r2, siflue_pval)
+
+# Set lower threshold for visualization
+gosif_r2[gosif_r2 <= 0.2]   <- 0.2
+csif_r2[csif_r2 <= 0.2]     <- 0.2
+siflue_r2[siflue_r2 <= 0.2] <- 0.2
+
 # Row means for latitude mean difference
 gosif_r2_lat  <- rev(rowMeans(as.matrix(gosif_r2), na.rm = TRUE))
 csif_r2_lat   <- rev(rowMeans(as.matrix(csif_r2), na.rm = TRUE))
 siflue_r2_lat <- rev(rowMeans(as.matrix(siflue_r2), na.rm = TRUE))
 
 # Colors
-r2.col <- rev(plasma(10))
+r2.col <- plasma(9)
 
 # Color lists for barplots
 gosif_col  <- col_list(gosif_r2_lat)
@@ -108,7 +122,7 @@ mtext(3, text="a", cex= 0.85, adj=0, font=2, col = "white")
 
 plot(gosif_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend.shrink=0.75,
      legend.args = list(text=expression(paste("R"^"2")), side = 1, line = -2.0, cex=0.85, col = "white"),
-     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0,0.5,1.0), labels=c("0","0.5","1.0"), col.axis = "white"),
+     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0.2,0.6,0.98), labels=c("<0.2","0.6","1.0"), col.axis = "white"),
      smallplot=c(0.45,0.80,0.15,0.20)); par(mar = par("mar"))
 
 par(new=TRUE)
@@ -140,7 +154,7 @@ mtext(3, text="b", cex= 0.85, adj=0, font=2, col = "white")
 
 plot(csif_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend.shrink=0.75,
      legend.args = list(text=expression(paste("R"^"2")), side = 1, line = -2.0, cex=0.85, col = "white"),
-     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0,0.5,0.99), labels=c("0","0.5","1.0"), col.axis = "white"),
+     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0.2,0.6,0.98), labels=c("<0.2","0.6","1.0"), col.axis = "white"),
      smallplot=c(0.45,0.80,0.15,0.20)); par(mar = par("mar"))
 
 par(new=TRUE)
@@ -173,7 +187,7 @@ mtext(3, text="c", cex= 0.85, adj=0, font=2, col = "white")
 
 plot(siflue_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend.shrink=0.75,
      legend.args = list(text=expression(paste("R"^"2")), side = 1, line = -2.0, cex=0.85, col = "white"),
-     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0,0.5,1.0), labels=c("0","0.5","1.0"), col.axis = "white"),
+     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0.2,0.6,0.98), labels=c("<0.2","0.6","1.0"), col.axis = "white"),
      smallplot=c(0.45,0.80,0.15,0.20)); par(mar = par("mar"))
 
 par(new=TRUE)
