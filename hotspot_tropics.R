@@ -2,6 +2,8 @@ library(ncdf4)
 library(terra)
 library(viridis)
 
+options(scipen = 999)
+
 out_name   <- "G:/SIF_comps/figs/hotspot_tropics_black.pdf"
 
 # March Equinox files
@@ -330,44 +332,45 @@ for (i in 1:nrow(seasia_s_equ_pred)) {
 }
 
 # get model coefficients
-samerica_m_equ_sif_coeff    <- round(samerica_m_equ_sif_fit$coefficients, 3)
-samerica_m_equ_nirv_coeff   <- round(samerica_m_equ_nirv_fit$coefficients, 3)
-samerica_m_equ_nirvr_coeff  <- round(samerica_m_equ_nirvr_fit$coefficients, 3)
-samerica_m_equ_ref665_coeff <- round(samerica_m_equ_ref665_fit$coefficients, 3)
-samerica_m_equ_ref781_coeff <- round(samerica_m_equ_ref781_fit$coefficients, 3)
+samerica_m_equ_sif_coeff    <- round(samerica_m_equ_sif_fit$coefficients, 4)
+samerica_m_equ_nirv_coeff   <- round(samerica_m_equ_nirv_fit$coefficients, 4)
+samerica_m_equ_nirvr_coeff  <- round(samerica_m_equ_nirvr_fit$coefficients, 4)
+samerica_m_equ_ref665_coeff <- round(samerica_m_equ_ref665_fit$coefficients, 4)
+samerica_m_equ_ref781_coeff <- round(samerica_m_equ_ref781_fit$coefficients, 4)
 
-africa_m_equ_sif_coeff    <- round(africa_m_equ_sif_fit$coefficients, 3)
-africa_m_equ_nirv_coeff   <- round(africa_m_equ_nirv_fit$coefficients, 3)
-africa_m_equ_nirvr_coeff  <- round(africa_m_equ_nirvr_fit$coefficients, 3)
-africa_m_equ_ref665_coeff <- round(africa_m_equ_ref665_fit$coefficients, 3)
-africa_m_equ_ref781_coeff <- round(africa_m_equ_ref781_fit$coefficients, 3)
+africa_m_equ_sif_coeff    <- round(africa_m_equ_sif_fit$coefficients, 4)
+africa_m_equ_nirv_coeff   <- round(africa_m_equ_nirv_fit$coefficients, 4)
+africa_m_equ_nirvr_coeff  <- round(africa_m_equ_nirvr_fit$coefficients, 4)
+africa_m_equ_ref665_coeff <- round(africa_m_equ_ref665_fit$coefficients, 4)
+africa_m_equ_ref781_coeff <- round(africa_m_equ_ref781_fit$coefficients, 4)
 
-seasia_m_equ_sif_coeff    <- round(seasia_m_equ_sif_fit$coefficients, 3)
-seasia_m_equ_nirv_coeff   <- round(seasia_m_equ_nirv_fit$coefficients, 3)
-seasia_m_equ_nirvr_coeff  <- round(seasia_m_equ_nirvr_fit$coefficients, 3)
-seasia_m_equ_ref665_coeff <- round(seasia_m_equ_ref665_fit$coefficients, 3)
-seasia_m_equ_ref781_coeff <- round(seasia_m_equ_ref781_fit$coefficients, 3)
+seasia_m_equ_sif_coeff    <- round(seasia_m_equ_sif_fit$coefficients, 4)
+seasia_m_equ_nirv_coeff   <- round(seasia_m_equ_nirv_fit$coefficients, 4)
+seasia_m_equ_nirvr_coeff  <- round(seasia_m_equ_nirvr_fit$coefficients, 4)
+seasia_m_equ_ref665_coeff <- round(seasia_m_equ_ref665_fit$coefficients, 4)
+seasia_m_equ_ref781_coeff <- round(seasia_m_equ_ref781_fit$coefficients, 4)
 
-samerica_s_equ_sif_coeff    <- round(samerica_s_equ_sif_fit$coefficients, 3)
-samerica_s_equ_nirv_coeff   <- round(samerica_s_equ_nirv_fit$coefficients, 3)
-samerica_s_equ_nirvr_coeff  <- round(samerica_s_equ_nirvr_fit$coefficients, 3)
-samerica_s_equ_ref665_coeff <- round(samerica_s_equ_ref665_fit$coefficients, 3)
-samerica_s_equ_ref781_coeff <- round(samerica_s_equ_ref781_fit$coefficients, 3)
+samerica_s_equ_sif_coeff    <- round(samerica_s_equ_sif_fit$coefficients, 4)
+samerica_s_equ_nirv_coeff   <- round(samerica_s_equ_nirv_fit$coefficients, 4)
+samerica_s_equ_nirvr_coeff  <- round(samerica_s_equ_nirvr_fit$coefficients, 4)
+samerica_s_equ_ref665_coeff <- round(samerica_s_equ_ref665_fit$coefficients, 4)
+samerica_s_equ_ref781_coeff <- round(samerica_s_equ_ref781_fit$coefficients, 4)
 
-africa_s_equ_sif_coeff    <- round(africa_s_equ_sif_fit$coefficients, 3)
-africa_s_equ_nirv_coeff   <- round(africa_s_equ_nirv_fit$coefficients, 3)
-africa_s_equ_nirvr_coeff  <- round(africa_s_equ_nirvr_fit$coefficients, 3)
-africa_s_equ_ref665_coeff <- round(africa_s_equ_ref665_fit$coefficients, 3)
-africa_s_equ_ref781_coeff <- round(africa_s_equ_ref781_fit$coefficients, 3)
+africa_s_equ_sif_coeff    <- round(africa_s_equ_sif_fit$coefficients, 4)
+africa_s_equ_nirv_coeff   <- round(africa_s_equ_nirv_fit$coefficients, 4)
+africa_s_equ_nirvr_coeff  <- round(africa_s_equ_nirvr_fit$coefficients, 4)
+africa_s_equ_ref665_coeff <- round(africa_s_equ_ref665_fit$coefficients, 4)
+africa_s_equ_ref781_coeff <- round(africa_s_equ_ref781_fit$coefficients, 4)
 
-seasia_s_equ_sif_coeff    <- round(seasia_s_equ_sif_fit$coefficients, 3)
-seasia_s_equ_nirv_coeff   <- round(seasia_s_equ_nirv_fit$coefficients, 3)
-seasia_s_equ_nirvr_coeff  <- round(seasia_s_equ_nirvr_fit$coefficients, 3)
-seasia_s_equ_ref665_coeff <- round(seasia_s_equ_ref665_fit$coefficients, 3)
-seasia_s_equ_ref781_coeff <- round(seasia_s_equ_ref781_fit$coefficients, 3)
+seasia_s_equ_sif_coeff    <- round(seasia_s_equ_sif_fit$coefficients, 4)
+seasia_s_equ_nirv_coeff   <- round(seasia_s_equ_nirv_fit$coefficients, 4)
+seasia_s_equ_nirvr_coeff  <- round(seasia_s_equ_nirvr_fit$coefficients, 4)
+seasia_s_equ_ref665_coeff <- round(seasia_s_equ_ref665_fit$coefficients, 4)
+seasia_s_equ_ref781_coeff <- round(seasia_s_equ_ref781_fit$coefficients, 4)
+
 
 # Eqs for US legend
-samerica_m_equ_sif_eq    <- paste0("SIF = ", samerica_m_equ_sif_coeff[1], samerica_m_equ_sif_coeff[2], "x", "+", samerica_m_equ_sif_coeff[3], "x^2")
+samerica_m_equ_sif_eq    <- paste0("SIF = ", samerica_m_equ_sif_coeff[1], samerica_m_equ_sif_coeff[2], "x", "+", samerica_m_equ_sif_coeff[3], "*x^2")
 samerica_m_equ_nirv_eq   <- paste0("NIRv Ref = ", samerica_m_equ_nirv_coeff[1], samerica_m_equ_nirv_coeff[2], "x", "+", samerica_m_equ_nirv_coeff[3], "x^2")
 samerica_m_equ_nirvr_eq  <- paste0("NIRv Rad = ", samerica_m_equ_nirvr_coeff[1], samerica_m_equ_nirvr_coeff[2], "x", "+", samerica_m_equ_nirvr_coeff[3], "x^2")
 samerica_m_equ_ref665_eq <- paste0("Red = ", samerica_m_equ_ref665_coeff[1], samerica_m_equ_ref665_coeff[2], "x", "+", samerica_m_equ_ref665_coeff[3], "x^2")
@@ -416,7 +419,10 @@ par(mfrow = c(3, 2), oma=c(3.0,2.75,0,0.1), bg = "black")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "S America Tropical Forest March Equniox", col = "white")
+mtext(3, text = "S America Tropical Forest March Equinox", col = "white")
+
+# Shaded area
+rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
 
 # Add polynomial curves
 lines(samerica_m_equ_pred$pa, samerica_m_equ_pred$sif, col=mag.cols[4], lwd = 2)
@@ -440,7 +446,10 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "S America Tropical Forest September Equniox", col = "white")
+mtext(3, text = "S America Tropical Forest September Equinox", col = "white")
+
+# Shaded area
+rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
 
 # Add polynomial curves
 lines(samerica_s_equ_pred$pa, samerica_s_equ_pred$sif, col=mag.cols[4], lwd = 2)
@@ -465,7 +474,10 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "Africa Tropical Forest March Equniox", col = "white")
+mtext(3, text = "Africa Tropical Forest March Equinox", col = "white")
+
+# Shaded area
+rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
 
 # Add polynomial curves
 lines(africa_m_equ_pred$pa, africa_m_equ_pred$sif, col=mag.cols[4], lwd = 2)
@@ -489,7 +501,10 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "Africa Tropical Forest September Equniox", col = "white")
+mtext(3, text = "Africa Tropical Forest September Equinox", col = "white")
+
+# Shaded area
+rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
 
 # Add polynomial curves
 lines(africa_s_equ_pred$pa, africa_s_equ_pred$sif, col=mag.cols[4], lwd = 2)
@@ -514,7 +529,10 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "SE Asia Tropical Forest March Equniox", col = "white")
+mtext(3, text = "SE Asia Tropical Forest March Equinox", col = "white")
+
+# Shaded area
+rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
 
 # Add polynomial curves
 lines(seasia_m_equ_pred$pa, seasia_m_equ_pred$sif, col=mag.cols[4], lwd = 2)
@@ -538,7 +556,10 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "SE Asia Tropical Forest September Equniox", col = "white")
+mtext(3, text = "SE Asia Tropical Forest September Equinox", col = "white")
+
+# Shaded area
+rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
 
 # Add polynomial curves
 lines(seasia_s_equ_pred$pa, seasia_s_equ_pred$sif, col=mag.cols[4], lwd = 2)
