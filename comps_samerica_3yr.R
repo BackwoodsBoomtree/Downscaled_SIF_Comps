@@ -88,112 +88,67 @@ mask_total[mask_total < 80]  <- NA
 samerica_ext   <- extent(c(-82,-34,-20,13))
 samerica_cover <- crop(mask_total, samerica_ext)
 
-# Returns weighted global mean of variable (v) and number of observations (n)
-# for entire time series raster from file list (f) using defined extent (e) and mask (m)
-get_ts_mean <- function(v, n, f, e, m){
+# Returns standard error of mean and weighted global mean of variable (v) using number of
+# observations (n) and standard deviation (s) for entire time series raster from file list (f)
+# using defined extent (e) and mask (m)
+get_ts <- function(v, n, s, f, e, m){
   
   for (i in 1:length(f)) {
-    n_obs <- crop(mask(rast(f[i], subds = n), m), e)
-    obs   <- crop(mask(rast(f[i], subds = v), m), e)
+    n_obs      <- crop(mask(rast(f[i], subds = n), m), e)
+    group_avg  <- crop(mask(rast(f[i], subds = v), m), e)
+    group_var  <- crop(mask(rast(f[i], subds = s), m), e)^2
     
-    for (j in 1:length(depth(obs))) {
-      avg <- global(obs[[j]], fun = "mean", na.rm = TRUE, weights = n_obs[[j]])
+    for (j in 1:length(depth(n_obs))) {
+      pop_avg <- global(group_avg[[j]], fun = "mean", na.rm = TRUE, weights = n_obs[[j]])
+      pop_avg <- as.vector(unlist(pop_avg))
+      
+      pop_n   <- global(n_obs[[j]], fun = "sum", na.rm = TRUE)
+      pop_n   <- as.vector(unlist(pop_n))
+      
+      # Between group variance
+      bgv <- n_obs[[j]] * (group_avg[[j]] - pop_avg)^2
+      bgv <- global(bgv, fun = "sum", na.rm = TRUE)
+      
+      # Within group variance
+      wgv <- n_obs[[j]] * group_var[[j]]
+      wgv <- global(wgv, fun = "sum", na.rm = TRUE)
+      
+      # Population variance
+      pop_var <- (bgv + wgv) / pop_n
+      
+      # Population SEM
+      pop_sem <- sqrt(pop_var) / sqrt(pop_n)
+      pop_sem <- as.vector(unlist(pop_sem))
+      
       if (i == 1 && j == 1){
-        ts_out <- avg
+        ts_avg <- pop_avg
+        ts_sem <- pop_sem
       } else {
-        ts_out <- c(ts_out, avg)
+        ts_avg <- c(ts_avg, pop_avg)
+        ts_sem <- c(ts_sem, pop_sem)
       }
     }
   }
-  
-  ts_out <- as.vector(unlist(ts_out))
-  return(ts_out)
+  return(list(ts_avg, ts_sem))
 }
 
-ts_sif_cs_all      <- get_ts_mean("SIF_743", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
-ts_nirv_cs_all     <- get_ts_mean("NIRv", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
-ts_nirv_rad_cs_all <- get_ts_mean("NIRv_Rad", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
-ts_ref_665_cs_all  <- get_ts_mean("REF_665", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
-ts_ref_781_cs_all  <- get_ts_mean("REF_781", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
+ts_sif_cs_all      <- get_ts("SIF_743", "n", "SIF_743_std", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)[[1]]
+ts_nirv_cs_all     <- get_ts("NIRv", "n", "NIRv_std", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)[[1]]
+ts_nirv_rad_cs_all <- get_ts("NIRv_Rad", "n", "NIRv_Rad", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)[[1]]
+ts_ref_665_cs_all  <- get_ts("REF_665", "n", "REF_665", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)[[1]]
+ts_ref_781_cs_all  <- get_ts("REF_781", "n", "REF_781", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)[[1]]
 
-ts_sif_cs      <- get_ts_mean("SIF_743", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
-ts_nirv_cs     <- get_ts_mean("NIRv", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
-ts_nirv_rad_cs <- get_ts_mean("NIRv_Rad", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
-ts_ref_665_cs  <- get_ts_mean("REF_665", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
-ts_ref_781_cs  <- get_ts_mean("REF_781", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
+ts_sif_cs      <- get_ts("SIF_743", "n", "SIF_743_std", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)[[1]]
+ts_nirv_cs     <- get_ts("NIRv", "n", "NIRv_std", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)[[1]]
+ts_nirv_rad_cs <- get_ts("NIRv_Rad", "n", "NIRv_Rad_std", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)[[1]]
+ts_ref_665_cs  <- get_ts("REF_665", "n", "REF_665_std", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)[[1]]
+ts_ref_781_cs  <- get_ts("REF_781", "n", "REF_781_std", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)[[1]]
 
-ts_sif_cf      <- get_ts_mean("SIF_743", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
-ts_nirv_cf     <- get_ts_mean("NIRv", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
-ts_nirv_rad_cf <- get_ts_mean("NIRv_Rad", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
-ts_ref_665_cf  <- get_ts_mean("REF_665", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
-ts_ref_781_cf  <- get_ts_mean("REF_781", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
-
-
-#### Calc SEM at regional scale ####
-
-# Sum the number of soundings from all gridcells
-ts_n_cf <- global(n_cf, fun = "sum", na.rm = TRUE)[[1]]
-ts_n_cs <- global(n_cs, fun = "sum", na.rm = TRUE)[[1]]
-
-# SIF CF20
-var           <- sif_std_cf^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_sif_sem_cf <- std_time / (sqrt(ts_n_cf))
-
-# SIF CS
-var           <- sif_std_cs^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_sif_sem_cs <- std_time / (sqrt(ts_n_cs))
-
-# NIRv CF20
-var           <- nirv_std_cf^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_nirv_sem_cf <- std_time / (sqrt(ts_n_cf))
-
-# NIRv CS
-var           <- nirv_std_cs^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_nirv_sem_cs <- std_time / (sqrt(ts_n_cs))
-
-# NIRv Rad CF20
-var           <- nirv_rad_std_cf^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_nirv_rad_sem_cf <- std_time / (sqrt(ts_n_cf))
-
-# NIRv Rad CS
-var           <- nirv_rad_std_cs^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_nirv_rad_sem_cs <- std_time / (sqrt(ts_n_cs))
-
-# REF 665 CF20
-var           <- ref_665_std_cf^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_ref_665_sem_cf <- std_time / (sqrt(ts_n_cf))
-
-# REF 665 CS
-var           <- ref_665_std_cs^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_ref_665_sem_cs <- std_time / (sqrt(ts_n_cs))
-
-# REF 781 CF20
-var           <- ref_781_std_cf^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_ref_781_sem_cf <- std_time / (sqrt(ts_n_cf))
-
-# REF 781 CS
-var           <- ref_781_std_cs^2
-var_tot       <- global(var, fun = "sum", na.rm = TRUE)[[1]]
-std_time      <- sqrt(var_tot)
-ts_ref_781_sem_cs <- std_time / (sqrt(ts_n_cs))
+ts_sif_cf      <- get_ts("SIF_743", "n", "SIF_743_std", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)[[1]]
+ts_nirv_cf     <- get_ts("NIRv", "n", "NIRv_std", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)[[1]]
+ts_nirv_rad_cf <- get_ts("NIRv_Rad", "n", "NIRv_Rad_std", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)[[1]]
+ts_ref_665_cf  <- get_ts("REF_665", "n", "REF_665_std", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)[[1]]
+ts_ref_781_cf  <- get_ts("REF_781", "n", "REF_781_std", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)[[1]]
 
 
 #### Plot Settings ####
