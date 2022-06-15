@@ -80,97 +80,53 @@ mask_veg   <- rast("G:/SIF_comps/veg_mask/max.monthly.ndvi.1deg.tif")
 coastlines <- readOGR("C:/Russell/R_Scripts/TROPOMI_2/mapping/GSHHS_shp/c/GSHHS_c_L1.shp")
 
 # Create single mask with cover threshold
-m <- mask(mask_ebf, mask_veg)
-m[m < 80]  <- NA
+mask_total <- mask(mask_ebf, mask_veg)
+mask_total[mask_total < 80]  <- NA
 # m[m >= 80] <- 1
 
 # Extent
-samerica_ext <- extent(c(-82,-34,-20,13))
-cover        <- crop(m, samerica_ext)
+samerica_ext   <- extent(c(-82,-34,-20,13))
+samerica_cover <- crop(mask_total, samerica_ext)
 
-#### Get the data ####
-n_cf        <- crop(mask(c(rast(cf_2019, subds = "n"), rast(cf_2020, subds = "n"), rast(cf_2021, subds = "n")), m), samerica_ext)
-nirv_cf     <- crop(mask(c(rast(cf_2019, subds = "NIRv"), rast(cf_2020, subds = "NIRv"), rast(cf_2021, subds = "NIRv")), m), samerica_ext)
-nirv_rad_cf <- crop(mask(c(rast(cf_2019, subds = "NIRv_Rad"), rast(cf_2020, subds = "NIRv_Rad"), rast(cf_2021, subds = "NIRv_Rad")), m), samerica_ext)
-sif_cf      <- crop(mask(c(rast(cf_2019, subds = "SIF_743"), rast(cf_2020, subds = "SIF_743"), rast(cf_2021, subds = "SIF_743")), m), samerica_ext)
-ref_665_cf  <- crop(mask(c(rast(cf_2019, subds = "REF_665"), rast(cf_2020, subds = "REF_665"), rast(cf_2021, subds = "REF_665")), m), samerica_ext)
-ref_781_cf  <- crop(mask(c(rast(cf_2019, subds = "REF_781"), rast(cf_2020, subds = "REF_781"), rast(cf_2021, subds = "REF_781")), m), samerica_ext)
+# Returns weighted global mean of variable (v) and number of observations (n)
+# for entire time series raster from file list (f) using defined extent (e) and mask (m)
+get_ts_mean <- function(v, n, f, e, m){
+  
+  for (i in 1:length(f)) {
+    n_obs <- crop(mask(rast(f[i], subds = n), m), e)
+    obs   <- crop(mask(rast(f[i], subds = v), m), e)
+    
+    for (j in 1:length(depth(obs))) {
+      avg <- global(obs[[j]], fun = "mean", na.rm = TRUE, weights = n_obs[[j]])
+      if (i == 1 && j == 1){
+        ts_out <- avg
+      } else {
+        ts_out <- c(ts_out, avg)
+      }
+    }
+  }
+  
+  ts_out <- as.vector(unlist(ts_out))
+  return(ts_out)
+}
 
-nirv_std_cf     <- crop(mask(c(rast(cf_2019, subds = "NIRv_std"), rast(cf_2020, subds = "NIRv_std"), rast(cf_2021, subds = "NIRv_std")), m), samerica_ext)
-nirv_rad_std_cf <- crop(mask(c(rast(cf_2019, subds = "NIRv_Rad_std"), rast(cf_2020, subds = "NIRv_Rad_std"), rast(cf_2021, subds = "NIRv_Rad_std")), m), samerica_ext)
-sif_std_cf      <- crop(mask(c(rast(cf_2019, subds = "SIF_743_std"), rast(cf_2020, subds = "SIF_743_std"), rast(cf_2021, subds = "SIF_743_std")), m), samerica_ext)
-ref_665_std_cf  <- crop(mask(c(rast(cf_2019, subds = "REF_665_std"), rast(cf_2020, subds = "REF_665_std"), rast(cf_2021, subds = "REF_665_std")), m), samerica_ext)
-ref_781_std_cf  <- crop(mask(c(rast(cf_2019, subds = "REF_781_std"), rast(cf_2020, subds = "REF_781_std"), rast(cf_2021, subds = "REF_781_std")), m), samerica_ext)
+ts_sif_cs_all      <- get_ts_mean("SIF_743", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
+ts_nirv_cs_all     <- get_ts_mean("NIRv", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
+ts_nirv_rad_cs_all <- get_ts_mean("NIRv_Rad", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
+ts_ref_665_cs_all  <- get_ts_mean("REF_665", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
+ts_ref_781_cs_all  <- get_ts_mean("REF_781", "n", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)
 
-n_cs        <- crop(mask(c(rast(cs_2019, subds = "n"), rast(cs_2020, subds = "n"), rast(cs_2021, subds = "n")), m), samerica_ext)
-nirv_cs     <- crop(mask(c(rast(cs_2019, subds = "NIRv"), rast(cs_2020, subds = "NIRv"), rast(cs_2021, subds = "NIRv")), m), samerica_ext)
-nirv_rad_cs <- crop(mask(c(rast(cs_2019, subds = "NIRv_Rad"), rast(cs_2020, subds = "NIRv_Rad"), rast(cs_2021, subds = "NIRv_Rad")), m), samerica_ext)
-sif_cs      <- crop(mask(c(rast(cs_2019, subds = "SIF_743"), rast(cs_2020, subds = "SIF_743"), rast(cs_2021, subds = "SIF_743")), m), samerica_ext)
-ref_665_cs  <- crop(mask(c(rast(cs_2019, subds = "REF_665"), rast(cs_2020, subds = "REF_665"), rast(cs_2021, subds = "REF_665")), m), samerica_ext)
-ref_781_cs  <- crop(mask(c(rast(cs_2019, subds = "REF_781"), rast(cs_2020, subds = "REF_781"), rast(cs_2021, subds = "REF_781")), m), samerica_ext)
+ts_sif_cs      <- get_ts_mean("SIF_743", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
+ts_nirv_cs     <- get_ts_mean("NIRv", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
+ts_nirv_rad_cs <- get_ts_mean("NIRv_Rad", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
+ts_ref_665_cs  <- get_ts_mean("REF_665", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
+ts_ref_781_cs  <- get_ts_mean("REF_781", "n", c(cs_2019, cs_2020, cs_2021), samerica_ext, mask_total)
 
-nirv_std_cs     <- crop(mask(c(rast(cs_2019, subds = "NIRv_std"), rast(cs_2020, subds = "NIRv_std"), rast(cs_2021, subds = "NIRv_std")), m), samerica_ext)
-nirv_rad_std_cs <- crop(mask(c(rast(cs_2019, subds = "NIRv_Rad_std"), rast(cs_2020, subds = "NIRv_Rad_std"), rast(cs_2021, subds = "NIRv_Rad_std")), m), samerica_ext)
-sif_std_cs      <- crop(mask(c(rast(cs_2019, subds = "SIF_743_std"), rast(cs_2020, subds = "SIF_743_std"), rast(cs_2021, subds = "SIF_743_std")), m), samerica_ext)
-ref_665_std_cs  <- crop(mask(c(rast(cs_2019, subds = "REF_665_std"), rast(cs_2020, subds = "REF_665_std"), rast(cs_2021, subds = "REF_665_std")), m), samerica_ext)
-ref_781_std_cs  <- crop(mask(c(rast(cs_2019, subds = "REF_781_std"), rast(cs_2020, subds = "REF_781_std"), rast(cs_2021, subds = "REF_781_std")), m), samerica_ext)
-
-n_cs_all        <- crop(mask(c(rast(cs_all_2019, subds = "n"), rast(cs_all_2020, subds = "n"), rast(cs_all_2021, subds = "n")), m), samerica_ext)
-nirv_cs_all     <- crop(mask(c(rast(cs_all_2019, subds = "NIRv"), rast(cs_all_2020, subds = "NIRv"), rast(cs_all_2021, subds = "NIRv")), m), samerica_ext)
-nirv_rad_cs_all <- crop(mask(c(rast(cs_all_2019, subds = "NIRv_Rad"), rast(cs_all_2020, subds = "NIRv_Rad"), rast(cs_all_2021, subds = "NIRv_Rad")), m), samerica_ext)
-sif_cs_all      <- crop(mask(c(rast(cs_all_2019, subds = "SIF_743"), rast(cs_all_2020, subds = "SIF_743"), rast(cs_all_2021, subds = "SIF_743")), m), samerica_ext)
-ref_665_cs_all  <- crop(mask(c(rast(cs_all_2019, subds = "REF_665"), rast(cs_all_2020, subds = "REF_665"), rast(cs_all_2021, subds = "REF_665")), m), samerica_ext)
-ref_781_cs_all  <- crop(mask(c(rast(cs_all_2019, subds = "REF_781"), rast(cs_all_2020, subds = "REF_781"), rast(cs_all_2021, subds = "REF_781")), m), samerica_ext)
-
-nirv_std_cs_all     <- crop(mask(c(rast(cs_all_2019, subds = "NIRv_std"), rast(cs_all_2020, subds = "NIRv_std"), rast(cs_all_2021, subds = "NIRv_std")), m), samerica_ext)
-nirv_rad_std_cs_all <- crop(mask(c(rast(cs_all_2019, subds = "NIRv_Rad_std"), rast(cs_all_2020, subds = "NIRv_Rad_std"), rast(cs_all_2021, subds = "NIRv_Rad_std")), m), samerica_ext)
-sif_std_cs_all      <- crop(mask(c(rast(cs_all_2019, subds = "SIF_743_std"), rast(cs_all_2020, subds = "SIF_743_std"), rast(cs_all_2021, subds = "SIF_743_std")), m), samerica_ext)
-ref_665_std_cs_all  <- crop(mask(c(rast(cs_all_2019, subds = "REF_665_std"), rast(cs_all_2020, subds = "REF_665_std"), rast(cs_all_2021, subds = "REF_665_std")), m), samerica_ext)
-ref_781_std_cs_all  <- crop(mask(c(rast(cs_all_2019, subds = "REF_781_std"), rast(cs_all_2020, subds = "REF_781_std"), rast(cs_all_2021, subds = "REF_781_std")), m), samerica_ext)
-
-
-#### Extract the data ####
-ts_nirv_cf     <- global(nirv_cf, fun = "mean", na.rm = TRUE)
-ts_nirv_rad_cf <- global(nirv_rad_cf, fun = "mean", na.rm = TRUE)
-ts_sif_cf      <- global(sif_cf, fun = "mean", na.rm = TRUE)
-ts_ref_665_cf  <- global(ref_665_cf, fun = "mean", na.rm = TRUE)
-ts_ref_781_cf  <- global(ref_781_cf, fun = "mean", na.rm = TRUE)
-ts_n_cf        <- global(n_cf, fun = "mean", na.rm = TRUE)
-
-ts_nirv_cf     <- as.vector(t(ts_nirv_cf))
-ts_nirv_rad_cf <- as.vector(t(ts_nirv_rad_cf))
-ts_sif_cf      <- as.vector(t(ts_sif_cf))
-ts_ref_665_cf  <- as.vector(t(ts_ref_665_cf))
-ts_ref_781_cf  <- as.vector(t(ts_ref_781_cf))
-ts_n_cf        <- as.vector(t(ts_n_cf))
-
-ts_nirv_cs     <- global(nirv_cs, fun = "mean", na.rm = TRUE)
-ts_nirv_rad_cs <- global(nirv_rad_cs, fun = "mean", na.rm = TRUE)
-ts_sif_cs      <- global(sif_cs, fun = "mean", na.rm = TRUE)
-ts_ref_665_cs  <- global(ref_665_cs, fun = "mean", na.rm = TRUE)
-ts_ref_781_cs  <- global(ref_781_cs, fun = "mean", na.rm = TRUE)
-ts_n_cs        <- global(n_cs, fun = "mean", na.rm = TRUE)
-
-ts_nirv_cs     <- as.vector(t(ts_nirv_cs))
-ts_nirv_rad_cs <- as.vector(t(ts_nirv_rad_cs))
-ts_sif_cs      <- as.vector(t(ts_sif_cs))
-ts_ref_665_cs  <- as.vector(t(ts_ref_665_cs))
-ts_ref_781_cs  <- as.vector(t(ts_ref_781_cs))
-ts_n_cs        <- as.vector(t(ts_n_cs))
-
-ts_nirv_cs_all     <- global(nirv_cs_all, fun = "mean", na.rm = TRUE)
-ts_nirv_rad_cs_all <- global(nirv_rad_cs_all, fun = "mean", na.rm = TRUE)
-ts_sif_cs_all      <- global(sif_cs_all, fun = "mean", na.rm = TRUE)
-ts_ref_665_cs_all  <- global(ref_665_cs_all, fun = "mean", na.rm = TRUE)
-ts_ref_781_cs_all  <- global(ref_781_cs_all, fun = "mean", na.rm = TRUE)
-ts_n_cs_all        <- global(n_cs_all, fun = "mean", na.rm = TRUE)
-
-ts_nirv_cs_all     <- as.vector(t(ts_nirv_cs_all))
-ts_nirv_rad_cs_all <- as.vector(t(ts_nirv_rad_cs_all))
-ts_sif_cs_all      <- as.vector(t(ts_sif_cs_all))
-ts_ref_665_cs_all  <- as.vector(t(ts_ref_665_cs_all))
-ts_ref_781_cs_all  <- as.vector(t(ts_ref_781_cs_all))
-ts_n_cs_all        <- as.vector(t(ts_n_cs_all))
+ts_sif_cf      <- get_ts_mean("SIF_743", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
+ts_nirv_cf     <- get_ts_mean("NIRv", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
+ts_nirv_rad_cf <- get_ts_mean("NIRv_Rad", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
+ts_ref_665_cf  <- get_ts_mean("REF_665", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
+ts_ref_781_cf  <- get_ts_mean("REF_781", "n", c(cf_2019, cf_2020, cf_2021), samerica_ext, mask_total)
 
 
 #### Calc SEM at regional scale ####
@@ -263,14 +219,14 @@ par(mfrow = c(3, 2), oma=c(2.0,0.1,1.25,0.1), bg = "black")
 
 # Map
 op <- par(mar = c(0,6,0,0.5), bg = "black")
-plot(raster(cover), col = map.cols, axes=F, legend=F)
-plot(raster(cover), col = map.cols, axes=F, legend=F, add = TRUE)
+plot(raster(samerica_cover), col = map.cols, axes=F, legend=F)
+plot(raster(samerica_cover), col = map.cols, axes=F, legend=F, add = TRUE)
 plot(coastlines, border = NA, col = rgb(0.30,0.30,0.30), add = TRUE, ylim = c(-60, 30))
-plot(raster(cover), col = map.cols, axes=F, add = TRUE, legend=F)
+plot(raster(samerica_cover), col = map.cols, axes=F, add = TRUE, legend=F)
 mtext(3, text = "South America Tropical Forest", col = "white")
 box(col = "white")
 # Legend
-plot(raster(cover), legend.only=TRUE, col=map.cols, horizontal=F,
+plot(raster(samerica_cover), legend.only=TRUE, col=map.cols, horizontal=F,
      legend.args = list(text = do.call(expression, y_lab_map), side = 2, line = c(3.0, 1.0), col = "white"),
      axis.args = list(line = -1.75, cex.axis=1, tick=F, at=c(81, 100), labels=c("80","100"), col.axis = "white", hadj = 1),
      smallplot=c(0.175,0.200,0.10,0.90)); par(mar = par("mar"))
@@ -281,7 +237,7 @@ op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_sif_cs, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs, ts_sif_cf) - 0.10 * min(ts_sif_cs, ts_sif_cf),
               max(ts_sif_cs, ts_sif_cf) + 0.10 * max(ts_sif_cs, ts_sif_cf)))
-rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
+rect(13, 0, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_sif_cs, col = mag.cols[4], lwd = 1.5)
 lines(x, ts_sif_cf, col = mag.cols[4], lwd = 1.5, lty = 2)
 lines(x, ts_sif_cs_all, col = mag.cols[4], lwd = 1.5, lty = 3)
@@ -298,7 +254,7 @@ op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_ref_781_cs, col = vir.cols[5], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_ref_781_cs, ts_ref_781_cf, ts_ref_781_cs_all) - 0.01,
               max(ts_ref_781_cs, ts_ref_781_cf, ts_ref_781_cs_all) + 0.01))
-rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
+rect(13, 0, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_ref_781_cs, col = vir.cols[5], lty = 1, lwd = 1.5)
 lines(x, ts_ref_781_cf, col = vir.cols[5], lty = 2, lwd = 1.5)
 lines(x, ts_ref_781_cs_all, col = vir.cols[5], lty = 3, lwd = 1.5)
@@ -313,7 +269,7 @@ op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_nirv_cs, col = mag.cols[5], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_nirv_cs, ts_nirv_cf) - 0.10 * min(ts_nirv_cs, ts_nirv_cf),
               max(ts_nirv_cs, ts_nirv_cf) + 0.10 * max(ts_nirv_cs, ts_nirv_cf)))
-rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
+rect(13, 0, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_nirv_cs, col = mag.cols[5], lty = 1, lwd = 1.5)
 lines(x, ts_nirv_cf, col = mag.cols[5], lty = 2, lwd = 1.5)
 lines(x, ts_nirv_cs_all, col = mag.cols[5], lty = 3, lwd = 1.5)
@@ -328,7 +284,7 @@ op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_ref_665_cs, col = vir.cols[6], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_ref_665_cs, ts_ref_665_cf, ts_ref_665_cs_all) - 0.01,
               max(ts_ref_665_cs, ts_ref_665_cf, ts_ref_665_cs_all) + 0.01))
-rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
+rect(13, 0, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_ref_665_cs, col = vir.cols[6], lty = 1, lwd = 1.5)
 lines(x, ts_ref_665_cf, col = vir.cols[6], lty = 2, lwd = 1.5)
 lines(x, ts_ref_665_cs_all, col = vir.cols[6], lty = 3, lwd = 1.5)
@@ -344,7 +300,7 @@ op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_nirv_rad_cs, col = mag.cols[6], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_nirv_rad_cs, ts_nirv_rad_cf, ts_nirv_rad_cs_all) - 2,
               max(ts_nirv_rad_cs, ts_nirv_rad_cf, ts_nirv_rad_cs_all) + 2))
-rect(13, 0, 24, 100, col = rgb(0.30,0.30,0.30), border = NA)
+rect(13, 0, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_nirv_rad_cs, col = mag.cols[6], lty = 1, lwd = 1.5)
 lines(x, ts_nirv_rad_cf, col = mag.cols[6], lty = 2, lwd = 1.5)
 lines(x, ts_nirv_rad_cs_all, col = mag.cols[6], lty = 3, lwd = 1.5)
