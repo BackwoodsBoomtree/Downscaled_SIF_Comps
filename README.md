@@ -2,7 +2,7 @@
 
 This project compares downscaled SIF products to actual SIF data. However, it has balooned into investigating the asynchrony of SIF and NIR(v) in the tropics.
 
-## Calculating weighted mean and population SEM from gridded data
+## Calculating population weighted mean and SEM from gridded data
 
 When using gridded data to calculate regional-scale means, such as using gridded data to investigate seasonality of SIF for South American tropical forests, we need to consider the number of soundings (n) in each gridcell when calculating the population mean. Since we know the gridcell-level n and standard deviation (std), we can derive the standard error of the mean (SEM) for the entire population. This will allow us to either create error bars for our plots, or when they are very small, we can plot the SEMs into a histogram or some other plot.
 
