@@ -12,6 +12,8 @@ I created a function called get_ts in the error.R files, which is also in the ti
 
 ![image](https://user-images.githubusercontent.com/31934468/174311164-13257b8a-54a9-4669-863d-a2fe296252eb.png)
 
+Where N is population number of samples (soundings) and μ is population mean (weighted).
+
 
 ## Downscaled products
 
