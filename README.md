@@ -1,6 +1,19 @@
 # Downscaled_SIF_Comps
 
-This project compares downscaled SIF products to actual SIF data.
+This project compares downscaled SIF products to actual SIF data. However, it has balooned into investigating the asynchrony of SIF and NIR(v) in the tropics.
+
+## Calculating weighted mean and population SEM from gridded data
+
+When using gridded data to calculate regional-scale means, such as using gridded data to investigate seasonality of SIF for South American tropical forests, we need to consider the number of soundings (n) in each gridcell when calculating the population mean. Since we know the gridcell-level n and standard deviation (std), we can derive the standard error of the mean (SEM) for the entire population. This will allow us to either create error bars for our plots, or when they are very small, we can plot the SEMs into a histogram or some other plot.
+
+I created a function called get_ts in the error.R files, which is also in the time series comps.R files. This function calculates the population mean using weights and also the SEM for each time series. The equations are as follows:
+
+
+
+## Calculating population SEM from gridded data
+The population variance is the sum of the Between Group Variance and the Within Group Variance as follows:
+
+N⋅σ2=∑g=13ng(μg−μ)2+∑g=13ngσ2g
 
 ## Downscaled products
 
