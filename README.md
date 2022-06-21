@@ -10,7 +10,7 @@ I created a function called get_ts in the error.R files, which is also in the ti
 
 ![image](https://user-images.githubusercontent.com/31934468/174311110-cd523a41-599d-405b-bdfb-d397b81d9f46.png)
 
-The first part of the right side is between group variance, and the second part is within group variance.
+The first part of the right side of the equation below is between group variance, and the second part is within group variance.
 
 ![image](https://user-images.githubusercontent.com/31934468/174311164-13257b8a-54a9-4669-863d-a2fe296252eb.png)
 
