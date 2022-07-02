@@ -373,19 +373,19 @@ plot(x, rep(NA, times = length(x)), col = mag.cols[4], type = "l", axes = FALSE,
 rect(13, -100, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, samerica_ts_sif_cs_norm, col = mag.cols[4], lwd = 1.5)
 lines(x, samerica_ts_sif_rel_cs_norm, col = mag.cols[5], lwd = 1.5, lty = 2)
-lines(x, samerica_ts_my_cs_norm, col = mag.cols[7], lwd = 1.5, lty = 2)
+# lines(x, samerica_ts_my_cs_norm, col = mag.cols[7], lwd = 1.5, lty = 2)
 lines(x, samerica_ts_yelu_cs_norm, col = vir.cols[4], lwd = 1.5, lty = 2)
 lines(x, samerica_ts_nirvp_cs_norm, col = vir.cols[6], lwd = 1.5, lty = 2)
 
 lines(x, samerica_ts_precip_norm, col = "blue", lwd = 1.5, lty = 1)
 axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
-# axis(1, tck = 0.06, mgp=c(3, 0.2, 0), labels = xlabs, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
+#axis(1, tck = 0.06, mgp=c(3, 0.2, 0), labels = xlabs, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
 axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
-legend("topleft", legend=c("SIF", "Precipitation", "SIF Relative", "SIF / Red * NIR Radiance", "SIF / NIRv Radiance", "SIF / NIRv * PAR"),
-       col=c(mag.cols[4], "blue", mag.cols[5], mag.cols[7], vir.cols[4], vir.cols[6]),
-       lty=c(1, 1, 2, 2, 2, 2), box.col = "white", text.col = "white", ncol = 3, y.intersp = 1, cex = 0.75)
-mtext(3, text = "S America Tropical Forest", col = "white", line = 0.25)
+legend("topleft", legend=c("SIF", "Precipitation", "SIF Relative", "SIF / NIRv Radiance", "SIF / NIRv * PAR"),
+       col=c(mag.cols[4], "blue", mag.cols[5], vir.cols[4], vir.cols[6]),
+       lty=c(1, 1, 2, 2, 2), box.col = "white", text.col = "white", ncol = 5, x.intersp = 1, cex = 0.75)
+mtext(3, text = "South American Tropical Forest", col = "white", line = 0.25)
 # mtext(1, text = "2019", col = "white", line = 1.5, at = 7)
 # mtext(1, text = "2020", col = "white", line = 1.5, at = 19)
 # mtext(1, text = "2021", col = "white", line = 1.5, at = 31)
@@ -399,7 +399,7 @@ plot(x, rep(NA, times = length(x)), col = mag.cols[4], type = "l", axes = FALSE,
 rect(13, -100, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, africa_ts_sif_cs_norm, col = mag.cols[4], lwd = 1.5)
 lines(x, africa_ts_sif_rel_cs_norm, col = mag.cols[5], lwd = 1.5, lty = 2)
-lines(x, africa_ts_my_cs_norm, col = mag.cols[7], lwd = 1.5, lty = 2)
+# lines(x, africa_ts_my_cs_norm, col = mag.cols[7], lwd = 1.5, lty = 2)
 lines(x, africa_ts_yelu_cs_norm, col = vir.cols[4], lwd = 1.5, lty = 2)
 lines(x, africa_ts_nirvp_cs_norm, col = vir.cols[6], lwd = 1.5, lty = 2)
 
@@ -420,7 +420,7 @@ plot(x, rep(NA, times = length(x)), col = mag.cols[4], type = "l", axes = FALSE,
 rect(13, -100, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, seasia_ts_sif_cs_norm, col = mag.cols[4], lwd = 1.5)
 lines(x, seasia_ts_sif_rel_cs_norm, col = mag.cols[5], lwd = 1.5, lty = 2)
-lines(x, seasia_ts_my_cs_norm, col = mag.cols[7], lwd = 1.5, lty = 2)
+# lines(x, seasia_ts_my_cs_norm, col = mag.cols[7], lwd = 1.5, lty = 2)
 lines(x, seasia_ts_yelu_cs_norm, col = vir.cols[4], lwd = 1.5, lty = 2)
 lines(x, seasia_ts_nirvp_cs_norm, col = vir.cols[6], lwd = 1.5, lty = 2)
 
