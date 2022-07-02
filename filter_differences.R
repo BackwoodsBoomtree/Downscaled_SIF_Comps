@@ -154,7 +154,7 @@ ts_samerica_ref_665_cf     <- 1-ts_samerica_ref_665_cf
 # Differences
 # samerica
 dif_samerica_sif_hotspot      <- (ts_samerica_sif_cs_all - ts_samerica_sif_cs) / abs(ts_samerica_sif_cs) * 100
-dif_samerica_sif_cloud        <- (ts_samerica_sif_cf - ts_samerica_sif_cs_all) / abs(ts_samerica_sif_cs_all) * 100
+dif_samerica_sif_cloud        <- (ts_samerica_sif_cf - ts_samerica_sif_cs) / abs(ts_samerica_sif_cs) * 100
 combo_samerica_sif            <- dif_samerica_sif_hotspot + dif_samerica_sif_cloud
 
 dif_samerica_ref_665_hotspot  <- (ts_samerica_ref_665_cs_all - ts_samerica_ref_665_cs) / abs(ts_samerica_ref_665_cs) * 100
@@ -219,7 +219,7 @@ plot(dif_samerica_sif_hotspot, axes = FALSE, xaxt="n", yaxt="n", xlab = NA, ylab
 lines(dif_samerica_sif_cloud, lty = 3)
 lines(combo_samerica_sif, lty = 1)
 abline(h = 0)
-# axis(1, tck = 0.03, mgp=c(3, 0.2, 0), at = x_lab)
+axis(1, tck = 0.03, mgp=c(3, 0.2, 0), at = x_lab)
 axis(2, tck = 0.03, mgp=c(3, 0.2, 0), las = 2)
 legend("topleft", bty = "n", legend = c(as.expression(lab_hot), as.expression(lab_cloud), as.expression(lab_combo)),
        lty = c(2, 3, 1), horiz = TRUE)
