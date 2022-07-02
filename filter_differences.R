@@ -9,17 +9,21 @@ library(RColorBrewer)
 out_name   <- "G:/SIF_comps/figs/filter_differences.pdf"
 
 ### All PAs, cold, cold CF
-cs_all_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.clearsky.nc"
-cs_all_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.nc"
-cs_all_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.nc"
+cs_all_2019 <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.clearsky.nc"
+cs_all_2020 <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.nc"
+cs_all_2021 <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.nc"
 
-cs_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.clearsky.cold.nc"
-cs_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.cold.nc"
-cs_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.cold.nc"
+cs_2019     <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.clearsky.cold.nc"
+cs_2020     <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.clearsky.cold.nc"
+cs_2021     <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.clearsky.cold.nc"
 
-cf_2019    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.CF20.cold.nc"
-cf_2020    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.cold.nc"
-cf_2021    <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.CF20.cold.nc"
+cf_2019     <- "G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.CF20.cold.nc"
+cf_2020     <- "G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.cold.nc"
+cf_2021     <- "G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.CF20.cold.nc"
+
+cf_all_2019 <-"G:/TROPOMI/esa/gridded/1deg/monthly/2019/TROPOMI.ESA.SIF.2019.global.monthly.1deg.CF20.nc"
+cf_all_2020 <-"G:/TROPOMI/esa/gridded/1deg/monthly/2020/TROPOMI.ESA.SIF.2020.global.monthly.1deg.CF20.nc"
+cf_all_2021 <-"G:/TROPOMI/esa/gridded/1deg/monthly/2021/TROPOMI.ESA.SIF.2021.global.monthly.1deg.CF20.nc"
 
 # Masks
 mask_ebf   <- rast("G:/MCD12C1/MCD12C1.A2020001.006.EBF.1deg.tif")
@@ -100,32 +104,68 @@ ts_tropics_nirv_rad_cf <- get_ts("NIRv_Rad", "n", "NIRv_Rad_std", c(cf_2019, cf_
 ts_tropics_ref_665_cf  <- get_ts("REF_665", "n", "REF_665_std", c(cf_2019, cf_2020, cf_2021), tropics_ext, mask_total)[[1]]
 ts_tropics_ref_781_cf  <- get_ts("REF_781", "n", "REF_781_std", c(cf_2019, cf_2020, cf_2021), tropics_ext, mask_total)[[1]]
 
+ts_tropics_sif_cf_all      <- get_ts("SIF_743", "n", "SIF_743_std", c(cf_all_2019, cf_all_2020, cf_all_2021), tropics_ext, mask_total)[[1]]
+ts_tropics_nirv_cf_all     <- get_ts("NIRv", "n", "NIRv_std", c(cf_all_2019, cf_all_2020, cf_all_2021), tropics_ext, mask_total)[[1]]
+ts_tropics_nirv_rad_cf_all <- get_ts("NIRv_Rad", "n", "NIRv_Rad_std", c(cf_all_2019, cf_all_2020, cf_all_2021), tropics_ext, mask_total)[[1]]
+ts_tropics_ref_665_cf_all  <- get_ts("REF_665", "n", "REF_665_std", c(cf_all_2019, cf_all_2020, cf_all_2021), tropics_ext, mask_total)[[1]]
+ts_tropics_ref_781_cf_all  <- get_ts("REF_781", "n", "REF_781_std", c(cf_all_2019, cf_all_2020, cf_all_2021), tropics_ext, mask_total)[[1]]
+
+
 # convert red to absorbance
 ts_tropics_ref_665_cs_all <- 1-ts_tropics_ref_665_cs_all
 ts_tropics_ref_665_cs     <- 1-ts_tropics_ref_665_cs
 ts_tropics_ref_665_cf     <- 1-ts_tropics_ref_665_cf
+ts_tropics_ref_665_cf_all <- 1-ts_tropics_ref_665_cf_all
+
+## Here we calculate:
+## 1. The hotspot effect on clear sky 
+## 2. and CF <0.20 data.
+## 3. The cloud effect (<0.20) on data with 
+## 4. and without hotspot.
+## 5. Combined effect of inclusion of cloud and hotspot
+## (with hotspot = _all)
 
 # Differences
 # Tropics
-dif_tropics_sif_hotspot      <- (ts_tropics_sif_cs_all - ts_tropics_sif_cs) / abs(ts_tropics_sif_cs) * 100
-dif_tropics_sif_cloud        <- (ts_tropics_sif_cf - ts_tropics_sif_cs_all) / abs(ts_tropics_sif_cs_all) * 100
-combo_tropics_sif            <- dif_tropics_sif_hotspot + dif_tropics_sif_cloud
+dif_tropics_sif_hotspot_cs   <- (ts_tropics_sif_cs_all - ts_tropics_sif_cs) / abs(ts_tropics_sif_cs) * 100
+dif_tropics_sif_hotspot_cf   <- (ts_tropics_sif_cf_all - ts_tropics_sif_cf) / abs(ts_tropics_sif_cf) * 100
+dif_tropics_sif_cloud        <- (ts_tropics_sif_cf - ts_tropics_sif_cs) / abs(ts_tropics_sif_cs) * 100
+dif_tropics_sif_cloud_all    <- (ts_tropics_sif_cf_all - ts_tropics_sif_cs_all) / abs(ts_tropics_sif_cs_all) * 100
+dif_tropics_sif              <- (ts_tropics_sif_cf_all - ts_tropics_sif_cs) / abs(ts_tropics_sif_cs) * 100
 
-dif_tropics_ref_665_hotspot  <- (ts_tropics_ref_665_cs_all - ts_tropics_ref_665_cs) / abs(ts_tropics_ref_665_cs) * 100
-dif_tropics_ref_665_cloud    <- (ts_tropics_ref_665_cf - ts_tropics_ref_665_cs_all) / abs(ts_tropics_ref_665_cs_all) * 100
-combo_tropics_ref_665        <- dif_tropics_ref_665_hotspot + dif_tropics_ref_665_cloud
+dif_tropics_ref_665_hotspot_cs   <- (ts_tropics_ref_665_cs_all - ts_tropics_ref_665_cs) / abs(ts_tropics_ref_665_cs) * 100
+dif_tropics_ref_665_hotspot_cf   <- (ts_tropics_ref_665_cf_all - ts_tropics_ref_665_cf) / abs(ts_tropics_ref_665_cf) * 100
+dif_tropics_ref_665_cloud        <- (ts_tropics_ref_665_cf - ts_tropics_ref_665_cs) / abs(ts_tropics_ref_665_cs) * 100
+dif_tropics_ref_665_cloud_all    <- (ts_tropics_ref_665_cf_all - ts_tropics_ref_665_cs_all) / abs(ts_tropics_ref_665_cs_all) * 100
+dif_tropics_ref_665              <- (ts_tropics_ref_665_cf_all - ts_tropics_ref_665_cs) / abs(ts_tropics_ref_665_cs) * 100
 
-dif_tropics_ref_781_hotspot  <- (ts_tropics_ref_781_cs_all - ts_tropics_ref_781_cs) / abs(ts_tropics_ref_781_cs) * 100
-dif_tropics_ref_781_cloud    <- (ts_tropics_ref_781_cf - ts_tropics_ref_781_cs_all) / abs(ts_tropics_ref_781_cs_all) * 100
-combo_tropics_ref_781        <- dif_tropics_ref_781_hotspot + dif_tropics_ref_781_cloud
+dif_tropics_ref_781_hotspot_cs   <- (ts_tropics_ref_781_cs_all - ts_tropics_ref_781_cs) / abs(ts_tropics_ref_781_cs) * 100
+dif_tropics_ref_781_hotspot_cf   <- (ts_tropics_ref_781_cf_all - ts_tropics_ref_781_cf) / abs(ts_tropics_ref_781_cf) * 100
+dif_tropics_ref_781_cloud        <- (ts_tropics_ref_781_cf - ts_tropics_ref_781_cs) / abs(ts_tropics_ref_781_cs) * 100
+dif_tropics_ref_781_cloud_all    <- (ts_tropics_ref_781_cf_all - ts_tropics_ref_781_cs_all) / abs(ts_tropics_ref_781_cs_all) * 100
+dif_tropics_ref_781              <- (ts_tropics_ref_781_cf_all - ts_tropics_ref_781_cs) / abs(ts_tropics_ref_781_cs) * 100
 
-dif_tropics_nirv_hotspot     <- (ts_tropics_nirv_cs_all - ts_tropics_nirv_cs) / abs(ts_tropics_nirv_cs) * 100
-dif_tropics_nirv_cloud       <- (ts_tropics_nirv_cf - ts_tropics_nirv_cs_all) / abs(ts_tropics_nirv_cs_all) * 100
-combo_tropics_nirv           <- dif_tropics_nirv_hotspot + dif_tropics_nirv_cloud
+dif_tropics_nirv_hotspot_cs   <- (ts_tropics_nirv_cs_all - ts_tropics_nirv_cs) / abs(ts_tropics_nirv_cs) * 100
+dif_tropics_nirv_hotspot_cf   <- (ts_tropics_nirv_cf_all - ts_tropics_nirv_cf) / abs(ts_tropics_nirv_cf) * 100
+dif_tropics_nirv_cloud        <- (ts_tropics_nirv_cf - ts_tropics_nirv_cs) / abs(ts_tropics_nirv_cs) * 100
+dif_tropics_nirv_cloud_all    <- (ts_tropics_nirv_cf_all - ts_tropics_nirv_cs_all) / abs(ts_tropics_nirv_cs_all) * 100
+dif_tropics_nirv              <- (ts_tropics_nirv_cf_all - ts_tropics_nirv_cs) / abs(ts_tropics_nirv_cs) * 100
 
-dif_tropics_nirv_rad_hotspot <- (ts_tropics_nirv_rad_cs_all - ts_tropics_nirv_rad_cs) / abs(ts_tropics_nirv_rad_cs) * 100
-dif_tropics_nirv_rad_cloud   <- (ts_tropics_nirv_rad_cf - ts_tropics_nirv_rad_cs_all) / abs(ts_tropics_nirv_rad_cs_all) * 100
-combo_tropics_nirv_rad       <- dif_tropics_nirv_rad_hotspot + dif_tropics_nirv_rad_cloud
+dif_tropics_nirv_rad_hotspot_cs   <- (ts_tropics_nirv_rad_cs_all - ts_tropics_nirv_rad_cs) / abs(ts_tropics_nirv_rad_cs) * 100
+dif_tropics_nirv_rad_hotspot_cf   <- (ts_tropics_nirv_rad_cf_all - ts_tropics_nirv_rad_cf) / abs(ts_tropics_nirv_rad_cf) * 100
+dif_tropics_nirv_rad_cloud        <- (ts_tropics_nirv_rad_cf - ts_tropics_nirv_rad_cs) / abs(ts_tropics_nirv_rad_cs) * 100
+dif_tropics_nirv_rad_cloud_all    <- (ts_tropics_nirv_rad_cf_all - ts_tropics_nirv_rad_cs_all) / abs(ts_tropics_nirv_rad_cs_all) * 100
+dif_tropics_nirv_rad              <- (ts_tropics_nirv_rad_cf_all - ts_tropics_nirv_rad_cs) / abs(ts_tropics_nirv_rad_cs) * 100
+
+# Anomalies
+# Tropics
+anom_ts_tropics_sif_cs_all <- ts_tropics_sif_cs_all - mean(ts_tropics_sif_cs_all)
+anom_ts_tropics_sif_cs     <- ts_tropics_sif_cs - mean(ts_tropics_sif_cs)
+anom_ts_tropics_sif_cf_all <- ts_tropics_sif_cf_all - mean(ts_tropics_sif_cf_all)
+
+anom_dif_tropics_sif_hotspot_cs   <- (anom_ts_tropics_sif_cf_all - anom_ts_tropics_sif_cs) / abs(anom_ts_tropics_sif_cs) * 100
+anom_test <- anom_ts_tropics_sif_cf_all - anom_ts_tropics_sif_cs
+
 
 # Get samerica data
 ts_samerica_sif_cs_all      <- get_ts("SIF_743", "n", "SIF_743_std", c(cs_all_2019, cs_all_2020, cs_all_2021), samerica_ext, mask_total)[[1]]
@@ -230,10 +270,16 @@ box()
 
 dev.off()
 
+dif_tropics_sif_hotspot_cs   <- (ts_tropics_sif_cs_all - ts_tropics_sif_cs) / abs(ts_tropics_sif_cs) * 100
+dif_tropics_sif_hotspot_cf   <- (ts_tropics_sif_cf_all - ts_tropics_sif_cf) / abs(ts_tropics_sif_cf) * 100
+dif_tropics_sif_cloud        <- (ts_tropics_sif_cf - ts_tropics_sif_cs) / abs(ts_tropics_sif_cs) * 100
+dif_tropics_sif_cloud_all    <- (ts_tropics_sif_cf_all - ts_tropics_sif_cs_all) / abs(ts_tropics_sif_cs_all) * 100
 
-plot(ts_tropics_sif_cs_all, type = "l")
-lines(ts_tropics_sif_cs, lty = 2)
 
-plot(dif_tropics_sif_hotspot, type = "l")
-plot(dif_tropics_sif_cloud, type = "l")
-plot(combo_tropics, type = "l")
+plot(dif_tropics_sif_hotspot_cs, type = "l", ylim = c(-12,12))
+lines(dif_tropics_sif_hotspot_cf, lty = 2)
+lines(dif_tropics_sif_cloud, lty = 2)
+lines(dif_tropics_sif_cloud_all, lty = 1)
+lines(dif_tropics_sif, col = "red")
+
+
