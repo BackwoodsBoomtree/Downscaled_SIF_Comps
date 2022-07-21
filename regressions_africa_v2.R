@@ -1,7 +1,7 @@
 
 #### Output PDF name ####
-out_name   <- "G:/SIF_comps/figs/v2/regressions_samerica_v2.pdf"
-data_prefix <- "G:/SIF_comps/csv/amazon/Amazon_2019-2021_"
+out_name   <- "G:/SIF_comps/figs/v2/regressions_africa_v2.pdf"
+data_prefix <- "G:/SIF_comps/csv/africa/Africa_2019-2021_"
 
 #### Grab the data ####
 
@@ -40,7 +40,7 @@ round2 = function(x, n, p) {
   z <- z*posneg
   
   if (p == TRUE) {
-    if (z < 0.05 && z > 0.01) {
+    if (z < 0.05 && z >= 0.01) {
       z <- "p < 0.05"
     } else if (z < 0.01) {
       z <- "p < 0.01"
@@ -113,7 +113,7 @@ reg_nir_cf_cold_r   <- bquote(R^2~" = "~.(round2(reg_nir_cf_cold_sum$adj.r.squar
 reg_nir_cf_cold_p   <- round2(reg_nir_cf_cold_sum$coefficients[2,4], 2, TRUE)
 
 # Labels
-lab_title   <- "Amazon Tropical Forest"
+lab_title   <- "African Tropical Forest"
 lab_sif     <- bquote("SIF (mW/m"^"2"*"/sr/nm)")
 lab_nirv    <- bquote("NIRv Reflectance")
 lab_nirvr   <- bquote("NIRv Radiance (mW/m"^"2"*"/sr/nm)")
