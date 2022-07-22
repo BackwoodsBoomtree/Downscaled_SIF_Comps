@@ -168,8 +168,8 @@ get_ts  <- function(df_f, variable, time, filters, threshs, direct) {
 }
 
 #### Tropics ####
-out_dir    <- "G:/SIF_comps/csv/tropics"
-out_name   <- "/Tropics_2019-2021_"
+out_dir    <- "G:/SIF_comps/csv/amazon"
+out_name   <- "/Amazon_2019-2021_"
 files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/tropics/2019", 2019, "month")
 files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/tropics/2020", 2020, "month")
 files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/tropics/2021", 2021, "month")
