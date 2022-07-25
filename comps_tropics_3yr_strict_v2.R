@@ -4,8 +4,8 @@ library(viridis)
 library(RColorBrewer)
 
 #### Output PDF name ####
-out_name    <- "G:/SIF_comps/figs/v2/comps_africa_map_3yr_cold_all_black_v2.pdf"
-data_prefix <- "G:/SIF_comps/csv/africa/Africa_2019-2021_"
+out_name    <- "G:/SIF_comps/figs/v2/comps_tropics_map_3yr_cold_all_strict_black_v2.pdf"
+data_prefix <- "G:/SIF_comps/csv/tropics/strict/Tropics_2019-2021_strict_"
 
 #### Grab the data ####
 
@@ -37,10 +37,10 @@ ts_red_cf_cold <- 1-ts_red_cf_cold
 #### Get shapes and forest cover ####
 
 coastlines     <- vect("C:/Russell/R_Scripts/TROPOMI_2/mapping/GSHHS_shp/c/GSHHS_c_L1.shp")
-africa_ext     <- ext(c(-18, 52, -11, 14))
+tropics_ext    <- ext(c(-180, 180, -23.5, 23.5))
 
 mcd12_majority <- rast("G:/MCD12C1/2020/reprocessed/percent/MCD12C1.A2020001.006.Percent_LC_03.tif")
-mcd12_majority <- crop(mcd12_majority, africa_ext)
+mcd12_majority <- crop(mcd12_majority, tropics_ext)
 mcd12_majority[mcd12_majority < 90]  <- NA
 
 #### Plot Settings ####
@@ -65,9 +65,9 @@ cairo_pdf(out_name, width = 7.5, height = 4.25)
 par(mfrow = c(3, 2), oma=c(2.0,0.1,1.25,0.1), bg = "black")
 
 # Map
-plot(coastlines, border = NA, col = rgb(0.30,0.30,0.30), xlim = c(-20, 55), ylim = c(-23.5, 23.5), mar = c(0,6,0,0.5))
+plot(coastlines, border = NA, col = rgb(0.30,0.30,0.30), xlim = c(-85, 160), ylim = c(-23.5, 23.5), mar = c(0,6,0,0.5))
 plot(mcd12_majority, col = map.cols, add = TRUE, legend = FALSE)
-mtext(3, text = "African Tropical Forest", col = "white")
+mtext(3, text = "Tropical Forest", col = "white")
 box(col = "white")
 # Legend
 plot(raster(mcd12_majority), legend.only=TRUE, col=map.cols, horizontal=F,
@@ -80,7 +80,7 @@ plot(raster(mcd12_majority), legend.only=TRUE, col=map.cols, horizontal=F,
 op <- par(mar = c(0,6,0,0.5), bg = "black")
 plot(x, ts_sif_cs_cold, col = mag.cols[4], type = "l", axes = FALSE, lwd = 1.5, xaxs="i",
      ylim = c(min(ts_sif_cs_all, ts_sif_cf_cold) - 0.10 * min(ts_sif_cs_all, ts_sif_cf_cold),
-              max(ts_sif_cs_all, ts_sif_cf_cold) + 0.15 * max(ts_sif_cs_all, ts_sif_cf_cold)))
+              max(ts_sif_cs_all, ts_sif_cf_cold) + 0.10 * max(ts_sif_cs_all, ts_sif_cf_cold)))
 rect(13, 0, 25, 100, col = rgb(0.30,0.30,0.30), border = NA)
 lines(x, ts_sif_cs_cold, col = mag.cols[4], lwd = 1.5)
 lines(x, ts_sif_cf_cold, col = mag.cols[4], lwd = 1.5, lty = 2)
@@ -89,7 +89,7 @@ axis(1, tck = 0.03, labels = FALSE, at = x, col.axis = "white", col = "white")
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 36, by = 3), col.axis = "white", col = "white")
 axis(2, tck = 0.03, mgp=c(3, 0.2, 0), col.axis = "white", col = "white", las = 2)
 mtext(2, text = do.call(expression, y_lab_sif), col = "white", line = c(4.25, 2.25))
-legend("topright", legend=c("Clear Sky (w/ Hotspot)", "Clear Sky (No Hotspot)", "Cloud <0.20 (No Hotspot)"), col=c("white", "white", "white"),
+legend("topleft", legend=c("Clear Sky (w/ Hotspot)", "Clear Sky (No Hotspot)", "Cloud <0.20 (No Hotspot)"), col=c("white", "white", "white"),
        lty=c(3, 1, 2), box.col = "white", text.col = "white", horiz = FALSE, y.intersp = 1, cex = 0.75)
 box(col = "white")
 

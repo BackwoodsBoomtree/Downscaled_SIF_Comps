@@ -475,7 +475,7 @@ par(mfrow = c(3, 2), oma=c(3.0,2.75,0,0.1), bg = "black")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "S America Tropical Forest March Equinox", col = "white")
+mtext(3, text = "Amazon Tropical Forest March Equinox", col = "white")
 
 # Shaded area
 rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
@@ -504,7 +504,7 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "S America Tropical Forest September Equinox", col = "white")
+mtext(3, text = "Amazon Tropical Forest September Equinox", col = "white")
 
 # Shaded area
 rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
@@ -534,7 +534,7 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "Africa Tropical Forest March Equinox", col = "white")
+mtext(3, text = "African Tropical Forest March Equinox", col = "white")
 
 # Shaded area
 rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
@@ -563,7 +563,7 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "Africa Tropical Forest September Equinox", col = "white")
+mtext(3, text = "African Tropical Forest September Equinox", col = "white")
 
 # Shaded area
 rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
@@ -593,7 +593,7 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "SE Asia Tropical Forest March Equinox", col = "white")
+mtext(3, text = "Asia-Pacific Tropical Forest March Equinox", col = "white")
 
 # Shaded area
 rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
@@ -622,7 +622,7 @@ box(col = "white")
 op <- par(mar = c(0,0.5,2,0.5), bg = "black")
 
 plot(NULL, xlim = c(0,70), ylim = c(0, 1), axes = FALSE, xaxs="i")
-mtext(3, text = "SE Asia Tropical Forest September Equinox", col = "white")
+mtext(3, text = "Asia-Pacific Tropical Forest September Equinox", col = "white")
 
 # Shaded area
 rect(-10, -10, 20, 100, col = rgb(0.30,0.30,0.30), border = NA)
