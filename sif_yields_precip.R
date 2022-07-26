@@ -6,8 +6,8 @@ library(rgeos)
 library(RColorBrewer)
 
 #### Output PDF name ####
-# out_name   <- "G:/SIF_comps/figs/sif_yields_precip_samerica_black.pdf"
-out_name   <- "G:/SIF_comps/figs/sif_yields_precip_black.pdf"
+out_name   <- "G:/SIF_comps/figs/sif_yields_precip_samerica_black.pdf"
+# out_name   <- "G:/SIF_comps/figs/sif_yields_precip_black.pdf"
 
 #### Load Files ####
 
