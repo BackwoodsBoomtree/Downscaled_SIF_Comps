@@ -1,5 +1,8 @@
 library(terra)
 library(ncdf4)
+library(viridis)
+
+out_name    <- "G:/SIF_comps/figs/v2/comps_ec_black.pdf"
 
 # Get data
 t_2018 <- "G:/TROPOMI/esa/gridded/1deg/monthly/ebf/2018/TROPOMI.ESA.SIF.2018.EBF90.monthly.1deg.CF80.nc"
@@ -7,7 +10,7 @@ t_2019 <- "G:/TROPOMI/esa/gridded/1deg/monthly/ebf/2019/TROPOMI.ESA.SIF.2019.EBF
 t_2020 <- "G:/TROPOMI/esa/gridded/1deg/monthly/ebf/2020/TROPOMI.ESA.SIF.2020.EBF90.monthly.1deg.CF80.nc"
 t_2021 <- "G:/TROPOMI/esa/gridded/1deg/monthly/ebf/2021/TROPOMI.ESA.SIF.2021.EBF90.monthly.1deg.CF80.nc"
 
-k34_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/K34_PC.csv", header = FALSE)[,2]
+k34_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/K34_PC.csv", header = FALSE)[,2] / 10 # my axis when extracting the data was off by a decimal place
 k67_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/K67_PC.csv", header = FALSE)[,2]
 rja_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/RJA_PC.csv", header = FALSE)[,2]
 cax_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/CAX_PC.csv", header = FALSE)[,2]
@@ -266,12 +269,11 @@ rja_files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/rja/2020", 2020, "month"
 rja_files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/rja/2021", 2021, "month")
 
 # K67 SIF Corr
-k67_sif_cor_2018 <- get_ts(k67_files_2018, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 99), c("lt", "gt"))
-k67_sif_cor_2019 <- get_ts(k67_files_2019, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 99), c("lt", "gt"))
-k67_sif_cor_2020 <- get_ts(k67_files_2020, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 99), c("lt", "gt"))
-k67_sif_cor_2021 <- get_ts(k67_files_2021, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 99), c("lt", "gt"))
+k67_sif_cor_2018 <- get_ts(k67_files_2018, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 90), c("lt", "gt"))
+k67_sif_cor_2019 <- get_ts(k67_files_2019, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 90), c("lt", "gt"))
+k67_sif_cor_2020 <- get_ts(k67_files_2020, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 90), c("lt", "gt"))
+k67_sif_cor_2021 <- get_ts(k67_files_2021, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 90), c("lt", "gt"))
 k67_sif_cor_df   <- rbind(k67_sif_cor_2018, k67_sif_cor_2019, k67_sif_cor_2020, k67_sif_cor_2021)
-# hist(k67_sif_cor_df$n)
 
 # RJA SIF Corr
 rja_sif_cor_2018 <- get_ts(rja_files_2018, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 90), c("lt", "gt"))
@@ -279,6 +281,20 @@ rja_sif_cor_2019 <- get_ts(rja_files_2019, "SIF_Corr_743", "month", c("cloud_fra
 rja_sif_cor_2020 <- get_ts(rja_files_2020, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 90), c("lt", "gt"))
 rja_sif_cor_2021 <- get_ts(rja_files_2021, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020"), c(0.80, 90), c("lt", "gt"))
 rja_sif_cor_df   <- rbind(rja_sif_cor_2018, rja_sif_cor_2019, rja_sif_cor_2020, rja_sif_cor_2021)
+
+# K67 NIRv
+k67_nirv_2018 <- get_ts(k67_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.01, 99, 20), c("lt", "gt", "gt"))
+k67_nirv_2019 <- get_ts(k67_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.01, 99, 20), c("lt", "gt", "gt"))
+k67_nirv_2020 <- get_ts(k67_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.01, 99, 20), c("lt", "gt", "gt"))
+k67_nirv_2021 <- get_ts(k67_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.01, 99, 20), c("lt", "gt", "gt"))
+k67_nirv_df   <- rbind(k67_nirv_2018, k67_nirv_2019, k67_nirv_2020, k67_nirv_2021)
+
+# RJA NIRv
+rja_nirv_2018 <- get_ts(rja_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.01, 99, 20), c("lt", "gt", "gt"))
+rja_nirv_2019 <- get_ts(rja_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.01, 99, 20), c("lt", "gt", "gt"))
+rja_nirv_2020 <- get_ts(rja_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.01, 99, 20), c("lt", "gt", "gt"))
+rja_nirv_2021 <- get_ts(rja_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.01, 99, 20), c("lt", "gt", "gt"))
+rja_nirv_df   <- rbind(rja_nirv_2018, rja_nirv_2019, rja_nirv_2020, rja_nirv_2021)
 
 # Make Weighted means
 k67_df_n                <- cbind(k67_sif_cor_2018$n, k67_sif_cor_2019$n, k67_sif_cor_2020$n, k67_sif_cor_2021$n)
@@ -295,6 +311,20 @@ rja_sif_cor_2019$weight <- rja_sif_cor_2019$n / rja_df_n[,5]
 rja_sif_cor_2020$weight <- rja_sif_cor_2020$n / rja_df_n[,5]
 rja_sif_cor_2021$weight <- rja_sif_cor_2021$n / rja_df_n[,5]
 
+k67_df_n                <- cbind(k67_nirv_2018$n, k67_nirv_2019$n, k67_nirv_2020$n, k67_nirv_2021$n)
+k67_df_n                <- cbind(k67_df_n, total_n = rowSums(k67_df_n, na.rm = TRUE))
+k67_nirv_2018$weight <- k67_nirv_2018$n / k67_df_n[,5]
+k67_nirv_2019$weight <- k67_nirv_2019$n / k67_df_n[,5]
+k67_nirv_2020$weight <- k67_nirv_2020$n / k67_df_n[,5]
+k67_nirv_2021$weight <- k67_nirv_2021$n / k67_df_n[,5]
+
+rja_df_n                <- cbind(rja_nirv_2018$n, rja_nirv_2019$n, rja_nirv_2020$n, rja_nirv_2021$n)
+rja_df_n                <- cbind(rja_df_n, total_n = rowSums(rja_df_n, na.rm = TRUE))
+rja_nirv_2018$weight <- rja_nirv_2018$n / rja_df_n[,5]
+rja_nirv_2019$weight <- rja_nirv_2019$n / rja_df_n[,5]
+rja_nirv_2020$weight <- rja_nirv_2020$n / rja_df_n[,5]
+rja_nirv_2021$weight <- rja_nirv_2021$n / rja_df_n[,5]
+
 for (i in 1:12){
   
   k67_sif_cor_wm <-  weighted.mean(c(k67_sif_cor_2018[i,1], k67_sif_cor_2019[i,1], k67_sif_cor_2020[i,1], k67_sif_cor_2021[i,1]),
@@ -303,22 +333,34 @@ for (i in 1:12){
   rja_sif_cor_wm <-  weighted.mean(c(rja_sif_cor_2018[i,1], rja_sif_cor_2019[i,1], rja_sif_cor_2020[i,1], rja_sif_cor_2021[i,1]),
                            c(rja_sif_cor_2018[i,5], rja_sif_cor_2019[i,5], rja_sif_cor_2020[i,5], rja_sif_cor_2021[i,5]),
                            na.rm = TRUE)
+  k67_nirv_wm <-  weighted.mean(c(k67_nirv_2018[i,1], k67_nirv_2019[i,1], k67_nirv_2020[i,1], k67_nirv_2021[i,1]),
+                                   c(k67_nirv_2018[i,5], k67_nirv_2019[i,5], k67_nirv_2020[i,5], k67_nirv_2021[i,5]),
+                                   na.rm = TRUE)
+  rja_nirv_wm <-  weighted.mean(c(rja_nirv_2018[i,1], rja_nirv_2019[i,1], rja_nirv_2020[i,1], rja_nirv_2021[i,1]),
+                                   c(rja_nirv_2018[i,5], rja_nirv_2019[i,5], rja_nirv_2020[i,5], rja_nirv_2021[i,5]),
+                                   na.rm = TRUE)
+  
   if (i == 1) {
     k67_sif_cor <- k67_sif_cor_wm
     rja_sif_cor <- rja_sif_cor_wm
+    k67_nirv <- k67_nirv_wm
+    rja_nirv <- rja_nirv_wm
   } else {
     k67_sif_cor <- c(k67_sif_cor, k67_sif_cor_wm)
     rja_sif_cor <- c(rja_sif_cor, rja_sif_cor_wm)
+    k67_nirv <- c(k67_nirv, k67_nirv_wm)
+    rja_nirv <- c(rja_nirv, rja_nirv_wm)
   }
 }
+
+
+### PLOTTING ####
 
 plot(k34_sif_cor, type = "l", main = "K34")
 par(new = TRUE)
 plot(k34_pc, type = "l", col = "red")
-# par(new = TRUE)
-# plot(k34_evi, type = "l", col = "green")
-# par(new = TRUE)
-# plot(k34_lai, type = "l", col = "yellow")
+par(new = TRUE)
+plot(k34_nirv, type = "l", col = "blue")
 
 plot(c(2, 4, 5, seq(7,12)), cax_pc, type = "l", xlim = c(1,12), col = "red", main = "CAX")
 par(new = TRUE)
@@ -327,11 +369,159 @@ plot(cax_sif_cor, type = "l")
 plot(k67_sif_cor, type = "l", main = "K67")
 par(new = TRUE)
 plot(k67_pc, type = "l", col = "red")
-# par(new = TRUE)
-# plot(k67_evi, type = "l", col = "green")
-# par(new = TRUE)
-# plot(k67_lai, type = "l", col = "yellow")
+par(new = TRUE)
+plot(k67_nirv, type = "l", col = "blue")
 
 plot(seq(2,11), rja_pc, type = "l", xlim = c(1,12), col = "red", main = "RJA")
 par(new = TRUE)
 plot(rja_sif_cor, type = "l")
+par(new = TRUE)
+plot(rja_nirv, type = "l", col = "blue")
+
+
+#### Plot ####
+mag.cols  <- magma(7)
+vir.cols  <- viridis(7)
+y_sif     <- c(0.2, 0.7)
+y_gep     <- c(4, 13)
+y_pc_k34  <- c(0.012, 0.03)
+y_pc_k67  <- c(0.010, 0.028)
+y_pc_cax  <- c(0.014, 0.032)
+y_pc_rja  <- c(0.010, 0.028)
+y_lab_sif <- bquote("Daily Average SIF (mW/m"^"2"*"/sr/nm)")
+y_lab_gep <- bquote("GEP (gC m"^"-2"*"day"^"-1")
+y_lab_pc  <- bquote("GEP (mol CO"[2]*"/mol photons)")
+x_lab     <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
+# y_pc     <- c(min(k34_pc, k67_pc, cax_pc, rja_pc),
+#               max(k34_pc, k67_pc, cax_pc, rja_pc))
+# y_gep    <- c(min(k34_gep, k67_gep, cax_gep, rja_gep),
+#               max(k34_gep, k67_gep, cax_gep, rja_gep))
+
+cairo_pdf(out_name, width = 7.5, height = 4.25)
+
+par(mfrow = c(2, 2), oma=c(2.5,2.75,0,3), bg = "black")
+
+### K34 ###
+op <- par(mar = c(0,0.5,2,4.5), bg = "black")
+
+plot(NULL, xlim = c(1,12), ylim = y_sif, axes = FALSE, xaxs="i")
+mtext(3, text = "K34", col = "white")
+
+# Shaded area
+rect(8, 0, 9, 1, col = rgb(0.30,0.30,0.30), border = NA)
+box(col = "white")
+
+# Add data
+lines(k34_sif_cor, col = mag.cols[4], type = "b", lwd = 2, pch = 16)
+axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[4], col = mag.cols[4], las = 2)
+
+par(new = TRUE)
+plot(k34_gep, ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 2, type = "b", lwd = 2, pch = 15)
+axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[5], col = vir.cols[5], las = 2)
+
+par(new = TRUE)
+plot(k34_pc, ylim = y_pc_k34, col = vir.cols[7], axes = FALSE, xaxs="i", lty = 3, type = "b", lwd = 2, pch = 17)
+axis(4, tck = 0.06, at = seq(min(y_pc_k34), max(y_pc_k34), by = 0.004),
+     mgp=c(3, 0.2, 0), col.axis = vir.cols[7], col = vir.cols[7], las = 2, line = 2)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white", col = "white")
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
+
+legend("topleft", legend = c("SIF", "GEP", "PC"), horiz = TRUE,
+       col = c(mag.cols[4], vir.cols[5], vir.cols[7]), lty = c(1,2,3), pch = c(16, 15, 17), lwd = c(2,2,2),
+       box.col = "transparent", bg = "transparent", text.col = "white", cex = 0.85)
+
+### K67 ###
+op <- par(mar = c(0,0.5,2,4.5), bg = "black")
+
+plot(NULL, xlim = c(1,12), ylim = y_sif, axes = FALSE, xaxs="i")
+mtext(3, text = "K67", col = "white")
+
+# Shaded area
+rect(7, 0, 11, 1, col = rgb(0.30,0.30,0.30), border = NA)
+box(col = "white")
+
+# Add data
+lines(k67_sif_cor, col = mag.cols[4], type = "b", lwd = 2, pch = 16)
+axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[4], col = mag.cols[4], las = 2, labels = FALSE)
+
+par(new = TRUE)
+plot(k67_gep, ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 2, type = "b", lwd = 2, pch = 15)
+axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[5], col = vir.cols[5], las = 2)
+
+par(new = TRUE)
+plot(k67_pc, ylim = y_pc_k67, col = vir.cols[7], axes = FALSE, xaxs="i", lty = 3, type = "b", lwd = 2, pch = 17)
+axis(4, tck = 0.06, at = seq(min(y_pc_k67), max(y_pc_k67), by = 0.004),
+     mgp=c(3, 0.2, 0), col.axis = vir.cols[7], col = vir.cols[7], las = 2, line = 2)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white", col = "white")
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
+
+
+### CAX ###
+op <- par(mar = c(0,0.5,2,4.5), bg = "black")
+
+plot(NULL, xlim = c(1,12), ylim = y_sif, axes = FALSE, xaxs="i")
+mtext(3, text = "CAX", col = "white")
+
+# Shaded area
+rect(8, 0, 11, 1, col = rgb(0.30,0.30,0.30), border = NA)
+box(col = "white")
+
+# Add data
+lines(cax_sif_cor, col = mag.cols[4], type = "b", lwd = 2, pch = 16)
+axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[4], col = mag.cols[4], las = 2)
+
+par(new = TRUE)
+plot(c(2, 4, 5, seq(7,12)), cax_gep, xlim = c(1,12), ylim = y_gep, col = vir.cols[5],
+     axes = FALSE, xaxs="i", lty = 2, type = "b", lwd = 2, pch = 15)
+axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[5], col = vir.cols[5], las = 2)
+
+par(new = TRUE)
+plot(c(2, 4, 5, seq(7,12)), cax_pc, xlim = c(1,12), ylim = y_pc_cax, col = vir.cols[7],
+     axes = FALSE, xaxs="i", lty = 3, type = "b", lwd = 2, pch = 17)
+axis(4, tck = 0.06, at = seq(min(y_pc_cax), max(y_pc_cax), by = 0.004),
+     mgp=c(3, 0.2, 0), col.axis = vir.cols[7], col = vir.cols[7], las = 2, line = 2)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white", col = "white")
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12), col.axis = "white", col = "white")
+
+
+### RJA ###
+op <- par(mar = c(0,0.5,2,4.5), bg = "black")
+
+plot(NULL, xlim = c(1,12), ylim = y_sif, axes = FALSE, xaxs="i")
+mtext(3, text = "RJA", col = "white")
+
+# Shaded area
+rect(5, 0, 9, 1, col = rgb(0.30,0.30,0.30), border = NA)
+box(col = "white")
+
+# Add data
+lines(rja_sif_cor, col = mag.cols[4], type = "b", lwd = 2, pch = 16)
+axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[4], col = mag.cols[4], las = 2, labels = FALSE)
+
+par(new = TRUE)
+plot(seq(2,11), rja_gep, xlim = c(1,12), ylim = y_gep, col = vir.cols[5],
+     axes = FALSE, xaxs="i", lty = 2, type = "b", lwd = 2, pch = 15)
+axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[5], col = vir.cols[5], las = 2)
+
+par(new = TRUE)
+plot(seq(2,11), rja_pc, xlim = c(1,12), ylim = y_pc_rja, col = vir.cols[7],
+     axes = FALSE, xaxs="i", lty = 3, type = "b", lwd = 2, pch = 17)
+axis(4, tck = 0.06, at = seq(min(y_pc_rja), max(y_pc_rja), by = 0.004),
+     mgp=c(3, 0.2, 0), col.axis = vir.cols[7], col = vir.cols[7], las = 2, line = 2)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white", col = "white")
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12), col.axis = "white", col = "white")
+
+
+# Margins
+mtext(1, text = "Month of Year", col = "white", line = 1.5, outer = TRUE)
+mtext(2, text = y_lab_sif, col = mag.cols[4], line = 1, outer = TRUE)
+mtext(4, text = y_lab_gep, col = vir.cols[5], line = 0.5, outer = TRUE)
+mtext(4, text = y_lab_pc, col = vir.cols[7], line = 2, outer = TRUE)
+
+dev.off()
