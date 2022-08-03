@@ -692,7 +692,7 @@ y_pc_cax   <- c(0.014, 0.032)
 y_pc_rja   <- c(0.010, 0.028)
 y_lab_sif  <- bquote("Daily Average SIF (mW/m"^"2"*"/sr/nm)")
 y_lab_nirv <- bquote("NIRv")
-y_lab_gep  <- bquote("GEP (gC m"^"-2"*"day"^"-1")
+y_lab_gep  <- bquote("GEP (gC m"^"-2"*"day"^"-1"*")")
 y_lab_pc   <- bquote("PC (mol CO"[2]*"/mol photons)")
 x_lab      <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
 
