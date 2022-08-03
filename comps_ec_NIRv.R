@@ -847,9 +847,76 @@ pc_cat   <- c(k34_pc, cax_pc_na, k67_pc, rja_pc_na)
 gep_cat  <- c(k34_gep, cax_gep_na, k67_gep, rja_gep_na)
 nirv_cat <- c(k34_nirv, cax_nirv, k67_nirv, rja_nirv)
 
+# All
 sif_pc_reg   <- lm(sif_cat~pc_cat)
 sif_gep_reg  <- lm(sif_cat~gep_cat)
 sif_nirv_reg <- lm(sif_cat~nirv_cat)
+
+nirv_pc_reg   <- lm(nirv_cat~pc_cat)
+nirv_gep_reg  <- lm(nirv_cat~gep_cat)
+
+
 summary(sif_pc_reg)
 summary(sif_gep_reg)
 summary(sif_nirv_reg)
+
+summary(nirv_gep_reg)
+summary(nirv_pc_reg)
+
+# K34
+k34_sif_pc_reg   <- lm(k34_sif_cor~k34_pc)
+k34_sif_gep_reg  <- lm(k34_sif_cor~k34_gep)
+k34_sif_nirv_reg <- lm(k34_sif_cor~k34_nirv)
+k34_nirv_pc_reg  <- lm(k34_nirv~k34_pc)
+k34_nirv_gep_reg <- lm(k34_nirv~k34_gep)
+
+
+summary(k34_sif_pc_reg)
+summary(k34_sif_gep_reg)
+summary(k34_sif_nirv_reg)
+summary(k34_nirv_pc_reg)
+summary(k34_nirv_gep_reg)
+
+# K67
+k67_sif_pc_reg   <- lm(k67_sif_cor~k67_pc)
+k67_sif_gep_reg  <- lm(k67_sif_cor~k67_gep)
+k67_sif_nirv_reg <- lm(k67_sif_cor~k67_nirv)
+k67_nirv_pc_reg  <- lm(k67_nirv~k67_pc)
+k67_nirv_gep_reg <- lm(k67_nirv~k67_gep)
+
+
+summary(k67_sif_pc_reg)
+summary(k67_sif_gep_reg)
+summary(k67_sif_nirv_reg)
+summary(k67_nirv_pc_reg)
+summary(k67_nirv_gep_reg)
+
+# CAX
+cax_sif_pc_reg   <- lm(cax_sif_cor~cax_pc_na)
+cax_sif_gep_reg  <- lm(cax_sif_cor~cax_gep_na)
+cax_sif_nirv_reg <- lm(cax_sif_cor~cax_nirv)
+cax_nirv_pc_reg  <- lm(cax_nirv~cax_pc_na)
+cax_nirv_gep_reg <- lm(cax_nirv~cax_gep_na)
+
+
+summary(cax_sif_pc_reg)
+summary(cax_sif_gep_reg)
+summary(cax_sif_nirv_reg)
+summary(cax_nirv_pc_reg)
+summary(cax_nirv_gep_reg)
+
+# RJA
+rja_sif_pc_reg   <- lm(rja_sif_cor~rja_pc_na)
+rja_sif_gep_reg  <- lm(rja_sif_cor~rja_gep_na)
+rja_sif_nirv_reg <- lm(rja_sif_cor~rja_nirv)
+rja_nirv_pc_reg  <- lm(rja_nirv~rja_pc_na)
+rja_nirv_gep_reg <- lm(rja_nirv~rja_gep_na)
+
+
+summary(rja_sif_pc_reg)
+summary(rja_sif_gep_reg)
+summary(rja_sif_nirv_reg)
+summary(rja_nirv_pc_reg)
+summary(rja_nirv_gep_reg)
+
+
