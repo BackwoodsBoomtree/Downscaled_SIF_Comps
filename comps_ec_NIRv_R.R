@@ -2,7 +2,7 @@ library(terra)
 library(ncdf4)
 library(viridis)
 
-out_name    <- "G:/SIF_comps/figs/v2/comps_ec_NIRV_black_v2.pdf"
+out_name    <- "G:/SIF_comps/figs/v2/comps_ec_NIRvR_black_v2.pdf"
 
 k34_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/K34_PC.csv", header = FALSE)[,2] / 10 # my axis when extracting the data was off by a decimal place
 k67_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/K67_PC.csv", header = FALSE)[,2]
@@ -423,31 +423,31 @@ cax_sif_cor_2021 <- get_ts(cax_files_2021, "SIF_Corr_743", "month", c("cloud_fra
 cax_sif_cor_df   <- rbind(cax_sif_cor_2018, cax_sif_cor_2019, cax_sif_cor_2020, cax_sif_cor_2021)
 
 # K34 NIRv
-k34_nirv_2018 <- get_ts(k34_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k34_nirv_2019 <- get_ts(k34_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k34_nirv_2020 <- get_ts(k34_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k34_nirv_2021 <- get_ts(k34_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+k34_nirv_2018 <- get_ts(k34_files_2018, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+k34_nirv_2019 <- get_ts(k34_files_2019, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+k34_nirv_2020 <- get_ts(k34_files_2020, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+k34_nirv_2021 <- get_ts(k34_files_2021, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
 k34_nirv_df   <- rbind(k34_nirv_2018, k34_nirv_2019, k34_nirv_2020, k34_nirv_2021)
 
 # K67 NIRv
-k67_nirv_2018 <- get_ts(k67_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k67_nirv_2019 <- get_ts(k67_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k67_nirv_2020 <- get_ts(k67_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k67_nirv_2021 <- get_ts(k67_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+k67_nirv_2018 <- get_ts(k67_files_2018, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+k67_nirv_2019 <- get_ts(k67_files_2019, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+k67_nirv_2020 <- get_ts(k67_files_2020, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+k67_nirv_2021 <- get_ts(k67_files_2021, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
 k67_nirv_df   <- rbind(k67_nirv_2018, k67_nirv_2019, k67_nirv_2020, k67_nirv_2021)
 
 # RJA NIRv
-rja_nirv_2018 <- get_ts(rja_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-rja_nirv_2019 <- get_ts(rja_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-rja_nirv_2020 <- get_ts(rja_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-rja_nirv_2021 <- get_ts(rja_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+rja_nirv_2018 <- get_ts(rja_files_2018, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+rja_nirv_2019 <- get_ts(rja_files_2019, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+rja_nirv_2020 <- get_ts(rja_files_2020, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+rja_nirv_2021 <- get_ts(rja_files_2021, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
 rja_nirv_df   <- rbind(rja_nirv_2018, rja_nirv_2019, rja_nirv_2020, rja_nirv_2021)
 
 # CAX NIRv
-cax_nirv_2018 <- get_ts(cax_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-cax_nirv_2019 <- get_ts(cax_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-cax_nirv_2020 <- get_ts(cax_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-cax_nirv_2021 <- get_ts(cax_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+cax_nirv_2018 <- get_ts(cax_files_2018, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+cax_nirv_2019 <- get_ts(cax_files_2019, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+cax_nirv_2020 <- get_ts(cax_files_2020, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
+cax_nirv_2021 <- get_ts(cax_files_2021, "NIRv_RAD", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
 cax_nirv_df   <- rbind(cax_nirv_2018, cax_nirv_2019, cax_nirv_2020, cax_nirv_2021)
 
 #### when including 2018, which I opted not to do ####
@@ -684,14 +684,14 @@ plot(rja_nirv, type = "l", col = "blue")
 mag.cols   <- magma(7)
 vir.cols   <- viridis(7)
 y_sif      <- c(0.2, 0.7)
-y_nirv     <- c(0.13, 0.20)
+y_nirv     <- c(40, 70)
 y_gep      <- c(4, 13)
 y_pc_k34   <- c(0.014, 0.032)
 y_pc_k67   <- c(0.010, 0.028)
 y_pc_cax   <- c(0.014, 0.032)
 y_pc_rja   <- c(0.010, 0.028)
 y_lab_sif  <- bquote("Daily Average SIF (mW/m"^"2"*"/sr/nm)")
-y_lab_nirv <- bquote("NIRv"[Ref])
+y_lab_nirv <- bquote("NIRv"[Rad])
 y_lab_gep  <- bquote("GEP (gC m"^"-2"*"day"^"-1"*")")
 y_lab_pc   <- bquote("PC (mol CO"[2]*"/mol photons)")
 x_lab      <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
@@ -707,12 +707,12 @@ plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
 mtext(3, text = "K34", col = "white")
 
 # Shaded area
-rect(8, 0, 9, 1, col = rgb(0.30,0.30,0.30), border = NA)
+rect(8, 0, 9, 100, col = rgb(0.30,0.30,0.30), border = NA)
 box(col = "white")
 
 # Add data
-lines(k34_nirv, col = mag.cols[5], type = "o", lwd = 1, pch = 4)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[5], col = mag.cols[5], las = 2)
+lines(k34_nirv, col = mag.cols[6], type = "o", lwd = 1, pch = 4)
+axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[6], col = mag.cols[6], las = 2)
 
 par(new = TRUE)
 plot(k34_gep, ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15)
@@ -730,13 +730,13 @@ axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white",
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
 
 legend("topleft", legend = c("SIF", "NIRv", "GEP", "PC"), horiz = TRUE,
-       col = c(mag.cols[4], mag.cols[5], vir.cols[5], vir.cols[7]), lty = c(1,1,1,1), pch = c(16, 4, 15, 17), lwd = c(1,1,1,1),
+       col = c(mag.cols[4], mag.cols[6], vir.cols[5], vir.cols[7]), lty = c(1,1,1,1), pch = c(16, 4, 15, 17), lwd = c(1,1,1,1),
        box.col = "transparent", bg = "transparent", text.col = "white", cex = 0.85)
 
 # Margins
 mtext(1, text = "Month of Year", col = "white", line = 1.5, outer = TRUE)
 mtext(2, text = y_lab_sif, col = mag.cols[4], line = 5.1, outer = TRUE)
-mtext(2, text = y_lab_nirv, col = mag.cols[5], line = 1.6, outer = TRUE)
+mtext(2, text = y_lab_nirv, col = mag.cols[6], line = 1.6, outer = TRUE)
 
 
 ### CAX ###
@@ -746,12 +746,12 @@ plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
 mtext(3, text = "CAX", col = "white")
 
 # Shaded area
-rect(8, 0, 11, 1, col = rgb(0.30,0.30,0.30), border = NA)
+rect(8, 0, 11, 100, col = rgb(0.30,0.30,0.30), border = NA)
 box(col = "white")
 
 # Add data
-lines(cax_nirv, col = mag.cols[5], type = "o", lwd = 1, pch = 4)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[5], col = mag.cols[5], las = 2, labels = FALSE)
+lines(cax_nirv, col = mag.cols[6], type = "o", lwd = 1, pch = 4)
+axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[6], col = mag.cols[6], las = 2, labels = FALSE)
 
 par(new = TRUE)
 plot(c(2, 4, 5, seq(7,12)), cax_gep, xlim = c(1,12), ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15)
@@ -779,12 +779,12 @@ plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
 mtext(3, text = "K67", col = "white")
 
 # Shaded area
-rect(7, 0, 11, 1, col = rgb(0.30,0.30,0.30), border = NA)
+rect(7, 0, 11, 100, col = rgb(0.30,0.30,0.30), border = NA)
 box(col = "white")
 
 # Add data
-lines(k67_nirv, col = mag.cols[5], type = "o", lwd = 1, pch = 4)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[5], col = mag.cols[5], las = 2)
+lines(k67_nirv, col = mag.cols[6], type = "o", lwd = 1, pch = 4)
+axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[6], col = mag.cols[6], las = 2)
 
 par(new = TRUE)
 plot(k67_gep, ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15)
@@ -810,12 +810,12 @@ plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
 mtext(3, text = "RJA", col = "white")
 
 # Shaded area
-rect(5, 0, 9, 1, col = rgb(0.30,0.30,0.30), border = NA)
+rect(5, 0, 9, 100, col = rgb(0.30,0.30,0.30), border = NA)
 box(col = "white")
 
 # Add data
-lines(rja_nirv, col = mag.cols[5], type = "o", lwd = 1, pch = 4)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[5], col = mag.cols[5], las = 2, labels = FALSE)
+lines(rja_nirv, col = mag.cols[6], type = "o", lwd = 1, pch = 4)
+axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[6], col = mag.cols[6], las = 2, labels = FALSE)
 
 par(new = TRUE)
 plot(seq(2,11), rja_gep, xlim = c(1,12), ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15)
@@ -851,7 +851,6 @@ nirv_cat <- c(k34_nirv, cax_nirv, k67_nirv, rja_nirv)
 sif_pc_reg   <- lm(sif_cat~pc_cat)
 sif_gep_reg  <- lm(sif_cat~gep_cat)
 sif_nirv_reg <- lm(sif_cat~nirv_cat)
-
 nirv_pc_reg   <- lm(nirv_cat~pc_cat)
 nirv_gep_reg  <- lm(nirv_cat~gep_cat)
 
@@ -859,7 +858,6 @@ nirv_gep_reg  <- lm(nirv_cat~gep_cat)
 summary(sif_pc_reg)
 summary(sif_gep_reg)
 summary(sif_nirv_reg)
-
 summary(nirv_gep_reg)
 summary(nirv_pc_reg)
 

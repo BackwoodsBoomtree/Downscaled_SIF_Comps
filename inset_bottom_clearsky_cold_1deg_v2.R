@@ -26,11 +26,11 @@ round2 <- function(x, n) {
 
 
 ### Data
-cs_nirv_r2  <- raster("G:/SIF_comps/figs/raster_regressions/TROPOMI_SIF743_vs_NIRv_monthly_1deg_clearsky_n30_2018-2021_Rsquare.tif")
-cs_nirvr_r2 <- raster("G:/SIF_comps/figs/raster_regressions/TROPOMI_SIF743_vs_NIRv_RAD_monthly_1deg_clearsky_n30_2018-2021_Rsquare.tif")
+cs_nirv_r2  <- raster("G:/SIF_comps/figs/raster_regressions/clearsky_cold/TROPOMI_SIF743_vs_NIRv_monthly_1deg_clearsky_cold_n30_2018-2021_Rsquare.tif")
+cs_nirvr_r2 <- raster("G:/SIF_comps/figs/raster_regressions/clearsky_cold/TROPOMI_SIF743_vs_NIRv_RAD_monthly_1deg_clearsky_cold_n30_2018-2021_Rsquare.tif")
 
-cs_nirv_n   <- raster("G:/SIF_comps/figs/raster_regressions/TROPOMI_SIF743_vs_NIRv_monthly_1deg_clearsky_n30_2018-2021_Nobs.tif")
-cs_nirvr_n  <- raster("G:/SIF_comps/figs/raster_regressions/TROPOMI_SIF743_vs_NIRv_RAD_monthly_1deg_clearsky_n30_2018-2021_Nobs.tif")
+cs_nirv_n   <- raster("G:/SIF_comps/figs/raster_regressions/clearsky_cold/TROPOMI_SIF743_vs_NIRv_monthly_1deg_clearsky_cold_n30_2018-2021_Nobs.tif")
+cs_nirvr_n  <- raster("G:/SIF_comps/figs/raster_regressions/clearsky_cold/TROPOMI_SIF743_vs_NIRv_RAD_monthly_1deg_clearsky_cold_n30_2018-2021_Nobs.tif")
 
 ### Mask out by n
 cs_nirv_n[cs_nirv_n < 40]   <- NA
