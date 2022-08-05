@@ -123,7 +123,7 @@ text(172, 30, "e", col = "white")
 
 plot(cs_nirv_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend.shrink=0.75,
      legend.args = list(text=expression(paste("R"^"2")), side = 1, line = -1.65, cex=0.75, col = "white"),
-     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0.01,0.5,0.97), labels=c("0","0.5","1.0"), col.axis = "white"),
+     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0.01,0.5,0.95), labels=c("0","0.5","1.0"), col.axis = "white"),
      smallplot=c(0.40,0.90,0.2,0.25)); par(mar = par("mar"))
 
 par(new=TRUE)
@@ -159,7 +159,7 @@ text(172, 30, "h", col = "white")
 
 plot(cs_nirvr_r2, legend.only=TRUE, col=r2.col, horizontal=T, legend.width=2, legend.shrink=0.75,
      legend.args = list(text=expression(paste("R"^"2")), side = 1, line = -1.65, cex=0.75, col = "white"),
-     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0.01,0.5,0.97), labels=c("0","0.5","1.0"), col.axis = "white"),
+     axis.args = list(line = -1.05, cex.axis=1,tick=F, at=c(0.01,0.5,0.94), labels=c("0","0.5","1.0"), col.axis = "white"),
      smallplot=c(0.40,0.90,0.2,0.25)); par(mar = par("mar"))
 
 par(new=TRUE)

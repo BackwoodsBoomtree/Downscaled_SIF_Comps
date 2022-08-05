@@ -97,7 +97,7 @@ plot(cs_nirvr_r2, col=r2.col, axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F
 plot(coastlines, border = NA, col = rgb(0.30,0.30,0.30), xaxs="i", yaxs="i", add = TRUE)
 plot(cs_nirvr_r2, col=r2.col, axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, add = TRUE, ext = samerica_ext)
 box(col = "white")
-mtext(3, text="c", col = "white", line = 0.25, adj = 0)
+mtext(3, text="f", col = "white", line = 0.25, adj = 0)
 
 ### Africa ###
 
@@ -107,7 +107,7 @@ plot(cs_nirvr_r2, col=r2.col, axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F
 plot(coastlines, border = NA, col = rgb(0.30,0.30,0.30), xaxs="i", yaxs="i", add = TRUE)
 plot(cs_nirvr_r2, col=r2.col, axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, ext = africa_ext, add = TRUE)
 box(col = "white")
-mtext(3, text="d", col = "white", line = 0.25, adj = 0)
+mtext(3, text="g", col = "white", line = 0.25, adj = 0)
 
 ### SE Asia ###
 
@@ -117,7 +117,7 @@ plot(cs_nirvr_r2, col=r2.col, axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F
 plot(coastlines, border = NA, col = rgb(0.30,0.30,0.30), xaxs="i", yaxs="i", add = TRUE)
 plot(cs_nirvr_r2, col=r2.col, axes=F, xaxs="i", yaxs="i", horizontal=T, legend=F, add = TRUE)
 box(col = "white")
-mtext(3, text="e", col = "white", line = 0.25, adj = 0)
+mtext(3, text="h", col = "white", line = 0.25, adj = 0)
 
 dev.off()
 
