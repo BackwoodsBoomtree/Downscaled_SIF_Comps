@@ -5,7 +5,7 @@ library(RColorBrewer)
 
 options(scipen=999)
 
-out_name <- "G:/SIF_comps/figs/v2/Downscale_SIF_vs_TROPOSIF_black_v2.pdf"
+out_name <- "G:/SIF_comps/figs/v2/Downscale_SIF_vs_TROPOSIF_clearsky_black_v2.pdf"
 
 #### Load Map ####
 
@@ -60,13 +60,13 @@ col_list <- function(x) {
 }
 
 ### Data
-gosif_r2    <- raster("G:/SIF_comps/figs/raster_regressions/CF80/gosif/TROPOMI_SIF_Corr_vs_GOSIF_1deg_CF80_2019-2020_Rsquare.tif")
-csif_r2     <- raster("G:/SIF_comps/figs/raster_regressions/CF80/csif/TROPOMI_SIF_Corr_vs_CSIF_1deg_CF80_2019-2020_Rsquare.tif")
-sunsif_r2   <- raster("G:/SIF_comps/figs/raster_regressions/CF80/sun_global/TROPOMI_SIF_Corr_vs_Sun_SIF_1deg_CF80_2019-2020_Rsquare.tif")
+gosif_r2    <- raster("G:/SIF_comps/figs/raster_regressions/clearsky/gosif/TROPOMI_SIF_Corr_vs_GOSIF_1deg_clearsky_2019-2020_Rsquare.tif")
+csif_r2     <- raster("G:/SIF_comps/figs/raster_regressions/clearsky/csif/TROPOMI_SIF_Corr_vs_CSIF_1deg_clearsky_2019-2020_Rsquare.tif")
+sunsif_r2   <- raster("G:/SIF_comps/figs/raster_regressions/clearsky/sun_global/TROPOMI_SIF_Corr_vs_Sun_SIF_1deg_clearsky_2019-2020_Rsquare.tif")
 
-gosif_pval  <- raster("G:/SIF_comps/figs/raster_regressions/CF80/gosif/TROPOMI_SIF_Corr_vs_GOSIF_1deg_CF80_2019-2020_Pval.tif")
-csif_pval   <- raster("G:/SIF_comps/figs/raster_regressions/CF80/csif/TROPOMI_SIF_Corr_vs_CSIF_1deg_CF80_2019-2020_Pval.tif")
-sunsif_pval <- raster("G:/SIF_comps/figs/raster_regressions/CF80/sun_global/TROPOMI_SIF_Corr_vs_Sun_SIF_1deg_CF80_2019-2020_Pval.tif")
+gosif_pval  <- raster("G:/SIF_comps/figs/raster_regressions/clearsky/gosif/TROPOMI_SIF_Corr_vs_GOSIF_1deg_clearsky_2019-2020_Pval.tif")
+csif_pval   <- raster("G:/SIF_comps/figs/raster_regressions/clearsky/csif/TROPOMI_SIF_Corr_vs_CSIF_1deg_clearsky_2019-2020_Pval.tif")
+sunsif_pval <- raster("G:/SIF_comps/figs/raster_regressions/clearsky/sun_global/TROPOMI_SIF_Corr_vs_Sun_SIF_1deg_clearsky_2019-2020_Pval.tif")
 
 # Mask rasters by veg
 m  <- raster("G:/SIF_comps/veg_mask/max.monthly.ndvi.1deg.tif") # Veg mask
