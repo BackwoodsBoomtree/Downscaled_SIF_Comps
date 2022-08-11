@@ -168,8 +168,8 @@ get_ts  <- function(df_f, variable, time, filters, threshs, direct) {
 }
 
 #### Tropics ####
-out_dir    <- "G:/SIF_comps/csv/tropics"
-out_name   <- "/Tropics_2019-2021_"
+out_dir    <- "G:/SIF_comps/csv/tropics/monthly"
+out_name   <- "/Tropics_2019-2021_monthly_"
 files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/tropics/2019", 2019, "month")
 files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/tropics/2020", 2020, "month")
 files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/tropics/2021", 2021, "month")
@@ -350,8 +350,8 @@ write.csv(ts_sif_nirv_cf_cold, paste0(out_dir, out_name, "sif_nirv_cf_cold.csv")
 # write.csv(ts_nir_cf_cold, paste0(out_dir, out_name, "nir_cf_cold.csv"), row.names = FALSE)
 
 #### Amazon ####
-out_dir    <- "G:/SIF_comps/csv/amazon"
-out_name   <- "/Amazon_2019-2021_"
+out_dir    <- "G:/SIF_comps/csv/amazon/monthly"
+out_name   <- "/Amazon_2019-2021_monthly_"
 files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/amazon/2019", 2019, "month")
 files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/amazon/2020", 2020, "month")
 files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/amazon/2021", 2021, "month")
@@ -532,8 +532,8 @@ write.csv(ts_sif_nirv_cf_cold, paste0(out_dir, out_name, "sif_nirv_cf_cold.csv")
 # write.csv(ts_nir_cf_cold, paste0(out_dir, out_name, "nir_cf_cold.csv"), row.names = FALSE)
 
 #### Africa ####
-out_dir    <- "G:/SIF_comps/csv/africa"
-out_name   <- "/Africa_2019-2021_"
+out_dir    <- "G:/SIF_comps/csv/africa/monthly"
+out_name   <- "/Africa_2019-2021_monthly_"
 files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/africa/2019", 2019, "month")
 files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/africa/2020", 2020, "month")
 files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/africa/2021", 2021, "month")
@@ -714,8 +714,8 @@ write.csv(ts_sif_nirv_cf_cold, paste0(out_dir, out_name, "sif_nirv_cf_cold.csv")
 # write.csv(ts_nir_cf_cold, paste0(out_dir, out_name, "nir_cf_cold.csv"), row.names = FALSE)
 
 #### SEAsia ####
-out_dir    <- "G:/SIF_comps/csv/seasia"
-out_name   <- "/SEAsia_2019-2021_"
+out_dir    <- "G:/SIF_comps/csv/seasia/monthly"
+out_name   <- "/SEAsia_2019-2021_monthly_"
 files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/seasia/2019", 2019, "month")
 files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/seasia/2020", 2020, "month")
 files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/seasia/2021", 2021, "month")
