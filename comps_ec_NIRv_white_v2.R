@@ -34,13 +34,13 @@ get_annual_means <- function(ts_data) {
   return(means)
 }
 
-k34_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K34_2001-2004_monthly_EVI.csv", header = TRUE)[,1]) / 10000
-k67_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K67_2001-2004_monthly_EVI.csv", header = TRUE)[,1]) / 10000
+k34_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K34_2001-2006_monthly_EVI.csv", header = TRUE)[,1]) / 10000
+k67_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K67_2002-2005_2009-2011_monthly_EVI.csv", header = TRUE)[,1]) / 10000
 rja_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/RJA_2001-2002_monthly_EVI.csv", header = TRUE)[,1]) / 10000
 cax_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/CAX_2001-2003_monthly_EVI.csv", header = TRUE)[,1]) / 10000
 
-k34_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K34_2001-2004_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
-k67_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K67_2001-2004_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
+k34_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K34_2001-2006_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
+k67_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K67_2002-2005_2009-2011_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
 rja_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/RJA_2001-2002_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
 cax_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/CAX_2001-2003_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
 
