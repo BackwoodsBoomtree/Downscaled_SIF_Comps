@@ -2,7 +2,7 @@ library(terra)
 library(ncdf4)
 library(viridis)
 
-out_name    <- "G:/SIF_comps/figs/v2/comps_ec_NIRV_mod_black_v2.pdf"
+out_name    <- "G:/SIF_comps/figs/v2/comps_ec_NIRV_mod_white_v2.pdf"
 
 # Data from Wu paper
 
@@ -24,6 +24,8 @@ k67_wu_evi <- read.csv("G:/SIF_comps/figs/Wu_2016/K67_EVI.csv", header = FALSE)[
 
 k34_wu_par <- read.csv("G:/SIF_comps/figs/Wu_2016/K34_PAR.csv", header = FALSE)[,2]
 k67_wu_par <- read.csv("G:/SIF_comps/figs/Wu_2016/K67_PAR.csv", header = FALSE)[,2]
+rja_wu_par <- read.csv("G:/SIF_comps/figs/Wu_2016/RJA_PAR.csv", header = FALSE)[,2]
+cax_wu_par <- read.csv("G:/SIF_comps/figs/Wu_2016/CAX_PAR.csv", header = FALSE)[,2]
 
 # MCD43C4 data
 get_annual_means <- function(ts_data) {
@@ -702,157 +704,268 @@ plot(rja_mod_nirv, type = "l", col = "blue")
 
 
 #### Plot ####
-mag.cols   <- magma(7)
-vir.cols   <- viridis(7)
+inf.cols   <- inferno(11)
+vir.cols   <- viridis(11)
+sif.col    <- vir.cols[3]
+gep.col    <- vir.cols[7]
+pc.col     <- vir.cols[5]
+nirv.col   <- inf.cols[3]
+par.col    <- inf.cols[7]
+pre.col    <- inf.cols[5]
 y_sif      <- c(0.2, 0.7)
-y_nirv     <- c(0.24, 0.34)
+y_nirv     <- c(0.22, 0.36)
 y_gep      <- c(4, 13)
 y_pc_k34   <- c(0.014, 0.032)
 y_pc_k67   <- c(0.010, 0.028)
 y_pc_cax   <- c(0.014, 0.032)
 y_pc_rja   <- c(0.010, 0.028)
-y_lab_sif  <- bquote("Daily Average SIF (mW/m"^"2"*"/sr/nm)")
+y_par      <- c(200, 500)
+y_pre      <- c(0, 400)
+y_lab_sif  <- bquote("SIF"[Daily]*" (mW/m"^"2"*"/sr/nm)")
 y_lab_nirv <- bquote("NIRv"[Ref])
 y_lab_gep  <- bquote("GEP (gC m"^"-2"*"day"^"-1"*")")
-y_lab_pc   <- bquote("PC (mol CO"[2]*"/mol photons)")
+y_lab_pc   <- bquote("PC (mol CO"[2]*"/mol γ)")
+y_lab_par  <- bquote("PAR (µmol m"^"-2"*"s"^"-1"*")")
+y_lab_pre  <- bquote("Precipitation (mm)")
 x_lab      <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
 
-cairo_pdf(out_name, width = 7.5, height = 4.25)
+cairo_pdf(out_name, width = 10, height = 3.75)
 
-par(mfrow = c(2, 2), oma=c(2.5,6.75,0,4.25), bg = "black")
+par(mfrow = c(2, 4), oma=c(2.5,3.75,0,7.5))
 
-### K34 ###
-op <- par(mar = c(0,0.25,2,2.25), bg = "black")
+#### FIRST ROW ####
+### K67 ###
+op <- par(mar = c(0,0.25,1.5,1.25))
 
 plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
-mtext(3, text = "K34", col = "white")
+mtext(3, text = "K67")
 
 # Shaded area
-rect(8, 0, 9, 1, col = rgb(0.30,0.30,0.30), border = NA)
-box(col = "white")
+rect(7, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
+box()
 
 # Add data
-lines(k34_mod_nirv, col = mag.cols[5], type = "o", lwd = 1, pch = 4, cex = 0.5)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[5], col = mag.cols[5], las = 2)
+par(new = TRUE)
+plot(k67_sif_cor, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sif.col, col = sif.col, las = 2)
 
 par(new = TRUE)
-plot(k34_gep, ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.5)
-axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[5], col = vir.cols[5], las = 2, labels = FALSE)
+plot(k67_gep, ylim = y_gep, col = gep.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = gep.col, col = gep.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(k34_pc, ylim = y_pc_k34, col = vir.cols[7], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.5)
-axis(4, tck = 0.06, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = vir.cols[7], col = vir.cols[7], las = 2, line = 1)
+plot(k67_pc, ylim = y_pc_k67, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 1)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+
+legend("topleft", legend = c("SIF", "GEP", "PC"), horiz = TRUE,
+       col = c(sif.col, gep.col, pc.col), lty = c(1,1,1), pch = c(16, 15, 17), lwd = c(1,1,1),
+       box.col = "transparent", bg = "transparent")
+
+mtext(2, text = y_lab_sif, col = sif.col, line = 1.8)
+
+
+### K34 ###
+op <- par(mar = c(0,0.25,1.5,1.25))
+
+plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+mtext(3, text = "K34")
+
+# Shaded area
+rect(8, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
+box()
+
+# Add data
+par(new = TRUE)
+plot(k34_sif_cor, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = sif.col, col = sif.col, las = 2)
 
 par(new = TRUE)
-plot(k34_sif_cor, ylim = y_sif, col = mag.cols[4], axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.5)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[4], col = mag.cols[4], las = 2, line = 4)
+plot(k34_gep, ylim = y_gep, col = gep.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = gep.col, col = gep.col, las = 2, labels = FALSE)
 
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white", col = "white")
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
+par(new = TRUE)
+plot(k34_pc, ylim = y_pc_k34, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 1)
 
-legend("topleft", legend = c("SIF", "NIRv", "GEP", "PC"), horiz = TRUE,
-       col = c(mag.cols[4], mag.cols[5], vir.cols[5], vir.cols[7]), lty = c(1,1,1,1), pch = c(16, 4, 15, 17), lwd = c(1,1,1,1),
-       box.col = "transparent", bg = "transparent", text.col = "white", cex = 0.85)
-
-# Margins
-mtext(1, text = "Month of Year", col = "white", line = 1.5, outer = TRUE)
-mtext(2, text = y_lab_sif, col = mag.cols[4], line = 5.1, outer = TRUE)
-mtext(2, text = y_lab_nirv, col = mag.cols[5], line = 1.6, outer = TRUE)
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
 
 ### CAX ###
-op <- par(mar = c(0,0.25,2,2.25), bg = "black")
+op <- par(mar = c(0,0.25,1.5,1.25))
 
 plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
-mtext(3, text = "CAX", col = "white")
+mtext(3, text = "CAX")
 
 # Shaded area
-rect(8, 0, 11, 1, col = rgb(0.30,0.30,0.30), border = NA)
-box(col = "white")
+rect(8, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
+box()
 
 # Add data
-lines(cax_mod_nirv, col = mag.cols[5], type = "o", lwd = 1, pch = 4, cex = 0.5)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[5], col = mag.cols[5], las = 2, labels = FALSE)
+par(new = TRUE)
+plot(cax_sif_cor, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sif.col, col = sif.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(c(2, 4, 5, seq(7,12)), cax_gep, xlim = c(1,12), ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.5)
-axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[5], col = vir.cols[5], las = 2)
+plot(c(2, 4, 5, seq(7,12)), cax_gep, xlim = c(1,12), ylim = y_gep, col = gep.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = gep.col, col = gep.col, las = 2)
 
 par(new = TRUE)
-plot(c(2, 4, 5, seq(7,12)), cax_pc, xlim = c(1,12), ylim = y_pc_cax, col = vir.cols[7], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.5)
-axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[7], col = vir.cols[7], las = 2, line = 3)
+plot(c(2, 4, 5, seq(7,12)), cax_pc, xlim = c(1,12), ylim = y_pc_cax, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = pc.col, col = pc.col, las = 2, line = 1)
 
-par(new = TRUE)
-plot(cax_sif_cor, ylim = y_sif, col = mag.cols[4], axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.5)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[4], col = mag.cols[4], las = 2, line = 1, labels = FALSE)
-
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white", col = "white")
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
-
-mtext(4, text = y_lab_gep, col = vir.cols[5], line = -0.8, outer = TRUE)
-mtext(4, text = y_lab_pc, col = vir.cols[7], line = 3.35, outer = TRUE)
-
-
-### K67 ###
-op <- par(mar = c(0,0.25,2,2.25), bg = "black")
-
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
-mtext(3, text = "K67", col = "white")
-
-# Shaded area
-rect(7, 0, 11, 1, col = rgb(0.30,0.30,0.30), border = NA)
-box(col = "white")
-
-# Add data
-lines(k67_mod_nirv, col = mag.cols[5], type = "o", lwd = 1, pch = 4, cex = 0.5)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[5], col = mag.cols[5], las = 2)
-
-par(new = TRUE)
-plot(k67_gep, ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.5)
-axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[5], col = vir.cols[5], las = 2, labels = FALSE)
-
-par(new = TRUE)
-plot(k67_pc, ylim = y_pc_k67, col = vir.cols[7], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.5)
-axis(4, tck = 0.06, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = vir.cols[7], col = vir.cols[7], las = 2, line = 1)
-
-par(new = TRUE)
-plot(k67_sif_cor, ylim = y_sif, col = mag.cols[4], axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.5)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[4], col = mag.cols[4], las = 2, line = 4)
-
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white", col = "white")
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
-axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12), col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
 
 ### RJA ###
-op <- par(mar = c(0,0.25,2,2.25), bg = "black")
+op <- par(mar = c(0,0.25,1.5,1.25))
 
 plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
-mtext(3, text = "RJA", col = "white")
+mtext(3, text = "RJA")
 
 # Shaded area
-rect(5, 0, 9, 1, col = rgb(0.30,0.30,0.30), border = NA)
-box(col = "white")
+rect(5, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
+box()
 
 # Add data
-lines(rja_mod_nirv, col = mag.cols[5], type = "o", lwd = 1, pch = 4, cex = 0.5)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[5], col = mag.cols[5], las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(seq(2,11), rja_gep, xlim = c(1,12), ylim = y_gep, col = vir.cols[5], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.5)
-axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[5], col = vir.cols[5], las = 2)
+plot(rja_sif_cor, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sif.col, col = sif.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(seq(2,11), rja_pc, xlim = c(1,12), ylim = y_pc_rja, col = vir.cols[7], axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.5)
-axis(4, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = vir.cols[7], col = vir.cols[7], las = 2, line = 3)
+plot(seq(2,11), rja_gep, xlim = c(1,12), ylim = y_gep, col = gep.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = gep.col, col = gep.col, las = 2)
 
 par(new = TRUE)
-plot(rja_sif_cor, ylim = y_sif, col = mag.cols[4], axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.5)
-axis(2, tck = 0.06, mgp=c(3, 0.2, 0), col.axis = mag.cols[4], col = mag.cols[4], las = 2, line = 1, labels = FALSE)
+plot(seq(2,11), rja_pc, xlim = c(1,12), ylim = y_pc_rja, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 4.5)
 
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2), col.axis = "white", col = "white")
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12), col.axis = "white", col = "white")
-axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12), col.axis = "white", col = "white")
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+
+mtext(4, text = y_lab_gep, col = gep.col, line = 2.75, outer = FALSE)
+mtext(4, text = y_lab_pc, col = pc.col, line = 7.75, outer = FALSE)
+
+#### SECOND ROW ####
+
+### K67 ###
+op <- par(mar = c(0,0.25,1.5,1.25))
+
+plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+
+# Shaded area
+rect(7, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
+box()
+
+# Add data
+lines(k67_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2)
+
+par(new = TRUE)
+plot(k67_wu_par, ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2, labels = FALSE)
+
+par(new = TRUE)
+plot(k67_pc, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 1)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+
+legend("topleft", legend = c("NIRv", "PAR", "Pre"), horiz = TRUE,
+       col = c(nirv.col, par.col, pre.col), lty = c(1,1,1,1), pch = c(4, 15, 17), lwd = c(1,1,1),
+       box.col = "transparent", bg = "transparent")
+
+mtext(2, text = y_lab_nirv, col = nirv.col, line = 2, outer = FALSE)
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
+
+
+### K34 ###
+op <- par(mar = c(0,0.25,1.5,1.25))
+
+plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+
+# Shaded area
+rect(8, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
+box()
+
+# Add data
+lines(k34_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = nirv.col, col = nirv.col, las = 2)
+
+par(new = TRUE)
+plot(k34_wu_par, ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2, labels = FALSE)
+
+par(new = TRUE)
+plot(k34_pc, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 1)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
+
+
+### CAX ###
+op <- par(mar = c(0,0.25,1.5,1.25))
+
+plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+
+# Shaded area
+rect(8, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
+box()
+
+# Add data
+lines(cax_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2, labels = FALSE)
+
+par(new = TRUE)
+plot(c(2, 4, 5, seq(7,12)), cax_wu_par, xlim = c(1,12), ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = par.col, col = par.col, las = 2)
+
+par(new = TRUE)
+plot(c(2, 4, 5, seq(7,12)), cax_pc, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = pre.col, col = pre.col, las = 2, line = 1)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
+
+
+### RJA ###
+op <- par(mar = c(0,0.25,1.5,1.25))
+
+plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+
+# Shaded area
+rect(5, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
+box()
+
+# Add data
+lines(rja_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2, labels = FALSE)
+
+par(new = TRUE)
+plot(seq(2,11), rja_wu_par, xlim = c(1,12), ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2)
+
+par(new = TRUE)
+plot(seq(2,11), rja_pc, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 4.5)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
+
+# Margins
+mtext(1, text = "Month of Year", line = 1.5, outer = TRUE)
+mtext(4, text = y_lab_par, col = par.col, line = 2.75, outer = FALSE)
+mtext(4, text = y_lab_pre, col = pre.col, line = 7.55, outer = FALSE)
 
 dev.off()
 
