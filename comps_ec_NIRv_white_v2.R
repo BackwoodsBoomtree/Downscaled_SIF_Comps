@@ -16,6 +16,11 @@ k67_gep <- read.csv("G:/SIF_comps/figs/Wu_2016/K67_GEP.csv", header = FALSE)[,2]
 rja_gep <- read.csv("G:/SIF_comps/figs/Wu_2016/RJA_GEP.csv", header = FALSE)[,2]
 cax_gep <- read.csv("G:/SIF_comps/figs/Wu_2016/CAX_GEP.csv", header = FALSE)[,2]
 
+k34_pre <- read.csv("G:/SIF_comps/figs/Wu_2016/K34_precip.csv", header = FALSE)[,2]
+k67_pre <- read.csv("G:/SIF_comps/figs/Wu_2016/K67_precip.csv", header = FALSE)[,2]
+rja_pre <- read.csv("G:/SIF_comps/figs/Wu_2016/RJA_precip.csv", header = FALSE)[,2]
+cax_pre <- read.csv("G:/SIF_comps/figs/Wu_2016/CAX_precip.csv", header = FALSE)[,2]
+
 k34_wu_lai <- read.csv("G:/SIF_comps/figs/Wu_2016/K34_LAI.csv", header = FALSE)[,2]
 k67_wu_lai <- read.csv("G:/SIF_comps/figs/Wu_2016/K67_LAI.csv", header = FALSE)[,2]
 
@@ -676,33 +681,6 @@ for (i in 1:12){
   }
 }
 
-### PLOTTING for a quick look ###
-
-plot(k34_sif_cor, type = "l", main = "K34 Monthly Avg Polygon")
-par(new = TRUE)
-plot(k34_pc, type = "l", col = "red")
-par(new = TRUE)
-plot(k34_mod_nirv, type = "l", col = "blue")
-
-plot(c(2, 4, 5, seq(7,12)), cax_pc, type = "l", xlim = c(1,12), col = "red", main = "CAX Monthly Avg Polygon")
-par(new = TRUE)
-plot(cax_sif_cor, type = "l")
-par(new = TRUE)
-plot(cax_mod_nirv, type = "l", col = "blue")
-
-plot(k67_sif_cor, type = "l", main = "K67 Monthly Avg Polygon")
-par(new = TRUE)
-plot(k67_pc, type = "l", col = "red")
-par(new = TRUE)
-plot(k67_mod_nirv, type = "l", col = "blue")
-
-plot(seq(2,11), rja_pc, type = "l", xlim = c(1,12), col = "red", main = "RJA Monthly Avg Polygon")
-par(new = TRUE)
-plot(rja_sif_cor, type = "l")
-par(new = TRUE)
-plot(rja_mod_nirv, type = "l", col = "blue")
-
-
 #### Plot ####
 inf.cols   <- inferno(11)
 vir.cols   <- viridis(11)
@@ -713,14 +691,14 @@ nirv.col   <- inf.cols[3]
 par.col    <- inf.cols[7]
 pre.col    <- inf.cols[5]
 y_sif      <- c(0.2, 0.7)
-y_nirv     <- c(0.22, 0.36)
+y_nirv     <- c(0.10, 0.36)
 y_gep      <- c(4, 13)
 y_pc_k34   <- c(0.014, 0.032)
 y_pc_k67   <- c(0.010, 0.028)
 y_pc_cax   <- c(0.014, 0.032)
 y_pc_rja   <- c(0.010, 0.028)
-y_par      <- c(200, 500)
-y_pre      <- c(0, 400)
+y_par      <- c(0, 800)
+y_pre      <- c(0, 1000)
 y_lab_sif  <- bquote("SIF"[Daily]*" (mW/m"^"2"*"/sr/nm)")
 y_lab_nirv <- bquote("NIRv"[Ref])
 y_lab_gep  <- bquote("GEP (gC m"^"-2"*"day"^"-1"*")")
@@ -871,13 +849,13 @@ plot(k67_wu_par, ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, t
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(k67_pc, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+plot(k67_pre, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 1)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
-legend("topleft", legend = c("NIRv", "PAR", "Pre"), horiz = TRUE,
+legend("topleft", legend = c("NIRv", "PAR", "Precip"), horiz = TRUE,
        col = c(nirv.col, par.col, pre.col), lty = c(1,1,1,1), pch = c(4, 15, 17), lwd = c(1,1,1),
        box.col = "transparent", bg = "transparent")
 
@@ -903,7 +881,7 @@ plot(k34_wu_par, ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, t
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(k34_pc, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+plot(k34_pre, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 1)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
@@ -929,7 +907,7 @@ plot(c(2, 4, 5, seq(7,12)), cax_wu_par, xlim = c(1,12), ylim = y_par, col = par.
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = par.col, col = par.col, las = 2)
 
 par(new = TRUE)
-plot(c(2, 4, 5, seq(7,12)), cax_pc, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+plot(cax_pre, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = pre.col, col = pre.col, las = 2, line = 1)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
@@ -955,7 +933,7 @@ plot(seq(2,11), rja_wu_par, xlim = c(1,12), ylim = y_par, col = par.col, axes = 
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2)
 
 par(new = TRUE)
-plot(seq(2,11), rja_pc, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+plot(rja_pre, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 4.5)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
