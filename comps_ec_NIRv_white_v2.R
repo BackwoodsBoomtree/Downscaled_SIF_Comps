@@ -275,83 +275,7 @@ cax_sif_cor_2020 <- get_ts(cax_files_2020, "SIF_Corr_743", "month", c("cloud_fra
 cax_sif_cor_2021 <- get_ts(cax_files_2021, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 cax_sif_cor_df   <- rbind(cax_sif_cor_2019, cax_sif_cor_2020, cax_sif_cor_2021)
 
-# K34 NIRv
-# k34_nirv_2018 <- get_ts(k34_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k34_nirv_2019 <- get_ts(k34_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k34_nirv_2020 <- get_ts(k34_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k34_nirv_2021 <- get_ts(k34_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k34_nirv_df   <- rbind(k34_nirv_2019, k34_nirv_2020, k34_nirv_2021)
-
-# K67 NIRv
-# k67_nirv_2018 <- get_ts(k67_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k67_nirv_2019 <- get_ts(k67_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k67_nirv_2020 <- get_ts(k67_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k67_nirv_2021 <- get_ts(k67_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-k67_nirv_df   <- rbind(k67_nirv_2019, k67_nirv_2020, k67_nirv_2021)
-
-# RJA NIRv
-# rja_nirv_2018 <- get_ts(rja_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-rja_nirv_2019 <- get_ts(rja_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-rja_nirv_2020 <- get_ts(rja_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-rja_nirv_2021 <- get_ts(rja_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-rja_nirv_df   <- rbind(rja_nirv_2019, rja_nirv_2020, rja_nirv_2021)
-
-# CAX NIRv
-# cax_nirv_2018 <- get_ts(cax_files_2018, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-cax_nirv_2019 <- get_ts(cax_files_2019, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-cax_nirv_2020 <- get_ts(cax_files_2020, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-cax_nirv_2021 <- get_ts(cax_files_2021, "NIRv", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0, 90, 20), c("eq", "gt", "gt"))
-cax_nirv_df   <- rbind(cax_nirv_2019, cax_nirv_2020, cax_nirv_2021)
-
-# Make Weighted means ####
-k34_df_n                <- cbind(k34_sif_cor_2019$n, k34_sif_cor_2020$n, k34_sif_cor_2021$n)
-k34_df_n                <- cbind(k34_df_n, total_n = rowSums(k34_df_n, na.rm = TRUE))
-k34_sif_cor_2019$weight <- k34_sif_cor_2019$n / k34_df_n[,4]
-k34_sif_cor_2020$weight <- k34_sif_cor_2020$n / k34_df_n[,4]
-k34_sif_cor_2021$weight <- k34_sif_cor_2021$n / k34_df_n[,4]
-
-k67_df_n                <- cbind(k67_sif_cor_2019$n, k67_sif_cor_2020$n, k67_sif_cor_2021$n)
-k67_df_n                <- cbind(k67_df_n, total_n = rowSums(k67_df_n, na.rm = TRUE))
-k67_sif_cor_2019$weight <- k67_sif_cor_2019$n / k67_df_n[,4]
-k67_sif_cor_2020$weight <- k67_sif_cor_2020$n / k67_df_n[,4]
-k67_sif_cor_2021$weight <- k67_sif_cor_2021$n / k67_df_n[,4]
-
-rja_df_n                <- cbind(rja_sif_cor_2019$n, rja_sif_cor_2020$n, rja_sif_cor_2021$n)
-rja_df_n                <- cbind(rja_df_n, total_n = rowSums(rja_df_n, na.rm = TRUE))
-rja_sif_cor_2019$weight <- rja_sif_cor_2019$n / rja_df_n[,4]
-rja_sif_cor_2020$weight <- rja_sif_cor_2020$n / rja_df_n[,4]
-rja_sif_cor_2021$weight <- rja_sif_cor_2021$n / rja_df_n[,4]
-
-cax_df_n                <- cbind(cax_sif_cor_2019$n, cax_sif_cor_2020$n, cax_sif_cor_2021$n)
-cax_df_n                <- cbind(cax_df_n, total_n = rowSums(cax_df_n, na.rm = TRUE))
-cax_sif_cor_2019$weight <- cax_sif_cor_2019$n / cax_df_n[,4]
-cax_sif_cor_2020$weight <- cax_sif_cor_2020$n / cax_df_n[,4]
-cax_sif_cor_2021$weight <- cax_sif_cor_2021$n / cax_df_n[,4]
-
-k34_df_n             <- cbind(k34_nirv_2019$n, k34_nirv_2020$n, k34_nirv_2021$n)
-k34_df_n             <- cbind(k34_df_n, total_n = rowSums(k34_df_n, na.rm = TRUE))
-k34_nirv_2019$weight <- k34_nirv_2019$n / k34_df_n[,4]
-k34_nirv_2020$weight <- k34_nirv_2020$n / k34_df_n[,4]
-k34_nirv_2021$weight <- k34_nirv_2021$n / k34_df_n[,4]
-
-k67_df_n             <- cbind(k67_nirv_2019$n, k67_nirv_2020$n, k67_nirv_2021$n)
-k67_df_n             <- cbind(k67_df_n, total_n = rowSums(k67_df_n, na.rm = TRUE))
-k67_nirv_2019$weight <- k67_nirv_2019$n / k67_df_n[,4]
-k67_nirv_2020$weight <- k67_nirv_2020$n / k67_df_n[,4]
-k67_nirv_2021$weight <- k67_nirv_2021$n / k67_df_n[,4]
-
-rja_df_n             <- cbind(rja_nirv_2019$n, rja_nirv_2020$n, rja_nirv_2021$n)
-rja_df_n             <- cbind(rja_df_n, total_n = rowSums(rja_df_n, na.rm = TRUE))
-rja_nirv_2019$weight <- rja_nirv_2019$n / rja_df_n[,4]
-rja_nirv_2020$weight <- rja_nirv_2020$n / rja_df_n[,4]
-rja_nirv_2021$weight <- rja_nirv_2021$n / rja_df_n[,4]
-
-cax_df_n                <- cbind(cax_nirv_2019$n, cax_nirv_2020$n, cax_nirv_2021$n)
-cax_df_n                <- cbind(cax_df_n, total_n = rowSums(cax_df_n, na.rm = TRUE))
-cax_nirv_2019$weight <- cax_nirv_2019$n / cax_df_n[,4]
-cax_nirv_2020$weight <- cax_nirv_2020$n / cax_df_n[,4]
-cax_nirv_2021$weight <- cax_nirv_2021$n / cax_df_n[,4]
-
+# Make weighted means
 for (i in 1:12){
   
   k34_sif_cor_wm <-  weighted.mean(c(k34_sif_cor_2019[i,1], k34_sif_cor_2020[i,1], k34_sif_cor_2021[i,1]),
@@ -366,37 +290,17 @@ for (i in 1:12){
   cax_sif_cor_wm <-  weighted.mean(c(cax_sif_cor_2019[i,1], cax_sif_cor_2020[i,1], cax_sif_cor_2021[i,1]),
                                    c(cax_sif_cor_2019[i,4], cax_sif_cor_2020[i,4], cax_sif_cor_2021[i,4]),
                                    na.rm = TRUE)
-  k34_nirv_wm <-  weighted.mean(c(k34_nirv_2019[i,1], k34_nirv_2020[i,1], k34_nirv_2021[i,1]),
-                                c(k34_nirv_2019[i,4], k34_nirv_2020[i,4], k34_nirv_2021[i,4]),
-                                na.rm = TRUE)
-  k67_nirv_wm <-  weighted.mean(c(k67_nirv_2019[i,1], k67_nirv_2020[i,1], k67_nirv_2021[i,1]),
-                                c(k67_nirv_2019[i,4], k67_nirv_2020[i,4], k67_nirv_2021[i,4]),
-                                na.rm = TRUE)
-  rja_nirv_wm <-  weighted.mean(c(rja_nirv_2019[i,1], rja_nirv_2020[i,1], rja_nirv_2021[i,1]),
-                                c(rja_nirv_2019[i,4], rja_nirv_2020[i,4], rja_nirv_2021[i,4]),
-                                na.rm = TRUE)
-  cax_nirv_wm <-  weighted.mean(c(cax_nirv_2019[i,1], cax_nirv_2020[i,1], cax_nirv_2021[i,1]),
-                                c(cax_nirv_2019[i,4], cax_nirv_2020[i,4], cax_nirv_2021[i,4]),
-                                na.rm = TRUE)
   
   if (i == 1) {
     k34_sif_cor <- k34_sif_cor_wm
     k67_sif_cor <- k67_sif_cor_wm
     rja_sif_cor <- rja_sif_cor_wm
     cax_sif_cor <- cax_sif_cor_wm
-    k34_nirv    <- k34_nirv_wm
-    k67_nirv    <- k67_nirv_wm
-    rja_nirv    <- rja_nirv_wm
-    cax_nirv    <- cax_nirv_wm
   } else {
     k34_sif_cor <- c(k34_sif_cor, k34_sif_cor_wm)
     k67_sif_cor <- c(k67_sif_cor, k67_sif_cor_wm)
     rja_sif_cor <- c(rja_sif_cor, rja_sif_cor_wm)
     cax_sif_cor <- c(cax_sif_cor, cax_sif_cor_wm)
-    k34_nirv    <- c(k34_nirv, k34_nirv_wm)
-    k67_nirv    <- c(k67_nirv, k67_nirv_wm)
-    rja_nirv    <- c(rja_nirv, rja_nirv_wm)
-    cax_nirv    <- c(cax_nirv, cax_nirv_wm)
   }
 }
 
