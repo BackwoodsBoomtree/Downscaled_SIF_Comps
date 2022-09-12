@@ -5,10 +5,26 @@ library(viridis)
 out_name    <- "G:/SIF_comps/figs/v2/sif_comps_white_v2.pdf"
 
 # SIF data
-tropo_data <- read.csv("G:/SIF_comps/csv/amazon/monthly/Amazon_2019-2021_sif_all.csv", header = TRUE)
-oco2_data  <- read.csv("G:/SIF_comps/csv/oco2/Amazon_OCO2_L2B10_2015-2021_sifd_cf.csv", header = TRUE)
-oco3_data  <- read.csv("G:/SIF_comps/csv/oco3/Amazon_OCO3_L2B10_2019-2022_sifd_cf.csv", header = TRUE)
-gome_data  <- read.csv("G:/SIF_comps/csv/gome2/Amazon_NSIFv2.6.2.GOME-2A_2011-2018_sifd_qc2.csv", header = TRUE)
+tropo_sif_data  <- read.csv("G:/SIF_comps/csv/tropomi/Amazon_TROPOSIF_L2B_2019-2021_sifd_mean.csv", header = TRUE)
+oco2_sif_data   <- read.csv("G:/SIF_comps/csv/oco2/Amazon_OCO2_L2B10_2015-2021_sifd_mean_qc_nadir.csv", header = TRUE)
+oco3_sif_data   <- read.csv("G:/SIF_comps/csv/oco3/Amazon_OCO3_L2B10_2019-2022_sifd_mean_qc_nadir.csv", header = TRUE)
+gome2_sif_data  <- read.csv("G:/SIF_comps/csv/gome2/Amazon_NSIFv2.6.2.GOME-2A_2011-2018_sifd_mean_qc2.csv", header = TRUE)
+
+tropo_pa_data  <- read.csv("G:/SIF_comps/csv/tropomi/Amazon_TROPOSIF_L2B_2019-2021_pa_median.csv", header = TRUE)
+oco2_pa_data   <- read.csv("G:/SIF_comps/csv/oco2/Amazon_OCO2_L2B10_2015-2021_pa_median_qc_nadir.csv", header = TRUE)
+oco3_pa_data   <- read.csv("G:/SIF_comps/csv/oco3/Amazon_OCO3_L2B10_2019-2022_pa_median_qc_nadir.csv", header = TRUE)
+gome2_pa_data  <- read.csv("G:/SIF_comps/csv/gome2/Amazon_NSIFv2.6.2.GOME-2A_2011-2018_pa_median_qc2.csv", header = TRUE)
+
+tropo_sza_data  <- read.csv("G:/SIF_comps/csv/tropomi/Amazon_TROPOSIF_L2B_2019-2021_sza_median.csv", header = TRUE)
+oco2_sza_data   <- read.csv("G:/SIF_comps/csv/oco2/Amazon_OCO2_L2B10_2015-2021_sza_median_qc_nadir.csv", header = TRUE)
+oco3_sza_data   <- read.csv("G:/SIF_comps/csv/oco3/Amazon_OCO3_L2B10_2019-2022_sza_median_qc_nadir.csv", header = TRUE)
+gome2_sza_data  <- read.csv("G:/SIF_comps/csv/gome2/Amazon_NSIFv2.6.2.GOME-2A_2011-2018_sza_median_qc2.csv", header = TRUE)
+
+tropo_vza_data  <- read.csv("G:/SIF_comps/csv/tropomi/Amazon_TROPOSIF_L2B_2019-2021_vza_median.csv", header = TRUE)
+oco2_vza_data   <- read.csv("G:/SIF_comps/csv/oco2/Amazon_OCO2_L2B10_2015-2021_vza_median_qc_nadir.csv", header = TRUE)
+oco3_vza_data   <- read.csv("G:/SIF_comps/csv/oco3/Amazon_OCO3_L2B10_2019-2022_vza_median_qc_nadir.csv", header = TRUE)
+gome2_vza_data  <- read.csv("G:/SIF_comps/csv/gome2/Amazon_NSIFv2.6.2.GOME-2A_2011-2018_vza_median_qc2.csv", header = TRUE)
+
 
 # MCD43C4 data
 get_annual_means <- function(ts_data) {
@@ -19,53 +35,42 @@ get_annual_means <- function(ts_data) {
 
 mcd_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/Amazon_EBF90_2019-2021_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
 
-# Make Weighted means ####
-get_annual_means_w <- function(ts_data) {
-  df_mean   <- as.data.frame(split(ts_data$Mean, ceiling(seq_along(ts_data$Mean)/12)))
-  df_n      <- as.data.frame(split(ts_data$n, ceiling(seq_along(ts_data$n)/12)))
-  
-  for (i in 1:12){
-    wm <-  weighted.mean(df_mean[i,], df_n[i,], na.rm = TRUE)
-    if (i == 1) {
-      ts_wm <- wm
-    } else {
-      ts_wm <- c(ts_wm, wm)
-    }
-  }
-  return(ts_wm)
-}
+tropo_sif_mean <- tropo_sif_data$Mean
+oco2_sif_mean  <- oco2_sif_data$Mean
+oco3_sif_mean  <- oco3_sif_data$Mean
+gome2_sif_mean  <- gome2_sif_data$Mean
 
-tropo_mean <- get_annual_means_w(tropo_data)
-oco2_mean  <- get_annual_means_w(oco2_data)
-oco3_mean  <- get_annual_means_w(oco3_data)
-gome_mean  <- get_annual_means_w(gome_data)
+tropo_pa_median <- tropo_pa_data$Median
+oco2_pa_median  <- oco2_pa_data$Median
+oco3_pa_median  <- oco3_pa_data$Median
+gome2_pa_median  <- gome2_pa_data$Median
 
+tropo_sza_median <- tropo_sza_data$Median
+oco2_sza_median  <- oco2_sza_data$Median
+oco3_sza_median  <- oco3_sza_data$Median
+gome2_sza_median  <- gome2_sza_data$Median
+
+tropo_vza_median <- tropo_vza_data$Median
+oco2_vza_median  <- oco2_vza_data$Median
+oco3_vza_median  <- oco3_vza_data$Median
+gome2_vza_median  <- gome2_vza_data$Median
 
 
 #### Plot ####
 inf.cols   <- inferno(11)
 vir.cols   <- viridis(11)
 sif.col    <- vir.cols[3]
-gep.col    <- vir.cols[7]
-pc.col     <- vir.cols[5]
-nirv.col   <- inf.cols[3]
-par.col    <- inf.cols[7]
-pre.col    <- inf.cols[5]
+pa.col     <- inf.cols[3]
+sza.col    <- inf.cols[7]
+vza.col    <- inf.cols[5]
 y_sif      <- c(0.2, 0.7)
-y_nirv     <- c(0.10, 0.40)
-y_gep      <- c(4, 13)
-y_pc_k34   <- c(0.014, 0.032)
-y_pc_k67   <- c(0.010, 0.028)
-y_pc_cax   <- c(0.014, 0.032)
-y_pc_rja   <- c(0.010, 0.028)
-y_par      <- c(0, 1000)
-y_pre      <- c(0, 1000)
+y_pa       <- c(0, 70)
+y_sza      <- c(0, 70)
+y_vza      <- c(0, 70)
 y_lab_sif  <- bquote("SIF"[Daily]*" (mW/m"^"2"*"/sr/nm)")
-y_lab_nirv <- bquote("NIRv")
-y_lab_gep  <- bquote("GEP (gC m"^"-2"*"day"^"-1"*")")
-y_lab_pc   <- bquote("PC (mol CO"[2]*"/mol γ)")
-y_lab_par  <- bquote("PAR (µmol m"^"-2"*"s"^"-1"*")")
-y_lab_pre  <- bquote("Precipitation (mm)")
+y_lab_pa   <- bquote("Phase Angle")
+y_lab_sza  <- bquote("Solar Zenith Angle")
+y_lab_vza  <- bquote("Viewing Zenith Angle")
 x_lab      <- c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
 
 cairo_pdf(out_name, width = 11, height = 3.75)
@@ -73,233 +78,164 @@ cairo_pdf(out_name, width = 11, height = 3.75)
 par(mfrow = c(2, 4), oma=c(2.5,3.75,0,7.5))
 
 #### FIRST ROW ####
-### K67 ###
+### TROPOMI ###
 op <- par(mar = c(0,0.25,1.5,1.25))
 
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
-mtext(3, text = "K67")
+plot(tropo_sif_mean, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+mtext(3, text = "TROPOMI")
 
-# Shaded area
-rect(7, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
 box()
 
 # Add data
 par(new = TRUE)
-plot(k67_sif_cor, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+plot(tropo_sif_mean, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
 axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sif.col, col = sif.col, las = 2)
-
-par(new = TRUE)
-plot(k67_gep, ylim = y_gep, col = gep.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = gep.col, col = gep.col, las = 2, labels = FALSE)
-
-par(new = TRUE)
-plot(k67_pc, ylim = y_pc_k67, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
-axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 1)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
-legend("topleft", legend = c("SIF", "GEP", "PC"), horiz = TRUE,
-       col = c(sif.col, gep.col, pc.col), lty = c(1,1,1), pch = c(16, 15, 17), lwd = c(1,1,1),
+legend("topleft", legend = c("SIF"), horiz = TRUE,
+       col = c(sif.col), lty = c(1), pch = c(16), lwd = c(1),
        box.col = "transparent", bg = "transparent")
 
 mtext(2, text = y_lab_sif, col = sif.col, line = 1.8)
 
 
-### K34 ###
+### OCO2 ###
 op <- par(mar = c(0,0.25,1.5,1.25))
 
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
-mtext(3, text = "K34")
+plot(oco2_sif_mean, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+mtext(3, text = "OCO-2")
 
-# Shaded area
-rect(8, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
 box()
-
-# Add data
-par(new = TRUE)
-plot(k34_sif_cor, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
-axis(2, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = sif.col, col = sif.col, las = 2)
-
-par(new = TRUE)
-plot(k34_gep, ylim = y_gep, col = gep.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = gep.col, col = gep.col, las = 2, labels = FALSE)
-
-par(new = TRUE)
-plot(k34_pc, ylim = y_pc_k34, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
-axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 1)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
 
-### CAX ###
+### OCO3 ###
 op <- par(mar = c(0,0.25,1.5,1.25))
 
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
-mtext(3, text = "CAX")
+plot(oco3_sif_mean, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+mtext(3, text = "OCO-3")
 
-# Shaded area
-rect(8, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
 box()
-
-# Add data
-par(new = TRUE)
-plot(cax_sif_cor, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
-axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sif.col, col = sif.col, las = 2, labels = FALSE)
-
-par(new = TRUE)
-plot(c(2, 4, 5, seq(7,12)), cax_gep, xlim = c(1,12), ylim = y_gep, col = gep.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = gep.col, col = gep.col, las = 2)
-
-par(new = TRUE)
-plot(c(2, 4, 5, seq(7,12)), cax_pc, xlim = c(1,12), ylim = y_pc_cax, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = pc.col, col = pc.col, las = 2, line = 1)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
 
-### RJA ###
+### GOME2 ###
 op <- par(mar = c(0,0.25,1.5,1.25))
 
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
-mtext(3, text = "RJA")
+plot(gome2_sif_mean, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
+mtext(3, text = "GOME-2")
 
-# Shaded area
-rect(5, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
 box()
-
-# Add data
-
-par(new = TRUE)
-plot(rja_sif_cor, ylim = y_sif, col = sif.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 16, cex = 0.75)
-axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sif.col, col = sif.col, las = 2, labels = FALSE)
-
-par(new = TRUE)
-plot(seq(2,11), rja_gep, xlim = c(1,12), ylim = y_gep, col = gep.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = gep.col, col = gep.col, las = 2)
-
-par(new = TRUE)
-plot(seq(2,11), rja_pc, xlim = c(1,12), ylim = y_pc_rja, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 4.5)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
-mtext(4, text = y_lab_gep, col = gep.col, line = 2.75, outer = FALSE)
-mtext(4, text = y_lab_pc, col = pc.col, line = 7.75, outer = FALSE)
+
 
 #### SECOND ROW ####
 
-### K67 ###
+### TROPOMI ###
 op <- par(mar = c(0,0.25,1.5,1.25))
 
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+plot(NULL, xlim = c(1,12), ylim = y_pa, axes = FALSE, xaxs="i")
 
-# Shaded area
-rect(7, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
 box()
 
 # Add data
-lines(k67_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
-lines(k67_mod_nirv_t, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75, lty = 2)
-axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2)
+lines(tropo_pa_median, col = pa.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pa.col, col = pa.col, las = 2)
 
 par(new = TRUE)
-plot(k67_wu_par, ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2, labels = FALSE)
+plot(tropo_sza_median, ylim = y_sza, col = sza.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sza.col, col = sza.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(k67_pre, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
-axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 1)
+plot(tropo_vza_median, ylim = y_vza, col = vza.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 
+axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = vza.col, col = vza.col, las = 2, line = 1)
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
-legend("topleft", legend = c("NIRv '19-'21", "NIRv", "PAR", "Precip"), ncol = 2,
-       col = c(nirv.col, nirv.col, par.col, pre.col), lty = c(2,1,1,1), pch = c(4, 4, 15, 17), lwd = c(1,1,1,1),
+legend("topleft", legend = c("PA", "SZA", "VZA"), horiz = TRUE,
+       col = c(pa.col, sza.col, vza.col), lty = c(2,1,1), pch = c(4, 15, 17), lwd = c(1,1,1),
        box.col = "transparent", bg = "transparent")
 
-mtext(2, text = y_lab_nirv, col = nirv.col, line = 2, outer = FALSE)
+mtext(2, text = y_lab_pa, col = pa.col, line = 2, outer = FALSE)
 axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 
 
-### K34 ###
+### OCO2 ###
 op <- par(mar = c(0,0.25,1.5,1.25))
 
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+plot(NULL, xlim = c(1,12), ylim = y_pa, axes = FALSE, xaxs="i")
 
-# Shaded area
-rect(8, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
 box()
 
 # Add data
-lines(k34_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
-lines(k34_mod_nirv_t, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75, lty = 2)
-axis(2, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = nirv.col, col = nirv.col, las = 2)
+lines(oco2_pa_median, col = pa.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
+axis(2, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pa.col, col = pa.col, las = 2)
 
 par(new = TRUE)
-plot(k34_wu_par, ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2, labels = FALSE)
+plot(oco2_sza_median, ylim = y_sza, col = sza.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sza.col, col = sza.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(k34_pre, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
-axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 1)
+plot(oco2_vza_median, ylim = y_vza, col = vza.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 
+axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = vza.col, col = vza.col, las = 2, line = 1)
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 
 
-### CAX ###
+### OCO3 ###
 op <- par(mar = c(0,0.25,1.5,1.25))
 
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+plot(NULL, xlim = c(1,12), ylim = y_pa, axes = FALSE, xaxs="i")
 
-# Shaded area
-rect(8, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
 box()
 
 # Add data
-lines(cax_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
-lines(cax_mod_nirv_t, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75, lty = 2)
-axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2, labels = FALSE)
+lines(oco3_pa_median, col = pa.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
+axis(2, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pa.col, col = pa.col, las = 2)
 
 par(new = TRUE)
-plot(c(2, 4, 5, seq(7,12)), cax_wu_par, xlim = c(1,12), ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = par.col, col = par.col, las = 2)
+plot(oco3_sza_median, ylim = y_sza, col = sza.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sza.col, col = sza.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(cax_pre, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = pre.col, col = pre.col, las = 2, line = 1)
+plot(oco3_vza_median, ylim = y_vza, col = vza.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 
+axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = vza.col, col = vza.col, las = 2, line = 1)
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 
 
-### RJA ###
+### GOME2 ###
 op <- par(mar = c(0,0.25,1.5,1.25))
 
-plot(NULL, xlim = c(1,12), ylim = y_nirv, axes = FALSE, xaxs="i")
+plot(NULL, xlim = c(1,12), ylim = y_pa, axes = FALSE, xaxs="i")
 
-# Shaded area
-rect(5, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
 box()
 
 # Add data
-lines(rja_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
-lines(rja_mod_nirv_t, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75, lty = 2)
-axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2, labels = FALSE)
+lines(gome2_pa_median, col = pa.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
+axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pa.col, col = pa.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
-plot(seq(2,11), rja_wu_par, xlim = c(1,12), ylim = y_par, col = par.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2)
+plot(gome2_sza_median, ylim = y_sza, col = sza.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 15, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = sza.col, col = sza.col, las = 2)
 
 par(new = TRUE)
-plot(rja_pre, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
-axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 4.5)
+plot(gome2_vza_median, ylim = y_vza, col = vza.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
+axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = vza.col, col = vza.col, las = 2, line = 4.5)
 
 axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
 axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
@@ -307,8 +243,8 @@ axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 
 # Margins
 mtext(1, text = "Month of Year", line = 1.5, outer = TRUE)
-mtext(4, text = y_lab_par, col = par.col, line = 2.75, outer = FALSE)
-mtext(4, text = y_lab_pre, col = pre.col, line = 7.55, outer = FALSE)
+mtext(4, text = y_lab_sza, col = sza.col, line = 2.75, outer = FALSE)
+mtext(4, text = y_lab_vza, col = vza.col, line = 7.55, outer = FALSE)
 
 dev.off()
 
