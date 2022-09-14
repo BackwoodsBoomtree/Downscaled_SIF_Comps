@@ -62,7 +62,7 @@ par(new = TRUE)
 plot(oco3_sif_mean, ylim = y_sif, col = sifo3.col, axes = FALSE, xaxs="i", type = "o", lwd = 1, pch = 18, cex = 0.75)
 axis(2, tck = 0.03, mgp=c(3, 0.2, 0), las = 2)
 
-legend("topleft", legend = c("GOME-2", "TROPOMI", "OCO-2", "OCO-3", "NIRv"), ncol = 3,
+legend("topleft", legend = c("GOME-2", "TROPOMI", "OCO-2", "OCO-3", "NIRv"), ncol = 3, lwd = c(1,1,1,1,2),
        col = c(sifg.col, sift.col, sifo2.col, sifo3.col, nirv.col), lty = c(2,1,2,1,1), pch = c(17,16,15,18,4),
        box.col = "transparent", bg = "transparent")
 
