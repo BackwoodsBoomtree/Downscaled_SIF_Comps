@@ -5,7 +5,6 @@ library(viridis)
 out_name    <- "G:/SIF_comps/figs/v2/comps_ec_NIRV_mod_white_v2.pdf"
 
 # Data from Wu paper
-
 k34_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/K34_PC.csv", header = FALSE)[,2] / 10 # my axis when extracting the data was off by a decimal place
 k67_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/K67_PC.csv", header = FALSE)[,2]
 rja_pc <- read.csv("G:/SIF_comps/figs/Wu_2016/RJA_PC.csv", header = FALSE)[,2]
@@ -227,49 +226,41 @@ get_ts  <- function(df_f, variable, time, filters, threshs, direct) {
   return(annual_df)
 }
 
-k34_files_2018 <- file_df("G:/TROPOMI/esa/extracted/ebf/k34/2018", 2018, "month")
 k34_files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/k34/2019", 2019, "month")
 k34_files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/k34/2020", 2020, "month")
 k34_files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/k34/2021", 2021, "month")
 
-k67_files_2018 <- file_df("G:/TROPOMI/esa/extracted/ebf/k67/2018", 2018, "month")
 k67_files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/k67/2019", 2019, "month")
 k67_files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/k67/2020", 2020, "month")
 k67_files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/k67/2021", 2021, "month")
 
-rja_files_2018 <- file_df("G:/TROPOMI/esa/extracted/ebf/rja/2018", 2018, "month")
 rja_files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/rja/2019", 2019, "month")
 rja_files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/rja/2020", 2020, "month")
 rja_files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/rja/2021", 2021, "month")
 
-cax_files_2018 <- file_df("G:/TROPOMI/esa/extracted/ebf/cax/2018", 2018, "month")
 cax_files_2019 <- file_df("G:/TROPOMI/esa/extracted/ebf/cax/2019", 2019, "month")
 cax_files_2020 <- file_df("G:/TROPOMI/esa/extracted/ebf/cax/2020", 2020, "month")
 cax_files_2021 <- file_df("G:/TROPOMI/esa/extracted/ebf/cax/2021", 2021, "month")
 
 # K34 SIF Corr
-# k34_sif_cor_2018 <- get_ts(k34_files_2018, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 k34_sif_cor_2019 <- get_ts(k34_files_2019, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 k34_sif_cor_2020 <- get_ts(k34_files_2020, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 k34_sif_cor_2021 <- get_ts(k34_files_2021, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 k34_sif_cor_df   <- rbind(k34_sif_cor_2019, k34_sif_cor_2020, k34_sif_cor_2021)
 
 # K67 SIF Corr
-k67_sif_cor_2018 <- get_ts(k67_files_2018, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 k67_sif_cor_2019 <- get_ts(k67_files_2019, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 k67_sif_cor_2020 <- get_ts(k67_files_2020, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 k67_sif_cor_2021 <- get_ts(k67_files_2021, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 k67_sif_cor_df   <- rbind(k67_sif_cor_2019, k67_sif_cor_2020, k67_sif_cor_2021)
 
 # RJA SIF Corr
-# rja_sif_cor_2018 <- get_ts(rja_files_2018, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 rja_sif_cor_2019 <- get_ts(rja_files_2019, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 rja_sif_cor_2020 <- get_ts(rja_files_2020, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 rja_sif_cor_2021 <- get_ts(rja_files_2021, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 rja_sif_cor_df   <- rbind(rja_sif_cor_2019, rja_sif_cor_2020, rja_sif_cor_2021)
 
 # CAX SIF Corr
-# cax_sif_cor_2018 <- get_ts(cax_files_2018, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 cax_sif_cor_2019 <- get_ts(cax_files_2019, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 cax_sif_cor_2020 <- get_ts(cax_files_2020, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
 cax_sif_cor_2021 <- get_ts(cax_files_2021, "SIF_Corr_743", "month", c("cloud_fraction_L2", "LC_PERC_2020", "phase_angle"), c(0.80, 90, 0), c("lt", "gt", "gt"))
@@ -584,7 +575,7 @@ rja_pc_na  <- c(NA, rja_pc, NA)
 sif_cat  <- c(k34_sif_cor, cax_sif_cor, k67_sif_cor, rja_sif_cor)
 pc_cat   <- c(k34_pc, cax_pc_na, k67_pc, rja_pc_na)
 gep_cat  <- c(k34_gep, cax_gep_na, k67_gep, rja_gep_na)
-nirv_cat <- c(k34_nirv, cax_nirv, k67_nirv, rja_nirv)
+nirv_cat <- c(k34_mod_nirv_t, cax_mod_nirv_t, k67_mod_nirv_t, rja_mod_nirv_t)
 
 # All
 sif_pc_reg   <- lm(sif_cat~pc_cat)
@@ -601,6 +592,75 @@ summary(sif_nirv_reg)
 
 summary(nirv_gep_reg)
 summary(nirv_pc_reg)
+
+# First half year
+sif1_cat  <- c(k34_sif_cor[1:6], cax_sif_cor[1:6], k67_sif_cor[1:6], rja_sif_cor[1:6])
+pc1_cat   <- c(k34_pc[1:6], cax_pc_na[1:6], k67_pc[1:6], rja_pc_na[1:6])
+gep1_cat  <- c(k34_gep[1:6], cax_gep_na[1:6], k67_gep[1:6], rja_gep_na[1:6])
+nirv1_cat <- c(k34_mod_nirv_t[1:6], cax_mod_nirv_t[1:6], k67_mod_nirv_t[1:6], rja_mod_nirv_t[1:6])
+
+sif1_pc_reg   <- lm(sif1_cat~pc1_cat)
+sif1_gep_reg  <- lm(sif1_cat~gep1_cat)
+sif1_nirv_reg <- lm(sif1_cat~nirv1_cat)
+
+nirv1_pc_reg   <- lm(nirv1_cat~pc1_cat)
+nirv1_gep_reg  <- lm(nirv1_cat~gep1_cat)
+
+
+summary(sif1_pc_reg)
+summary(sif1_gep_reg)
+summary(sif1_nirv_reg)
+
+summary(nirv1_gep_reg)
+summary(nirv1_pc_reg)
+
+
+# Second half year
+sif2_cat  <- c(k34_sif_cor[7:12], cax_sif_cor[7:12], k67_sif_cor[7:12], rja_sif_cor[7:12])
+pc2_cat   <- c(k34_pc[7:12], cax_pc_na[7:12], k67_pc[7:12], rja_pc_na[7:12])
+gep2_cat  <- c(k34_gep[7:12], cax_gep_na[7:12], k67_gep[7:12], rja_gep_na[7:12])
+nirv2_cat <- c(k34_mod_nirv_t[7:12], cax_mod_nirv_t[7:12], k67_mod_nirv_t[7:12], rja_mod_nirv_t[7:12])
+
+sif2_pc_reg   <- lm(sif2_cat~pc2_cat)
+sif2_gep_reg  <- lm(sif2_cat~gep2_cat)
+sif2_nirv_reg <- lm(sif2_cat~nirv2_cat)
+
+nirv2_pc_reg   <- lm(nirv2_cat~pc2_cat)
+nirv2_gep_reg  <- lm(nirv2_cat~gep2_cat)
+
+
+summary(sif2_pc_reg)
+summary(sif2_gep_reg)
+summary(sif2_nirv_reg)
+
+summary(nirv2_gep_reg)
+summary(nirv2_pc_reg)
+
+# October to March
+sif3_cat  <- c(c(k34_sif_cor[9:12], k34_sif_cor[1:3]), c(cax_sif_cor[9:12], cax_sif_cor[1:3]),
+               c(k67_sif_cor[9:12], k67_sif_cor[1:3]), c(rja_sif_cor[9:12], rja_sif_cor[1:3]))
+pc3_cat   <- c(c(k34_pc[9:12], k34_pc[1:3]), c(cax_pc_na[9:12], cax_pc_na[1:3]),
+               c(k67_pc[9:12], k67_pc[1:3]), c(rja_pc_na[9:12], rja_pc_na[1:3]))
+gep3_cat   <- c(c(k34_gep[9:12], k34_gep[1:3]), c(cax_gep_na[9:12], cax_gep_na[1:3]),
+               c(k67_gep[9:12], k67_gep[1:3]), c(rja_gep_na[9:12], rja_gep_na[1:3]))
+nirv3_cat  <- c(c(k34_mod_nirv_t[9:12], k34_mod_nirv_t[1:3]), c(cax_mod_nirv_t[9:12], cax_mod_nirv_t[1:3]),
+               c(k67_mod_nirv_t[9:12], k67_mod_nirv_t[1:3]), c(rja_mod_nirv_t[9:12], rja_mod_nirv_t[1:3]))
+
+sif3_pc_reg   <- lm(sif3_cat~pc3_cat)
+sif3_gep_reg  <- lm(sif3_cat~gep3_cat)
+sif3_nirv_reg <- lm(sif3_cat~nirv3_cat)
+
+nirv3_pc_reg   <- lm(nirv3_cat~pc3_cat)
+nirv3_gep_reg  <- lm(nirv3_cat~gep3_cat)
+
+
+summary(sif3_pc_reg)
+summary(sif3_gep_reg)
+summary(sif3_nirv_reg)
+
+summary(nirv3_gep_reg)
+summary(nirv3_pc_reg)
+
 
 # K34
 k34_sif_pc_reg   <- lm(k34_sif_cor~k34_pc)
