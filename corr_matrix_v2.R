@@ -376,6 +376,7 @@ p.mat  <- cor.mtest(df)
 
 col <- colorRampPalette(c("#BB4444", "#EE9988", "#FFFFFF", "#77AADD", "#4477AA"))
 
+#### Matrix plot
 cairo_pdf(out_name, width = 6, height = 5)
 
 corrplot(df_cor, method="color", col=col(40),  
@@ -385,10 +386,12 @@ corrplot(df_cor, method="color", col=col(40),
          # Combine with significance
          p.mat = p.mat, sig.level = 0.01, insig = "pch",
          pch.cex = 6, pch.col = "#00000050",
-         diag=TRUE)
+         diag=TRUE, type="upper")
 
 dev.off()
 
+
+########################
 
 ### K34
 
@@ -406,7 +409,7 @@ corrplot(df_cor, method="color", col=col(200),
          # Combine with significance
          p.mat = p.mat, sig.level = 0.01,
          # hide correlation coefficient on the principal diagonal
-         diag=TRUE 
+         diag=TRUE
 )
 
 ### K67
