@@ -32,26 +32,36 @@ rja_wu_par <- read.csv("G:/SIF_comps/figs/Wu_2016/RJA_PAR.csv", header = FALSE)[
 cax_wu_par <- read.csv("G:/SIF_comps/figs/Wu_2016/CAX_PAR.csv", header = FALSE)[,2]
 
 # MCD43C4 data
-get_annual_means <- function(ts_data) {
-  df <- as.data.frame(split(ts_data, ceiling(seq_along(ts_data)/12)))
-  means <- rowMeans(df)
-  return(means)
+get_monthly_ts_means <- function(ts_data) {
+  df_m    <- as.data.frame(split(read.csv(ts_data, header = TRUE)[,1], ceiling(seq_along(read.csv(ts_data, header = TRUE)[,1])/12)))
+  df_n    <- as.data.frame(split(read.csv(ts_data, header = TRUE)[,2], ceiling(seq_along(read.csv(ts_data, header = TRUE)[,2])/12)))
+  
+  for (i in 1:nrow(df_m)) {
+    mean_w <- weighted.mean(df_m[i,], df_n[i,])
+    if (i == 1) {
+      means_w <- mean_w
+    } else {
+      means_w <- c(means_w, mean_w)
+    }
+  }
+  
+  return(means_w)
 }
 
-k34_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K34_2001-2006_monthly_EVI.csv", header = TRUE)[,1]) / 10000
-k67_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K67_2002-2005_2009-2011_monthly_EVI.csv", header = TRUE)[,1]) / 10000
-rja_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/RJA_2001-2002_monthly_EVI.csv", header = TRUE)[,1]) / 10000
-cax_mod_evi <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/CAX_2001-2003_monthly_EVI.csv", header = TRUE)[,1]) / 10000
+k34_mod_evi <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/K34_2001-2006_monthly_EVI.csv") / 10000
+k67_mod_evi <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/K67_2002-2005_2009-2011_monthly_EVI.csv") / 10000
+rja_mod_evi <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/RJA_2001-2002_monthly_EVI.csv") / 10000
+cax_mod_evi <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/CAX_2001-2003_monthly_EVI.csv") / 10000
 
-k34_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K34_2001-2006_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
-k67_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K67_2002-2005_2009-2011_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
-rja_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/RJA_2001-2002_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
-cax_mod_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/CAX_2001-2003_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
+k34_mod_nirv <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/K34_2001-2006_monthly_NIRv.csv") / 10000
+k67_mod_nirv <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/K67_2002-2005_2009-2011_monthly_NIRv.csv") / 10000
+rja_mod_nirv <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/RJA_2001-2002_monthly_NIRv.csv") / 10000
+cax_mod_nirv <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/CAX_2001-2003_monthly_NIRv.csv") / 10000
 
-k34_mod_nirv_t <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K34_2019-2021_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
-k67_mod_nirv_t <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/K67_2019-2021_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
-rja_mod_nirv_t <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/RJA_2019-2021_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
-cax_mod_nirv_t <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/CAX_2019-2021_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
+k34_mod_nirv_t <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/K34_2019-2021_monthly_NIRv.csv") / 10000
+k67_mod_nirv_t <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/K67_2019-2021_monthly_NIRv.csv") / 10000
+rja_mod_nirv_t <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/RJA_2019-2021_monthly_NIRv.csv") / 10000
+cax_mod_nirv_t <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/CAX_2019-2021_monthly_NIRv.csv") / 10000
 
 ### Get data from L2 data clipped out by polygons ####
 
