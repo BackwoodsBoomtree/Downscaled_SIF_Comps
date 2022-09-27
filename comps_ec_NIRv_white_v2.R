@@ -334,6 +334,9 @@ mtext(3, text = "K67")
 
 # Shaded area
 rect(7, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 box()
 
 # Add data
@@ -348,9 +351,6 @@ axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = gep.col, col = gep.col, las = 2
 par(new = TRUE)
 plot(k67_pc, ylim = y_pc_k67, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 1)
-
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
 legend("topleft", legend = c("SIF", "GEP", "PC"), horiz = TRUE,
        col = c(sif.col, gep.col, pc.col), lty = c(1,1,1), pch = c(16, 15, 17), lwd = c(1,1,1),
@@ -367,6 +367,9 @@ mtext(3, text = "K34")
 
 # Shaded area
 rect(8, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 box()
 
 # Add data
@@ -382,9 +385,6 @@ par(new = TRUE)
 plot(k34_pc, ylim = y_pc_k34, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 1)
 
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
-
 
 ### CAX ###
 op <- par(mar = c(0,0.25,1.5,1.25))
@@ -394,6 +394,9 @@ mtext(3, text = "CAX")
 
 # Shaded area
 rect(8, 0, 11, 1, col = rgb(0.80,0.80,0.80), border = NA)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 box()
 
 # Add data
@@ -409,9 +412,6 @@ par(new = TRUE)
 plot(c(2, 4, 5, seq(7,12)), cax_pc, xlim = c(1,12), ylim = y_pc_cax, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = pc.col, col = pc.col, las = 2, line = 1)
 
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
-
 
 ### RJA ###
 op <- par(mar = c(0,0.25,1.5,1.25))
@@ -421,6 +421,9 @@ mtext(3, text = "RJA")
 
 # Shaded area
 rect(5, 0, 9, 1, col = rgb(0.80,0.80,0.80), border = NA)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 box()
 
 # Add data
@@ -436,9 +439,6 @@ axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = gep.col, col = gep.col, las = 2
 par(new = TRUE)
 plot(seq(2,11), rja_pc, xlim = c(1,12), ylim = y_pc_rja, col = pc.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pc.col, col = pc.col, las = 2, line = 4.5)
-
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
 
 mtext(4, text = y_lab_gep, col = gep.col, line = 2.75, outer = FALSE)
 mtext(4, text = y_lab_pc, col = pc.col, line = 7.75, outer = FALSE)
@@ -457,6 +457,10 @@ box()
 # Add data
 lines(k67_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
 lines(k67_mod_nirv_t, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75, lty = 2)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2)
 
 par(new = TRUE)
@@ -467,15 +471,11 @@ par(new = TRUE)
 plot(k67_pre, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 1)
 
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
-
 legend("topleft", legend = c("NIRv '19-'21", "NIRv", "PAR", "Precip"), ncol = 2,
        col = c(nirv.col, nirv.col, par.col, pre.col), lty = c(2,1,1,1), pch = c(4, 4, 15, 17), lwd = c(1,1,1,1),
        box.col = "transparent", bg = "transparent")
 
 mtext(2, text = y_lab_nirv, col = nirv.col, line = 2, outer = FALSE)
-axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 
 
 ### K34 ###
@@ -490,6 +490,10 @@ box()
 # Add data
 lines(k34_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
 lines(k34_mod_nirv_t, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75, lty = 2)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 axis(2, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = nirv.col, col = nirv.col, las = 2)
 
 par(new = TRUE)
@@ -499,10 +503,6 @@ axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2
 par(new = TRUE)
 plot(k34_pre, ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, labels = FALSE, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 1)
-
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
-axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 
 
 ### CAX ###
@@ -517,6 +517,10 @@ box()
 # Add data
 lines(cax_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
 lines(cax_mod_nirv_t, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75, lty = 2)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
@@ -526,10 +530,6 @@ axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = par.col, col = 
 par(new = TRUE)
 plot(cax_pre, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), labels = FALSE, col.axis = pre.col, col = pre.col, las = 2, line = 1)
-
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
-axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 
 
 ### RJA ###
@@ -544,6 +544,10 @@ box()
 # Add data
 lines(rja_mod_nirv, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75)
 lines(rja_mod_nirv_t, col = nirv.col, type = "o", lwd = 1, pch = 4, cex = 0.75, lty = 2)
+
+axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
+axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
+axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 axis(2, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = nirv.col, col = nirv.col, las = 2, labels = FALSE)
 
 par(new = TRUE)
@@ -553,10 +557,6 @@ axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = par.col, col = par.col, las = 2
 par(new = TRUE)
 plot(rja_pre, xlim = c(1,12), ylim = y_pre, col = pre.col, axes = FALSE, xaxs="i", lty = 1, type = "o", lwd = 1, pch = 17, cex = 0.75)
 axis(4, tck = 0.04, mgp=c(3, 0.2, 0), col.axis = pre.col, col = pre.col, las = 2, line = 4.5)
-
-axis(1, tck = 0.06, labels = FALSE, at = seq(1, 12, by = 2))
-axis(1, tck = 0.03, labels = FALSE, at = seq(2, 12))
-axis(1, tck = FALSE, mgp=c(3, 0.2, 0), labels = x_lab, at = seq(1, 12))
 
 # Margins
 mtext(1, text = "Month of Year", line = 1.5, outer = TRUE)
