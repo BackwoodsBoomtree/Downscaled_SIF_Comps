@@ -18,13 +18,23 @@ gome2_sif_mean  <- gome2_sif_data$Mean
 
 
 # MCD43C4 data
-get_annual_means <- function(ts_data) {
-  df <- as.data.frame(split(ts_data, ceiling(seq_along(ts_data)/12)))
-  means <- rowMeans(df)
-  return(means)
+get_monthly_ts_means <- function(ts_data) {
+  df_m    <- as.data.frame(split(read.csv(ts_data, header = TRUE)[,1], ceiling(seq_along(read.csv(ts_data, header = TRUE)[,1])/12)))
+  df_n    <- as.data.frame(split(read.csv(ts_data, header = TRUE)[,2], ceiling(seq_along(read.csv(ts_data, header = TRUE)[,2])/12)))
+  
+  for (i in 1:nrow(df_m)) {
+    mean_w <- weighted.mean(df_m[i,], df_n[i,])
+    if (i == 1) {
+      means_w <- mean_w
+    } else {
+      means_w <- c(means_w, mean_w)
+    }
+  }
+  
+  return(means_w)
 }
+mcd_nirv <- get_monthly_ts_means("G:/SIF_comps/csv/mcd43c4/Amazon_EBF90_2019-2021_monthly_NIRv.csv") / 10000
 
-mcd_nirv <- get_annual_means(read.csv("G:/SIF_comps/csv/mcd43c4/Amazon_EBF90_2019-2021_monthly_NIRv.csv", header = TRUE)[,1]) / 10000
 
 #### Plot ####
 inf.cols   <- inferno(11)
